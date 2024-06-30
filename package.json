@@ -1,0 +1,20 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon bot.js", 
+    "test": "nodemon valute.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "grammy": "^1.25.1",
+    "money": "^0.2.0",
+    "nodemon": "^3.1.4"
+  }
+}

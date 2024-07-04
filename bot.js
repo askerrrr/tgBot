@@ -2,7 +2,7 @@ const { Bot, GrammyError, HttpError, Keyboard } = require("grammy");
 require("dotenv").config();
 const { getCNY, getDate } = require("./valute");
 const commands = require("./commands");
-
+const { botText, frequentQuestions } = require("./text");
 const bot = new Bot(process.env.BOT_TOKEN);
 
 //
@@ -16,14 +16,16 @@ const keyboard = new Keyboard()
   .row()
   .text("Какой курс юаня сегодня?")
   .row()
-  .text("Часто задаваемые вопросы")
+  .text("У меня вопросы")
   .resized();
 //
+
 bot.hears("/start", async (ctx) => {
   await ctx.reply(
     `${ctx.from.first_name}, добро пожаловать в наш бот  🤖\nВам присвоен ID-${ctx.chat.id}, в дальнейшем этот ID будет соответствовать номеру вашего заказа\nДля дальнейшей работы воспользуйтесь 'Меню' `
   );
 });
+
 //
 bot.hears("/menu", async (ctx) => {
   await ctx.reply("Меню", {
@@ -31,18 +33,43 @@ bot.hears("/menu", async (ctx) => {
   });
 });
 //
-bot.hears("Как сделать заказ?", async (ctx) => {
-  await ctx.reply("Отправьте нам");
+
+bot.hears("У меня вопросы", async (ctx) => {
+  await ctx.reply(frequentQuestions, {
+    parse_mode: "HTML",
+  });
 });
+
+bot.hears("Сделать заказ!", async (ctx) => {
+  await ctx.reply(
+    "Отправьте нам ссылку на товар, фотографию самого товара, размер(если это одежда или обувь) и количество"
+  );
+});
+
+bot.hears("Как сделать заказ?", async (ctx) => {
+  await ctx.reply(botText);
+});
+
 bot.hears("Какой курс юаня сегодня?", async (ctx) => {
   try {
     const valute = await getCNY();
+
     await ctx.reply(
       `Курс на ${getDate()} ${valute.Valute.CNY.Value + 1.5} рублей за 1 юань`
     );
   } catch (err) {
     console.log(err);
   }
+});
+
+bot.on("::url", async (ctx) => {
+  await ctx.reply("мммм... ссылочка...", {
+    parse_mode: "HTML",
+  });
+});
+
+bot.on("message", async (ctx) => {
+  await ctx.reply("Не понимаю...");
 });
 
 bot.catch((err) => {
@@ -57,4 +84,5 @@ bot.catch((err) => {
     console.error("Unknown error:", e);
   }
 });
+
 bot.start();

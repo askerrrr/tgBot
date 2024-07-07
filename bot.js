@@ -7,17 +7,8 @@ const bot = new Bot(process.env.BOT_TOKEN);
 
 //
 
-bot.api.setMyCommands(commands);
 //
-const keyboard = new Keyboard()
-  .text("Сделать заказ!")
-  .row()
-  .text("Как сделать заказ?")
-  .row()
-  .text("Какой курс юаня сегодня?")
-  .row()
-  .text("У меня вопросы")
-  .resized();
+
 //
 
 bot.hears("/start", async (ctx) => {
@@ -26,30 +17,34 @@ bot.hears("/start", async (ctx) => {
   );
 });
 
-//
+bot.api.setMyCommands(commands);
+
+const KeyboardForTheMainMenu = new Keyboard()
+  .text("Сделать заказ!")
+  .row()
+  .text("Как сделать заказ?")
+  .row()
+  .text("Какой курс юаня сегодня?")
+  .row()
+  .text("У меня вопросы")
+  .row()
+  .text("Другое")
+  .resized();
+
 bot.hears("/menu", async (ctx) => {
   await ctx.reply("Меню", {
-    reply_markup: keyboard,
+    reply_markup: KeyboardForTheMainMenu,
   });
 });
 //
-
-bot.hears("У меня вопросы", async (ctx) => {
-  await ctx.reply(frequentQuestions, {
-    parse_mode: "HTML",
-  });
-});
-
 bot.hears("Сделать заказ!", async (ctx) => {
   await ctx.reply(
     "Отправьте нам ссылку на товар, фотографию самого товара, размер(если это одежда или обувь) и количество"
   );
 });
-
 bot.hears("Как сделать заказ?", async (ctx) => {
   await ctx.reply(botText);
 });
-
 bot.hears("Какой курс юаня сегодня?", async (ctx) => {
   try {
     const valute = await getCNY();
@@ -60,6 +55,22 @@ bot.hears("Какой курс юаня сегодня?", async (ctx) => {
   } catch (err) {
     console.log(err);
   }
+});
+bot.hears("У меня вопросы", async (ctx) => {
+  await ctx.reply(frequentQuestions, {
+    parse_mode: "HTML",
+  });
+});
+
+const keyboardForDownloadingApp = new Keyboard()
+  .text("1688")
+  .text("Taobao")
+  .resized();
+
+bot.hears("Другое", async (ctx) => {
+  await ctx.reply("Другое", {
+    reply_markup: keyboardForDownloadingApp,
+  });
 });
 
 bot.on("::url", async (ctx) => {

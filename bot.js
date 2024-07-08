@@ -2,14 +2,13 @@ const { Bot, GrammyError, HttpError, Keyboard } = require("grammy");
 require("dotenv").config();
 const { getCNY, getDate } = require("./valute");
 const commands = require("./commands");
-const { botText, frequentQuestions } = require("./text");
+const {
+  botText,
+  frequentQuestions,
+  textFor1688,
+  textFor1688b,
+} = require("./text");
 const bot = new Bot(process.env.BOT_TOKEN);
-
-//
-
-//
-
-//
 
 bot.hears("/start", async (ctx) => {
   await ctx.reply(
@@ -31,12 +30,14 @@ const KeyboardForTheMainMenu = new Keyboard()
   .text("Другое")
   .resized();
 
+// Блок Основного меню =>
+
 bot.hears("/menu", async (ctx) => {
   await ctx.reply("Меню", {
     reply_markup: KeyboardForTheMainMenu,
   });
 });
-//
+
 bot.hears("Сделать заказ!", async (ctx) => {
   await ctx.reply(
     "Отправьте нам ссылку на товар, фотографию самого товара, размер(если это одежда или обувь) и количество"
@@ -62,13 +63,69 @@ bot.hears("У меня вопросы", async (ctx) => {
   });
 });
 
+bot.hears("Другое", async (ctx) => {
+  await ctx.reply("Другое", {
+    reply_markup: keyboardForOtherQueries,
+  });
+});
+//  <= Блок Основного меню
+
+//  Блок раздера "Другое" =>
+
+const keyboardForOtherQueries = new Keyboard()
+  .text("Скачать приложения")
+  .row()
+  .text("Основное меню")
+  .resized();
+
+bot.hears("Основное меню", async (ctx) => {
+  await ctx.reply("Меню", {
+    reply_markup: KeyboardForTheMainMenu,
+  });
+});
+
+//  <= Блок раздела "Другое"
+
+// Блок выбора приложений из раздела "Другое/Скачать приложения" =>
 const keyboardForDownloadingApp = new Keyboard()
   .text("1688")
   .text("Taobao")
+  .row()
+  .text("Poizon")
+  .text("Pinduoduo")
+  .row()
+  .text("Назад")
   .resized();
 
-bot.hears("Другое", async (ctx) => {
+bot.hears("Скачать приложения", async (ctx) => {
+  await ctx.reply("Выберите приложения", {
+    reply_markup: keyboardForDownloadingApp,
+  });
+});
+
+bot.hears("Назад", async (ctx) => {
   await ctx.reply("Другое", {
+    reply_markup: keyboardForOtherQueries,
+  });
+});
+//  <= Блок выбора приложений из раздела "Другое/Скачать приложения"
+
+// Блок управление приложениями =>
+const keyboardForDeviceSelection = new Keyboard()
+  .text("Для айфона")
+  .text("Для андроида")
+  .row()
+  .text("К приложениям")
+  .resized();
+
+bot.hears("1688", async (ctx) => {
+  await ctx.reply(textFor1688, {
+    parse_mode: "HTML",
+  });
+});
+
+bot.hears("К приложениям", async (ctx) => {
+  await ctx.reply("Выберите приложения", {
     reply_markup: keyboardForDownloadingApp,
   });
 });

@@ -4,9 +4,9 @@ const { getCNY, getDate } = require("./valute");
 const commands = require("./commands");
 const {
   botText,
-  frequentQuestions,
+  frequentlyAskedQuestions,
   textFor1688,
-  textFor1688b,
+  unprocessedMessages,
 } = require("./text");
 const bot = new Bot(process.env.BOT_TOKEN);
 
@@ -20,14 +20,12 @@ bot.api.setMyCommands(commands);
 
 const KeyboardForTheMainMenu = new Keyboard()
   .text("Сделать заказ!")
-  .row()
   .text("Как сделать заказ?")
   .row()
-  .text("Какой курс юаня сегодня?")
-  .row()
-  .text("У меня вопросы")
-  .row()
+  .text("Рассчитать стоимость заказа")
   .text("Другое")
+  .row()
+  .text("Часто задаваемые вопросы FAQ")
   .resized();
 
 // Блок Основного меню =>
@@ -46,7 +44,7 @@ bot.hears("Сделать заказ!", async (ctx) => {
 bot.hears("Как сделать заказ?", async (ctx) => {
   await ctx.reply(botText);
 });
-bot.hears("Какой курс юаня сегодня?", async (ctx) => {
+bot.hears("Рассчитать стоимость заказа", async (ctx) => {
   try {
     const valute = await getCNY();
 
@@ -57,8 +55,8 @@ bot.hears("Какой курс юаня сегодня?", async (ctx) => {
     console.log(err);
   }
 });
-bot.hears("У меня вопросы", async (ctx) => {
-  await ctx.reply(frequentQuestions, {
+bot.hears("Часто задаваемые вопросы FAQ", async (ctx) => {
+  await ctx.reply(frequentlyAskedQuestions, {
     parse_mode: "HTML",
   });
 });
@@ -121,6 +119,7 @@ const keyboardForDeviceSelection = new Keyboard()
 bot.hears("1688", async (ctx) => {
   await ctx.reply(textFor1688, {
     parse_mode: "HTML",
+    disable_web_page_preview: true,
   });
 });
 
@@ -137,9 +136,10 @@ bot.on("::url", async (ctx) => {
 });
 
 bot.on("message", async (ctx) => {
-  await ctx.reply("Не понимаю...");
+  await ctx.reply(unprocessedMessages);
 });
 
+//Обработка ошибок
 bot.catch((err) => {
   const ctx = err.ctx;
   console.error(`Error while handling update ${ctx.update.update_id}:`);

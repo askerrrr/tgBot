@@ -1,16 +1,52 @@
-const { Bot, GrammyError, HttpError, Keyboard } = require("grammy");
-require("dotenv").config();
-const { getCNY, getDate } = require("./valute");
-const commands = require("./commands");
+const {
+  Bot,
+  session,
+  Context,
+  GrammyError,
+  HttpError,
+  Keyboard,
+  MemorySessionStorage,
+  InputFile,
+} = require("grammy");
+
+const {
+  conversations,
+  createConversation,
+} = require("@grammyjs/conversations");
+
+const { chatMembers } = require("@grammyjs/chat-members");
+
 const {
   botText,
-  frequentlyAskedQuestions,
-  textFor1688,
+  FAQ,
+  linkForApp1688,
+  linkForAppTaobao,
+  linkForAppPoizon,
+  linkForAppPinduoduo,
   unprocessedMessages,
 } = require("./text");
+
+require("dotenv").config();
+
+const { getCNY, getDate } = require("./currencyExtraction");
+
+const commands = require("./commands");
+
 const bot = new Bot(process.env.BOT_TOKEN);
 
+//
+//
+//
+
+const adapter = new MemorySessionStorage();
+bot.use(chatMembers(adapter));
+
 bot.hears("/start", async (ctx) => {
+  const chatMember = await ctx.chatMembers.getChatMember();
+  const arrayOfUsers = [];
+  arrayOfUsers.push(chatMember.user);
+  console.log(arrayOfUsers);
+  //console.log(chatMember.user);
   await ctx.reply(
     `${ctx.from.first_name}, добро пожаловать в наш бот  🤖\nВам присвоен ID-${ctx.chat.id}, в дальнейшем этот ID будет соответствовать номеру вашего заказа\nДля дальнейшей работы воспользуйтесь 'Меню' `
   );
@@ -41,9 +77,11 @@ bot.hears("Сделать заказ!", async (ctx) => {
     "Отправьте нам ссылку на товар, фотографию самого товара, размер(если это одежда или обувь) и количество"
   );
 });
+
 bot.hears("Как сделать заказ?", async (ctx) => {
   await ctx.reply(botText);
 });
+
 bot.hears("Рассчитать стоимость заказа", async (ctx) => {
   try {
     const valute = await getCNY();
@@ -55,8 +93,9 @@ bot.hears("Рассчитать стоимость заказа", async (ctx) =>
     console.log(err);
   }
 });
+
 bot.hears("Часто задаваемые вопросы FAQ", async (ctx) => {
-  await ctx.reply(frequentlyAskedQuestions, {
+  await ctx.reply(FAQ, {
     parse_mode: "HTML",
   });
 });
@@ -66,6 +105,7 @@ bot.hears("Другое", async (ctx) => {
     reply_markup: keyboardForOtherQueries,
   });
 });
+
 //  <= Блок Основного меню
 
 //  Блок раздера "Другое" =>
@@ -108,19 +148,56 @@ bot.hears("Назад", async (ctx) => {
 });
 //  <= Блок выбора приложений из раздела "Другое/Скачать приложения"
 
-// Блок управление приложениями =>
-const keyboardForDeviceSelection = new Keyboard()
-  .text("Для айфона")
-  .text("Для андроида")
-  .row()
-  .text("К приложениям")
-  .resized();
+// Блок, в котором предлагают скачать приложение под IOS или Андроид, тут используется плагин "@grammyjs/conversations", для каждого приложения написана своя функция, мне показалось, что так будет лучше смореться  =>
 
-bot.hears("1688", async (ctx) => {
-  await ctx.reply(textFor1688, {
+bot.use(session({ initial: () => ({}) }));
+bot.use(conversations());
+bot.use(createConversation(showLinksFor1688));
+bot.use(createConversation(showLinksForTaobao));
+bot.use(createConversation(showLinksForPoizon));
+bot.use(createConversation(showLinksForPinduoduo));
+
+async function showLinksFor1688(conversation, ctx) {
+  await ctx.reply(linkForApp1688, {
     parse_mode: "HTML",
     disable_web_page_preview: true,
   });
+}
+
+async function showLinksForTaobao(conversation, ctx) {
+  await ctx.reply(linkForAppTaobao, {
+    parse_mode: "HTML",
+    disable_web_page_preview: true,
+  });
+}
+
+async function showLinksForPoizon(conversation, ctx) {
+  await ctx.reply(linkForAppPoizon, {
+    parse_mode: "HTML",
+    disable_web_page_preview: true,
+  });
+}
+
+async function showLinksForPinduoduo(conversation, ctx) {
+  await ctx.reply(linkForAppPinduoduo, {
+    parse_mode: "HTML",
+    disable_web_page_preview: true,
+  });
+}
+bot.hears("1688", async (ctx) => {
+  await ctx.conversation.enter("showLinksFor1688");
+});
+
+bot.hears("Taobao", async (ctx) => {
+  await ctx.conversation.enter("showLinksForTaobao");
+});
+
+bot.hears("Poizon", async (ctx) => {
+  await ctx.conversation.enter("showLinksForPoizon");
+});
+
+bot.hears("Pinduoduo", async (ctx) => {
+  await ctx.conversation.enter("showLinksForPinduoduo");
 });
 
 bot.hears("К приложениям", async (ctx) => {
@@ -129,15 +206,23 @@ bot.hears("К приложениям", async (ctx) => {
   });
 });
 
-bot.on("::url", async (ctx) => {
-  await ctx.reply("мммм... ссылочка...", {
+// <= Блок, в котором предлагают скачать приложение под IOS или Андроид
+
+// bot.on("::url", async (ctx) => {
+//   await ctx.reply("мммм... ссылочка...", {
+//     parse_mode: "HTML",
+//   });
+// });
+// bot.hears("данные", async (ctx) => {
+//   await ctx.reply(ctx.message.chat);
+// });
+
+bot.on("message", async (ctx) => {
+  await ctx.reply(unprocessedMessages, {
     parse_mode: "HTML",
   });
 });
-
-bot.on("message", async (ctx) => {
-  await ctx.reply(unprocessedMessages);
-});
+//  <= Блок управление приложениями
 
 //Обработка ошибок
 bot.catch((err) => {
@@ -152,5 +237,8 @@ bot.catch((err) => {
     console.error("Unknown error:", e);
   }
 });
+//Обработка ошибок
 
-bot.start();
+bot.start({
+  allowed_updates: ["chat_member", "message"],
+});

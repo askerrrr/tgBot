@@ -2,12 +2,13 @@ const {
   conversations,
   createConversation,
 } = require("@grammyjs/conversations");
+
+const { showLinksFor1688 } = require("../services/linksForApp/linkFor1688");
+const { showLinksForTaobao } = require("../services/linksForApp/linkForTaobao");
+const { showLinksForPoizon } = require("../services/linksForApp/linkForPoizon");
 const {
-  showLinksFor1688,
-  showLinksForTaobao,
-  showLinksForPoizon,
   showLinksForPinduoduo,
-} = require("../services/showLinks");
+} = require("../services/linksForApp/linkForPinduoduo");
 
 const { session } = require("grammy");
 

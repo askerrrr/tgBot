@@ -1,6 +1,7 @@
 const { keyboardForOtherQueries } = require("../keyboard/keyboard");
 const { FAQ, botText } = require("../utils/text");
-const { getCNY, getDate } = require("../services/currencyExtraction");
+const { getCNY } = require("../services/currencyExtraction");
+const { getDate } = require("../services/date");
 
 function listenerOfMainMenu(bot) {
   bot.hears("Сделать заказ!", async (ctx) => {

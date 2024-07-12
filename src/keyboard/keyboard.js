@@ -11,6 +11,8 @@ const keyboardForTheMainMenu = new Keyboard()
   .resized();
 
 const keyboardForOtherQueries = new Keyboard()
+  .text("Гайд по приложениям")
+  .row()
   .text("Скачать приложения")
   .row()
   .text("Основное меню")
@@ -26,8 +28,18 @@ const keyboardForDownloadingApp = new Keyboard()
   .text("Назад")
   .resized();
 
+const keyboardForAppGuides = new Keyboard()
+  .text("Гайд по 1688")
+  .text("Гайд по Taobao")
+  .row()
+  .text("Гайд по Ponzon")
+  .text("Гайд по Pinduoduo")
+  .row("Назад")
+  .resized();
+
 module.exports = {
   keyboardForTheMainMenu,
   keyboardForOtherQueries,
   keyboardForDownloadingApp,
+  keyboardForAppGuides,
 };

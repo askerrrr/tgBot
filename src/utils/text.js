@@ -21,7 +21,7 @@ const linkForAppPinduoduo =
   '<u><a href="" target="_blank">Скачать приложение на айфон</a>\n\n\n<a href="" target="_blank">Скачать приложение на андроид</a></u>';
 
 //Текст для необработанных сообщений
-const unprocessedMessages = "Не понимаю вас, пожалуйста, воспользуйтесь меню ☰";
+const unexpectedMessages = "Не понимаю вас, пожалуйста, воспользуйтесь меню ☰";
 
 module.exports = {
   botText,
@@ -30,5 +30,5 @@ module.exports = {
   linkForAppTaobao,
   linkForAppPoizon,
   linkForAppPinduoduo,
-  unprocessedMessages,
+  unexpectedMessages,
 };

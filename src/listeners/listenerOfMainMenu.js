@@ -1,13 +1,17 @@
-const { keyboardForOtherQueries } = require("../keyboard/keyboard");
+const {
+  keyboardForOtherQueries,
+  keyboardForOrder,
+} = require("../keyboard/keyboard");
 const { FAQ, botText } = require("../utils/text");
 const { getCNY } = require("../services/currencyExtraction");
 const { getDate } = require("../services/date");
 
 function listenerOfMainMenu(bot) {
   bot.hears("Сделать заказ!", async (ctx) => {
-    await ctx.reply(
-      "Отправьте нам ссылку на товар, фотографию самого товара, размер(если это одежда или обувь) и количество"
-    );
+    await ctx.reply("Выберите один из вариантов", {
+      reply_markup: keyboardForOrder,
+    });
+    
   });
 
   bot.hears("Как сделать заказ?", async (ctx) => {

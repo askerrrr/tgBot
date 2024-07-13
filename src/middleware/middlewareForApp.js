@@ -20,7 +20,9 @@ function middlewareForApp(bot) {
   bot.use(createConversation(showLinksForTaobao));
   bot.use(createConversation(showLinksForPoizon));
   bot.use(createConversation(showLinksForPinduoduo));
-  bot.use(catchUnexpectedMessages);
 }
 
-module.exports = { middlewareForApp };
+function catchMessage(bot) {
+  bot.use(catchUnexpectedMessages);
+}
+module.exports = { middlewareForApp, catchMessage };

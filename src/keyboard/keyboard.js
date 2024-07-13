@@ -39,9 +39,16 @@ const keyboardForAppGuides = new Keyboard()
   .row("Назад")
   .resized();
 
+const keyboardForOrder = new Keyboard()
+  .text("Хочу заказать один товар")
+  .row()
+  .text("Хочу заказать несколько товаров")
+  .resized();
+
 module.exports = {
   keyboardForTheMainMenu,
   keyboardForOtherQueries,
   keyboardForDownloadingApp,
   keyboardForAppGuides,
+  keyboardForOrder,
 };

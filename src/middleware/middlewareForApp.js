@@ -11,6 +11,7 @@ const {
 } = require("../services/linksForApp/linkForPinduoduo");
 
 const { session } = require("grammy");
+const { catchUnexpectedMessages } = require("../middleware/unexpectedMessages");
 
 function middlewareForApp(bot) {
   bot.use(session({ initial: () => ({}) }));
@@ -19,6 +20,7 @@ function middlewareForApp(bot) {
   bot.use(createConversation(showLinksForTaobao));
   bot.use(createConversation(showLinksForPoizon));
   bot.use(createConversation(showLinksForPinduoduo));
+  bot.use(catchUnexpectedMessages);
 }
 
 module.exports = { middlewareForApp };

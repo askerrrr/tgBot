@@ -2,19 +2,25 @@ const { Bot } = require("grammy");
 const { errorHandler } = require("./src/middleware/errorHandler");
 const { startCommand } = require("./src/commands/start");
 const { mainMenu } = require("./src/commands/mainMenu");
-const { middlewareForApp } = require("./src/middleware/middlewareForApp");
 const { allListeners } = require("./src/listeners/allLinteners");
-const { catchMessage } = require("./src/middleware/middlewareForApp");
+const { middlewareForConversations } = require("./src/middleware/middleware");
+const {
+  catchUnexpectedMessages,
+} = require("./src/middleware/unexpectedMessages");
+
 require("dotenv").config();
 
 const bot = new Bot(process.env.BOT_TOKEN);
 
 bot.hears("/start", startCommand);
+
 bot.hears("/menu", mainMenu);
 
 allListeners(bot);
-//middlewareForApp(bot);
-catchMessage(bot);
+middlewareForConversations(bot);
+
+bot.on("message", catchUnexpectedMessages);
+
 bot.catch(errorHandler);
 
 bot.start({

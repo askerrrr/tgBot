@@ -43,6 +43,8 @@ const keyboardForOrder = new Keyboard()
   .text("Хочу заказать один товар")
   .row()
   .text("Хочу заказать несколько товаров")
+  .row()
+  .text("Основное меню")
   .resized();
 
 module.exports = {

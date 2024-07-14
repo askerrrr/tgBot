@@ -1,13 +1,18 @@
-const { keyboardForOrder } = require("../keyboard/keyboard");
-const { textForOneOrder } = require("../utils/text");
+const { keyboardForTheMainMenu } = require("../keyboard/keyboard");
 
-function listenersForOrder(bot) {
+async function listenersForOrder(bot) {
   bot.hears("Хочу заказать один товар", async (ctx) => {
-    await ctx.reply(textForOneOrder);
+    await ctx.conversation.enter("singleOrder");
   });
+
   bot.hears("Хочу заказать несколько товаров", async (ctx) => {
-    await ctx.reply("Сейчас пришлем шаблон для заполнения...");
+    await ctx.conversation.enter("multipleOrders");
+  });
+
+  bot.hears("Основное меню", async (ctx) => {
+    await ctx.reply("Меню", {
+      reply_markup: keyboardForTheMainMenu,
+    });
   });
 }
-
 module.exports = { listenersForOrder };

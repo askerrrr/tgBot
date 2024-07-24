@@ -2,15 +2,14 @@ const {
   conversations,
   createConversation,
 } = require("@grammyjs/conversations");
-const { getChatUsers } = require("../chatMember/chatMember");
+const { session, MemorySessionStorage } = require("grammy");
 const { chatMembers } = require("@grammyjs/chat-members");
-const { session, MemorySessionStorages } = require("grammy");
+const { mongo } = require("../chatMember/chatMember");
 const { singleOrder } = require("../services/order/singleOrder");
 const { multipleOrders } = require("../services/order/multipleOrders");
 const { listenersForOrder } = require("../listeners/listenersForOrder");
-const { catchUnexpectedMessages } = require("./unexpectedMessages");
 
-const adapter = new MemorySessionStorages();
+const { catchUnexpectedMessages } = require("./unexpectedMessages");
 
 function middlewareForConversations(bot) {
   bot.use(session({ initial: () => ({}) }));
@@ -18,8 +17,7 @@ function middlewareForConversations(bot) {
   bot.use(createConversation(singleOrder));
   bot.use(createConversation(multipleOrders));
   listenersForOrder(bot);
-  bot.use(chatMembers(adapter));
-  getChatUsers(bot);
+  mongo(bot);
   bot.on("message", catchUnexpectedMessages);
 }
 

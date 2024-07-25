@@ -1,19 +1,30 @@
 const MongoClient = require("mongodb").MongoClient;
-const { chatMembers } = require("@grammyjs/chat-members");
-const { MemorySessionStorage } = require("grammy");
-const mongodb = new MongoClient("mongodb://localhost:27017");
 
-const mongo = async (bot) => {
-  const adapter = new MemorySessionStorage();
-  bot.use(chatMembers(adapter));
-  await mongodb.connect();
-  const collection = mongodb.db("tgusers").collection("users");
-  collection.insertOne();
+const mongodb = new MongoClient("mongodb://localhost:27017");
+const collection = mongodb.db("grammyUsers").collection("users");
+
+(async () => {
+  try {
+    await mongodb.connect();
+  } catch (err) {
+    console.log(err, "Ошибка подключение mongodb...");
+  }
+})();
+
+module.exports.chat = async (bot) => {
   bot.hears("/start", async (ctx) => {
-    const chatMember = ctx.chatMember.getChatMember(ctx.chat.id, ctx.from.id);
-    collection.insertOne(chatMember.user);
+    await ctx.reply(
+      `${ctx.from.first_name}, добро пожаловать в наш бот  🤖\nВам присвоен id-${ctx.chat.id}, в дальнейшем этот ID будет соответствовать номеру вашего заказа\nДля дальнейшей работы воспользуйтесь 'Меню' `
+    );
+    const chatMember = await ctx.chatMembers.getChatMember(
+      ctx.chat.id,
+      ctx.from.id
+    );
+    const existingDocument = await collection.findOne(chatMember.user);
+    if (!existingDocument) {
+      return await collection.insertOne(chatMember.user);
+    } else {
+      console.log("Document already exists in the collection");
+    }
   });
 };
-
-
-module.exports = { mongo };

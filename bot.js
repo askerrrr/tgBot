@@ -10,8 +10,6 @@ require("dotenv").config();
 
 const bot = new Bot(process.env.BOT_TOKEN);
 
-bot.hears("/start", startCommand);
-
 bot.hears("/menu", mainMenu);
 
 allListeners(bot);

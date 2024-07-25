@@ -1,14 +1,27 @@
+let num = 1;
+
 function row(user) {
   const tbody = document.getElementById("tbody");
   const tr = document.createElement("tr");
+
+  const tdNum = document.createElement("td");
+  tdNum.append(`${num++})`);
+  tr.append(tdNum);
 
   const tdId = document.createElement("td");
   tdId.append(user._id);
   tr.append(tdId);
 
-  const tdName = document.createElement("td");
-  tdName.append(user.first_name);
-  tr.append(tdName);
+  const tdFirstName = document.createElement("td");
+  tdFirstName.append(user.first_name);
+  tr.append(tdFirstName);
+
+  const tdUserName = document.createElement("td");
+  user.username !== undefined
+    ? tdUserName.append(user.username)
+    : tdUserName.append("");
+
+  tr.append(tdUserName);
 
   const tdTelegramId = document.createElement("td");
   tdTelegramId.append(user.id);

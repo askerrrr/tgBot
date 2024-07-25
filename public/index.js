@@ -26,7 +26,7 @@ async function GetUsers() {
   });
   const users = await response.json();
 
-  return row(users);
+  users.forEach((user) => row(user));
 }
 
 GetUsers();

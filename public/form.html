@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order form</title>
+  </head>
+  <body>
+    <form action="" method="post">
+      <p>
+        <label for="url">Введите ссылку</label>
+        <input
+          type="url"
+          name="url"
+          id="url"
+          placeholder="https://placeholdercom"
+          required
+        />
+      </p>
+      <p>
+        <label for="image">Прикрепите фото товара</label>
+        <input type="image" name="image" id="image" required />
+      </p>
+      <p>
+        <label for="quantity">Количество товара</label>
+        <input
+          type="number"
+          name="quantity"
+          id="quantity"
+          placeholder="123"
+          required
+        />
+      </p>
+      <p>
+        <label for="size">Размер (для одежды )</label
+        ><input type="number" name="size" id="size" placeholder="42" />
+      </p>
+      <p><button type="submit">Отправить форму</button></p>
+    </form>
+    <script src="form.js"></script>
+  </body>
+</html>

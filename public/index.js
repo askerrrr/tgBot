@@ -5,7 +5,7 @@ function row(user) {
   const tr = document.createElement("tr");
 
   const tdNum = document.createElement("td");
-  tdNum.append(`${num++})`);
+  tdNum.append(`${num++}`);
   tr.append(tdNum);
 
   const tdId = document.createElement("td");

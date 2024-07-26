@@ -1,9 +1,9 @@
 const { textForOneOrder } = require("../../utils/text");
 
 async function singleOrder(conversation, ctx) {
-  await ctx.reply(textForOneOrder);
-  const { message } = await conversation.wait();
-  await ctx.reply("Спасибо, скоро начнем обрабатывать ваш заказ");
+  await ctx.reply("Пришлите ссылку на товар");
+  const { url } = await conversation.wait();
+  await ctx.reply(`${typeof url}`);
 }
 
 module.exports = { singleOrder };

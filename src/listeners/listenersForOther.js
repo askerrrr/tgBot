@@ -16,11 +16,11 @@ function listenersForOther(bot) {
   });
 
   bot.hears("Пришли шаблон", async (ctx) => {
-    const file_id = await ctx.replyWithDocument.file_id;
-    const url = new URL(
-      "https://docs.google.com/spreadsheets/d/1Et9BAoT9lRXr-QqV_891K5ZG2PVj6YfpEt2KGKFKcqE/edit?gid=0#gid=0"
-    );
-    await ctx.reply(url, file_id);
+    const url =
+      "https://docs.google.com/spreadsheets/d/1APcCLIs87uZNGCTMdnOsCUR1utWItf-5MMKrDi7vRPM/edit?gid=0#gid=0";
+    await ctx.reply(url);
+
+    // await ctx.replyWithDocument(new InputFile("src/template/template.xlsx"));
   });
 
   bot.hears("Гайд по приложениям", async (ctx) => {

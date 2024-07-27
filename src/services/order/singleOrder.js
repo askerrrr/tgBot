@@ -1,4 +1,4 @@
-const { textForOneOrder } = require("../../utils/text");
+const { keyboardForSingleOrder } = require("../../keyboard/keyboard");
 
 async function singleOrder(conversation, ctx) {
   await ctx.reply("Пришлите ссылку на товар");
@@ -10,9 +10,7 @@ async function singleOrder(conversation, ctx) {
   );
   const quantityAndSizeCtx = await conversation.wait();
   const quantityAndSize = quantityAndSizeCtx.msg.text;
-  let quantityAndSizeLength = quantityAndSize
-    .split(" ")
-    .map((item, index) => `${index + 1} : ${item}\n`);
+  let quantityAndSizeStr = quantityAndSize.split(" ");
 
   await ctx.reply("Отправьте фото товара");
 
@@ -22,9 +20,22 @@ async function singleOrder(conversation, ctx) {
   await ctx.reply(`Ссылка : ${url}`, {
     disable_web_page_preview: true,
   });
-  await ctx.reply(`${quantityAndSizeLength}`);
-
+  await ctx.reply(
+    `Размер :${quantityAndSizeStr[0]}\nкол-во: ${quantityAndSizeStr[1]}`
+  );
   await ctx.replyWithPhoto(`${image}`);
+
+  await ctx.reply("Спасибо, скоро начнем обрабатывать заказ");
+  // await ctx.reply("Все правильно?", {
+  //   reply_markup: keyboardForSingleOrder,
+  // });
+
+  // const orderStartus = await conversation.wait();
+  // if (orderStartus == "Да, все правильно!") {
+  //   return await ctx.reply("Спасибо, скоро начнем обрабатывать заказ");
+  // } else if (orderStartus == "Нет, тут ошибка, я хочу исправить данные") {
+  //   return await singleOrder(conversation, ctx);
+  // }
 }
 
 module.exports = { singleOrder };

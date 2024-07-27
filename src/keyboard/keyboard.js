@@ -47,10 +47,17 @@ const keyboardForOrder = new Keyboard()
   .text("Основное меню")
   .resized();
 
+const keyboardForSingleOrder = new Keyboard()
+  .text("Да, все правильно!")
+  .row()
+  .text("Нет, тут ошибка, я хочу исправить данные")
+  .resized();
+
 module.exports = {
+  keyboardForOrder,
+  keyboardForAppGuides,
+  keyboardForSingleOrder,
   keyboardForTheMainMenu,
   keyboardForOtherQueries,
   keyboardForDownloadingApp,
-  keyboardForAppGuides,
-  keyboardForOrder,
 };

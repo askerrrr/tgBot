@@ -10,7 +10,7 @@ async function singleOrder(conversation, ctx) {
   );
   const quantityAndSizeCtx = await conversation.wait();
   const quantityAndSize = quantityAndSizeCtx.msg.text;
-  let quantityAndSizeStr = quantityAndSize.split(" ");
+  const quantityAndSizeStr = quantityAndSize.split(" ");
 
   await ctx.reply("Отправьте фото товара");
 
@@ -20,22 +20,38 @@ async function singleOrder(conversation, ctx) {
   await ctx.reply(`Ссылка : ${url}`, {
     disable_web_page_preview: true,
   });
-  await ctx.reply(
-    `Размер :${quantityAndSizeStr[0]}\nкол-во: ${quantityAndSizeStr[1]}`
-  );
+
+  if (quantityAndSizeStr.length === 1) {
+    await ctx.reply(`кол-во: ${quantityAndSizeStr[0]}`);
+  } else if (quantityAndSizeStr.length === 2) {
+    await ctx.reply(
+      `кол-во: ${quantityAndSizeStr[0]}\nРазмер : ${quantityAndSizeStr[1]}`
+    );
+  }
+
   await ctx.replyWithPhoto(`${image}`);
 
-  await ctx.reply("Спасибо, скоро начнем обрабатывать заказ");
-  // await ctx.reply("Все правильно?", {
-  //   reply_markup: keyboardForSingleOrder,
-  // });
+  await ctx.reply("Все правильно?", {
+    reply_markup: keyboardForSingleOrder,
+  });
 
-  // const orderStartus = await conversation.wait();
-  // if (orderStartus == "Да, все правильно!") {
-  //   return await ctx.reply("Спасибо, скоро начнем обрабатывать заказ");
-  // } else if (orderStartus == "Нет, тут ошибка, я хочу исправить данные") {
-  //   return await singleOrder(conversation, ctx);
-  // }
+  const orderStartus = await conversation.wait();
+  if (orderStartus.msg.text == "Да, все правильно!") {
+    await ctx.reply("Спасибо, скоро начнем обрабатывать заказ", {
+      reply_markup: {
+        remove_keyboard: true,
+      },
+    });
+  } else if (
+    orderStartus.msg.text == "Нет, тут ошибка, я хочу исправить данные"
+  ) {
+    await ctx.reply("Давайте исправим", {
+      reply_markup: {
+        remove_keyboard: true,
+      },
+    });
+    return await singleOrder(conversation, ctx);
+  }
 }
 
 module.exports = { singleOrder };

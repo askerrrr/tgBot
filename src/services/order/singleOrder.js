@@ -1,5 +1,6 @@
 const { response } = require("express");
 const { keyboardForSingleOrder } = require("../../keyboard/keyboard");
+const { checkStrLength } = require("./checkStrLength");
 
 async function singleOrder(conversation, ctx) {
   const userId = ctx.from.id;
@@ -12,27 +13,24 @@ async function singleOrder(conversation, ctx) {
     "Теперь пришлите нам количество товара и размер ( в случае если это одежда ). Если это товар не из категории одежды, тогда просто количество"
   );
   const quantityAndSizeCtx = await conversation.wait();
-  const quantityAndSize = quantityAndSizeCtx.msg.text;
-  const quantityAndSizeStr = quantityAndSize.split(" ");
+  const quantityAndSize = String(quantityAndSizeCtx.msg.text).split(" ");
 
   await ctx.reply("Отправьте фото товара");
 
   const imageCtx = await conversation.wait();
   const image = imageCtx.msg.photo[imageCtx.msg.photo.length - 1].file_id;
 
+  await ctx.reply(
+    "Напишите номер вашего телефона, чтобы мы могли связаться с вами"
+  );
+  const userPhoneNumber = await conversation.wait();
+
   await ctx.reply(`Ссылка : ${url}`, {
     disable_web_page_preview: true,
-  });
-
-  if (quantityAndSizeStr.length === 1) {
-    await ctx.reply(`кол-во: ${quantityAndSizeStr[0]}`);
-  } else if (quantityAndSizeStr.length === 2) {
-    await ctx.reply(
-      `кол-во: ${quantityAndSizeStr[0]}\nРазмер : ${quantityAndSizeStr[1]}`
-    );
-  }
-
-  await ctx.replyWithPhoto(`${image}`);
+  }); // возвращение ссылки
+  await checkStrLength(quantityAndSize, ctx); //возвращение количества товара и проверка ответа на наличие или отсутствие размера
+  await ctx.replyWithPhoto(`${image}`); // возвращение фото
+  await ctx.reply(`${userPhoneNumber}`); // возвращение номера телефона
 
   await ctx.reply("Все правильно?", {
     reply_markup: keyboardForSingleOrder,
@@ -55,6 +53,7 @@ async function singleOrder(conversation, ctx) {
     });
     return await singleOrder(conversation, ctx);
   }
+  module.exports = { url, image, userPhoneNumber, quantityAndSize };
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

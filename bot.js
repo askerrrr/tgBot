@@ -3,7 +3,6 @@ const { startCommand } = require("./src/commands/start");
 const { mainMenu } = require("./src/commands/mainMenu");
 const { allListeners } = require("./src/listeners/allLinteners");
 const { middlewareForConversations } = require("./src/middleware/middleware");
-
 const { errorHandler } = require("./src/middleware/errorHandler");
 
 require("dotenv").config();

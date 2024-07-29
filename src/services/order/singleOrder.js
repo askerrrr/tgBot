@@ -1,6 +1,9 @@
+const { response } = require("express");
 const { keyboardForSingleOrder } = require("../../keyboard/keyboard");
 
 async function singleOrder(conversation, ctx) {
+  const userId = ctx.from.id;
+
   await ctx.reply("Пришлите ссылку на товар");
   const urlCtx = await conversation.wait();
   const url = urlCtx.msg.text;
@@ -54,4 +57,16 @@ async function singleOrder(conversation, ctx) {
   }
 }
 
-module.exports = { singleOrder };
+module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"
+
+// const response = await fetch("/telegramuser/order", {
+//   method: "POST",
+//   body: JSON.stringify({
+//     url,
+//     quantityAndSizeStr,
+//     image,
+//   }),
+//   headers: { Accept: "application/json", "Content-Type": "application/json" },
+// });
+// const order = response.json();
+// return order;

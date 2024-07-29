@@ -3,9 +3,11 @@ const path = require("path");
 const MongoClient = require("mongodb").MongoClient;
 
 const app = express();
+const order = require("./router/order");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
+
 const mongodb = new MongoClient("mongodb://localhost:27017");
 
 (async () => {
@@ -27,3 +29,5 @@ app.get("/telegramuser", async (req, res) => {
     res.sendStatus(404);
   }
 });
+
+app.use("/order", order);

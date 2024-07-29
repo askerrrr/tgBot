@@ -24,10 +24,10 @@ async function singleOrder(conversation, ctx) {
 
   await ctx.reply(`Ссылка : ${url}`, {
     disable_web_page_preview: true,
-  });
-  await checkStrLength(quantityAndSize, ctxs);
-  await ctx.replyWithPhoto(`${image}`);
-  await ctx.reply(`${userPhoneNumber}`);
+  }); // возвращение ссылки
+  await checkStrLength(quantityAndSize, ctx); //возвращение количества товара и проверка ответа на наличие или отсутствие размера
+  await ctx.replyWithPhoto(`${image}`); // возвращение фото
+  await ctx.reply(`${userPhoneNumber}`); // возвращение номера телефона
 
   await ctx.reply("Все правильно?", {
     reply_markup: keyboardForSingleOrder,
@@ -50,6 +50,7 @@ async function singleOrder(conversation, ctx) {
     });
     return await singleOrder(conversation, ctx);
   }
+  module.exports = { url, image, userPhoneNumber, quantityAndSize };
 }
 
 module.exports = { singleOrder };

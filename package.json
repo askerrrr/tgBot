@@ -13,6 +13,7 @@
   "dependencies": {
     "@grammyjs/chat-members": "^1.1.0",
     "@grammyjs/conversations": "^1.2.0",
+    "@grammyjs/files": "^1.1.1",
     "@grammyjs/hydrate": "^1.4.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

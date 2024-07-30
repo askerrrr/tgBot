@@ -3,8 +3,8 @@ const {
   keyboardForOrder,
 } = require("../keyboard/keyboard");
 const { FAQ, botText } = require("../utils/text");
-const { getCNY } = require("../services/currencyExtraction");
-const { getDate } = require("../services/date");
+const { getCNY } = require("../services/different/currencyExtraction");
+const { getDate } = require("../services/different/date");
 
 function listenerOfMainMenu(bot) {
   bot.hears("Сделать заказ!", async (ctx) => {

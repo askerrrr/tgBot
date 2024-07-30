@@ -3,18 +3,11 @@ const path = require("path");
 const MongoClient = require("mongodb").MongoClient;
 
 const app = express();
-<<<<<<< HEAD
-const order = require("./router/order");
-
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.json());
-=======
 const user = require("./router/userOrder");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use("/telegramuser/user", user);
->>>>>>> detachhead
 
 const mongodb = new MongoClient("mongodb://localhost:27017");
 

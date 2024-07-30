@@ -1,10 +1,8 @@
-const { response } = require("express");
 const { keyboardForSingleOrder } = require("../../keyboard/keyboard");
 const { checkStrLength } = require("./checkStrLength");
+const { orderMessageToAdmit } = require("./messageToAdmin");
 
 async function singleOrder(conversation, ctx) {
-  const userId = ctx.from.id;
-
   await ctx.reply("Пришлите ссылку на товар");
   const urlCtx = await conversation.wait();
   const url = urlCtx.msg.text;
@@ -30,7 +28,7 @@ async function singleOrder(conversation, ctx) {
   }); // возвращение ссылки
   await checkStrLength(quantityAndSize, ctx); //возвращение количества товара и проверка ответа на наличие или отсутствие размера
   await ctx.replyWithPhoto(`${image}`); // возвращение фото
-  await ctx.reply(`${userPhoneNumber}`); // возвращение номера телефона
+  await ctx.reply(`Ваш номер телефона : ${userPhoneNumber.msg.text}`); // возвращение номера телефона
 
   await ctx.reply("Все правильно?", {
     reply_markup: keyboardForSingleOrder,
@@ -53,7 +51,10 @@ async function singleOrder(conversation, ctx) {
     });
     return await singleOrder(conversation, ctx);
   }
+
   module.exports = { url, image, userPhoneNumber, quantityAndSize };
+
+  await orderMessageToAdmit(ctx, url, image, quantityAndSize, userPhoneNumber);
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

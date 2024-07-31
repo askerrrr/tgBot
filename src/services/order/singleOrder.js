@@ -54,7 +54,7 @@ async function singleOrder(conversation, ctx) {
 
   module.exports = { url, image, userPhoneNumber, quantityAndSize };
 
-  await orderMessageToAdmit(ctx, url, image, quantityAndSize, userPhoneNumber);
+  await orderMessageToAdmit(ctx, url, image, quantityAndSize, userPhoneNumber) // отправляем заказ админу в лс;
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

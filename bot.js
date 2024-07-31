@@ -1,3 +1,4 @@
+const env = require("./env");
 const { Bot } = require("grammy");
 const { startCommand } = require("./src/commands/start");
 const { mainMenu } = require("./src/commands/mainMenu");
@@ -5,9 +6,7 @@ const { allListeners } = require("./src/listeners/allLinteners");
 const { middlewareForConversations } = require("./src/middleware/middleware");
 const { errorHandler } = require("./src/middleware/errorHandler");
 
-require("dotenv").config();
-
-const bot = new Bot(process.env.BOT_TOKEN);
+const bot = new Bot(env.bottoken);
 
 bot.hears("/menu", mainMenu);
 

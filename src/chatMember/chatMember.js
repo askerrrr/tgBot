@@ -1,15 +1,28 @@
-const MongoClient = require("mongodb").MongoClient;
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const env = require("../../env");
+const e = require("cors");
 
-const mongodb = new MongoClient("mongodb://localhost:27017");
-const collection = mongodb.db("grammyUsers").collection("users");
+const client = new MongoClient(env.mongourl, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
 
 (async () => {
   try {
-    await mongodb.connect();
+    await client.connect();
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } catch (err) {
-    console.log(err, "Ошибка подключение mongodb...");
+    console.log(err);
   }
 })();
+
+const collection = client.db("TelegramUsers").collection("users");
 
 module.exports.chat = async (bot) => {
   bot.hears("/start", async (ctx) => {

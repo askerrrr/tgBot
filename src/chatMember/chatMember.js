@@ -1,28 +1,4 @@
-const env = require("../../env");
-const { MongoClient, ServerApiVersion } = require("mongodb");
 const sendUserDataToServer = require("../services/different/sendUserDataToServer");
-
-// const client = new MongoClient(env.mongourl, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   },
-// });
-
-// (async () => {
-//   try {
-//     await client.connect();
-//     await client.db("admin").command({ ping: 1 });
-//     console.log(
-//       "Pinged your deployment. You successfully connected to MongoDB!"
-//     );
-//   } catch (err) {
-//     console.log(err);
-//   }
-// })();
-
-//const collection = client.db("TelegramUsers").collection("users");
 
 module.exports.chat = async (bot) => {
   bot.hears("/start", async (ctx) => {
@@ -35,12 +11,7 @@ module.exports.chat = async (bot) => {
         ctx.chat.id,
         ctx.from.id
       );
-      //const existingDocument = await collection.findOne(chatMember.user);
-      if (!existingDocument) {
-        return await collection.insertOne(chatMember.user);
-      } else {
-        console.log("Document already exists in the collection");
-      }
+
       await sendUserDataToServer(chatMember.user);
     } catch (err) {
       console.log(err);

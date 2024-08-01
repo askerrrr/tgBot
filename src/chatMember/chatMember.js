@@ -1,4 +1,6 @@
-const sendUserDataToServer = require("../services/different/sendUserDataToServer");
+const {
+  sendUserDataToServer,
+} = require("../services/different/sendUserDataToServer");
 
 module.exports.chat = async (bot) => {
   bot.hears("/start", async (ctx) => {
@@ -12,11 +14,16 @@ module.exports.chat = async (bot) => {
         ctx.from.id
       );
 
-      await sendUserDataToServer(chatMember.user)
-        .then((data) => data)
-        .catch((err) => console.log(err));
+      const userData = {
+        id: chatMember.user.id,
+        firstName: chatMember.user.first_name,
+        userName: chatMember.user.user_name,
+      };
+      await sendUserDataToServer(userData)
+       
     } catch (err) {
       console.log(err);
     }
   });
 };
+

@@ -6,7 +6,7 @@ module.exports.sendUserDataToServer = async (userData) => {
     body: JSON.stringify(userData),
     headers: {
       "Content-Type": "application/json",
-      Authorization: Bearer`${env.auttoken}`,
+      Authorization: `Bearer ${env.auttoken}`,
     },
   });
   const users = await response.json();

@@ -12,7 +12,9 @@ module.exports.chat = async (bot) => {
         ctx.from.id
       );
 
-      await sendUserDataToServer(chatMember.user);
+      await sendUserDataToServer(chatMember.user)
+        .then((data) => data)
+        .catch((err) => console.log(err));
     } catch (err) {
       console.log(err);
     }

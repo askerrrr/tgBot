@@ -6,12 +6,11 @@ const { FAQ, botText } = require("../utils/text");
 const { getCNY } = require("../services/different/currencyExtraction");
 const { getDate } = require("../services/different/date");
 
-function listenerOfMainMenu(bot) {
+async function listenerOfMainMenu(bot) {
   bot.hears("Сделать заказ!", async (ctx) => {
     await ctx.reply("Выберите один из вариантов", {
       reply_markup: keyboardForOrder,
     });
-    
   });
 
   bot.hears("Как сделать заказ?", async (ctx) => {

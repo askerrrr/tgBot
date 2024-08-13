@@ -17,13 +17,17 @@ module.exports.chat = async (bot) => {
       const userData = {
         id: chatMember.user.id,
         firstName: chatMember.user.first_name,
-        userName: chatMember.user.user_name,
+        userName:
+          chatMember.user.user_name === undefined
+            ? ""
+            : chatMember.user.user_name,
       };
-      await sendUserDataToServer(userData)
-       
+
+      console.log(JSON.stringify(userData));
+
+      await sendUserDataToServer(userData);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   });
 };
-

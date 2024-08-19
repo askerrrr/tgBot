@@ -20,10 +20,13 @@ const adapter = new MemorySessionStorage();
 module.exports.middlewareForConversations = async function (bot) {
   bot.use(chatMembers(adapter));
   chat(bot);
+
   bot.use(session({ initial: () => ({}) }));
   bot.use(conversations());
+
   bot.use(createConversation(singleOrder));
   bot.use(createConversation(multipleOrders));
+
   listenersForOrder(bot);
 
   bot.on("message", catchUnexpectedMessages);

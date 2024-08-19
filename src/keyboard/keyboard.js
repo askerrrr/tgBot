@@ -13,7 +13,7 @@ const keyboardForTheMainMenu = new Keyboard()
 const keyboardForOtherQueries = new Keyboard()
   .text("Пришли шаблон")
   .row()
-  //.text("Гайд по приложениям")
+  .text("Гайд по магазинам")
   .row()
   .text("Скачать приложения")
   .row()
@@ -55,7 +55,7 @@ const keyboardForSingleOrder = new Keyboard()
 
 module.exports = {
   keyboardForOrder,
-  //keyboardForAppGuides,
+  keyboardForAppGuides,
   keyboardForSingleOrder,
   keyboardForTheMainMenu,
   keyboardForOtherQueries,

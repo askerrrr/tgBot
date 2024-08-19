@@ -23,8 +23,8 @@ function listenersForOther(bot) {
     // await ctx.replyWithDocument(new InputFile("src/template/template.xlsx"));
   });
 
-  bot.hears("Гайд по приложениям", async (ctx) => {
-    await ctx.reply("Гайды по приложениям", {
+  bot.hears("Гайд по магазинам", async (ctx) => {
+    await ctx.reply("Гайды по магазинам", {
       reply_markup: keyboardForAppGuides,
     });
   });

@@ -4,7 +4,7 @@ const {
 } = require("../keyboard/keyboard");
 const { FAQ, botText } = require("../utils/text");
 const { getCNY } = require("../services/different/currencyExtraction");
-const { getDate } = require("../services/different/date");
+const { getDateAndTime } = require("../services/different/dateAndTime");
 
 async function listenerOfMainMenu(bot) {
   bot.hears("Сделать заказ!", async (ctx) => {
@@ -22,7 +22,9 @@ async function listenerOfMainMenu(bot) {
       const valute = await getCNY();
 
       await ctx.reply(
-        `Курс на ${getDate()} ${valute.Valute.CNY.Value + 1.5} рублей за 1 юань`
+        `Курс на ${getDateAndTime().getDate()} ${
+          valute.Valute.CNY.Value + 1.5
+        } рублей за 1 юань`
       );
     } catch (err) {
       console.log(err);

@@ -1,4 +1,4 @@
-const { sendOrderFileToAdmin } = require("./sendOrderMessageToAdmin");
+const { sendOrderFileToAdmin } = require("./sendOrderFileToAdmin");
 
 async function multipleOrders(conversation, ctx) {
   await ctx.reply("Пришлите документ с вашими товарами");

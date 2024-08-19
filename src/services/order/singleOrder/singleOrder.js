@@ -1,4 +1,4 @@
-const { keyboardForSingleOrder } = require("../../keyboard/keyboard");
+const { keyboardForSingleOrder } = require("../../../keyboard/keyboard");
 const { checkStrLength } = require("./checkStrLength");
 const { orderMessageToAdmin } = require("./sendOrderMessageToAdmin");
 

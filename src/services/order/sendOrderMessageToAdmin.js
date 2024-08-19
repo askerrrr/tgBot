@@ -1,7 +1,7 @@
 const { env } = require("../../../env");
 const { getDateAndTime } = require("../different/dateAndTime");
 
-async function orderMessageToAdmit(
+async function orderMessageToAdmin(
   ctx,
   url,
   image,
@@ -17,4 +17,10 @@ async function orderMessageToAdmit(
   await ctx.api.sendPhoto(env.admin_id, `${image}`);
 }
 
-module.exports = { orderMessageToAdmit }; //экспорт в src\services\order\singleOrder.js
+async function sendOrderFileToAdmin(ctx, fileId, userPhoneNumber) {
+  const messageToAdmin = `Заказ от пользователя ${ctx.from.id}\nНомер телефона ${userPhoneNumber.msg.text}\n`;
+  await ctx.api.sendMessage(env.admin_id, messageToAdmin);
+  await ctx.api.sendDocument(env.admin_id, fileId);
+}
+
+module.exports = { orderMessageToAdmin, sendOrderFileToAdmin }; //экспорт в src\services\order\singleOrder.js

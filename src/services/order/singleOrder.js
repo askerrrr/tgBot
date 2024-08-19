@@ -1,6 +1,6 @@
 const { keyboardForSingleOrder } = require("../../keyboard/keyboard");
 const { checkStrLength } = require("./checkStrLength");
-const { orderMessageToAdmit } = require("./messageToAdmin");
+const { orderMessageToAdmin } = require("./sendOrderMessageToAdmin");
 
 async function singleOrder(conversation, ctx) {
   await ctx.reply("Пришлите ссылку на товар");
@@ -54,7 +54,7 @@ async function singleOrder(conversation, ctx) {
 
   module.exports = { url, image, userPhoneNumber, quantityAndSize };
 
-  await orderMessageToAdmit(ctx, url, image, quantityAndSize, userPhoneNumber) // отправляем заказ админу в лс;
+  await orderMessageToAdmin(ctx, url, image, quantityAndSize, userPhoneNumber); // отправляем заказ админу в лс;
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

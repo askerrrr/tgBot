@@ -8,7 +8,7 @@ async function allListeners(bot) {
   listenerOfMainMenu(bot);
   listenersForOther(bot);
   listenersForApp(bot);
-  getFileId(bot);
+  //getFileId(bot);
   middlewareForConversations(bot);
 }
 

@@ -1,8 +1,10 @@
 const { chat } = require("../chatMember/chatMember");
 const { session, MemorySessionStorage } = require("grammy");
 const { chatMembers } = require("@grammyjs/chat-members");
-const { singleOrder } = require("../services/order/singleOrder");
-const { multipleOrders } = require("../services/order/multipleOrders");
+const { singleOrder } = require("../services/order/singleOrder/singleOrder");
+const {
+  multipleOrders,
+} = require("../services/order/multipleOrders/multipleOrders");
 const { listenersForOrder } = require("../listeners/listenersForOrder");
 const { catchUnexpectedMessages } = require("./unexpectedMessages");
 const {

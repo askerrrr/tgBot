@@ -3,7 +3,7 @@ const {
   keyboardForOrder,
   keyboardForAppGuides,
 } = require("../keyboard/keyboard");
-const { FAQ, botText } = require("../utils/text");
+const { FAQ } = require("../utils/text");
 const { getCNY } = require("../services/different/currencyExtraction");
 const { getDateAndTime } = require("../services/different/dateAndTime");
 

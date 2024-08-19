@@ -1,4 +1,3 @@
-//const { middlewareForApp } = require("../middleware/middlewareForApp");
 const {
   linkForApp1688,
   linkForAppTaobao,

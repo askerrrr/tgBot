@@ -1,6 +1,5 @@
 const { env } = require("./env.js");
 const { Bot } = require("grammy");
-const { startCommand } = require("./src/commands/start");
 const { mainMenu } = require("./src/commands/mainMenu");
 const { allListeners } = require("./src/listeners/allLinteners");
 const { middlewareForConversations } = require("./src/middleware/middleware");

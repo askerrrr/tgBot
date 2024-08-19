@@ -2,11 +2,9 @@ const {
   keyboardForTheMainMenu,
   keyboardForDownloadingApp,
   keyboardForOtherQueries,
-  keyboardForAppGuides,
 } = require("../keyboard/keyboard");
-const { InputFile } = require("grammy");
 
-const fs = require("fs");
+const { env } = require("../../env");
 
 function listenersForOther(bot) {
   bot.hears("Основное меню", async (ctx) => {
@@ -16,17 +14,7 @@ function listenersForOther(bot) {
   });
 
   bot.hears("Пришли шаблон", async (ctx) => {
-    const url =
-      "https://docs.google.com/spreadsheets/d/1APcCLIs87uZNGCTMdnOsCUR1utWItf-5MMKrDi7vRPM/edit?gid=0#gid=0";
-    await ctx.reply(url);
-
-    // await ctx.replyWithDocument(new InputFile("src/template/template.xlsx"));
-  });
-
-  bot.hears("Гайд по магазинам", async (ctx) => {
-    await ctx.reply("Гайды по магазинам", {
-      reply_markup: keyboardForAppGuides,
-    });
+    await ctx.replyWithDocument(env.file_id);
   });
 
   bot.hears("Скачать приложения", async (ctx) => {
@@ -43,8 +31,3 @@ function listenersForOther(bot) {
 }
 
 module.exports = { listenersForOther };
-// new InputFile(
-//   fs.createReadStream(
-//     "/home/phosphorus/botDir/bot/tgbot/src/utils/text.txt"
-//   )
-// )

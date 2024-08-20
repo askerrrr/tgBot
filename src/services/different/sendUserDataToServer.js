@@ -2,7 +2,7 @@ const { env } = require("../../../env");
 
 module.exports.sendUserDataToServer = async (userData) => {
   try {
-    const response = await fetch("https://test-nodejs.ru/api", {
+    const response = await fetch(env.siteUrl, {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {

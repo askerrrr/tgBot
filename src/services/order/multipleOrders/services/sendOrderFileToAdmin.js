@@ -1,5 +1,7 @@
-const { env } = require("../../../../env");
-const { getDateAndTime } = require("../../different/dateAndTime");
+const { env } = require("../../../../../env");
+const {
+  getDateAndTime,
+} = require("../../../../services/different/dateAndTime");
 
 async function sendOrderFileToAdmin(ctx, fileId, userPhoneNumber) {
   const messageToAdmin = `Заказ от пользователя ${

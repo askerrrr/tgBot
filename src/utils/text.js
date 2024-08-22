@@ -21,8 +21,6 @@ const linkForAppPinduoduo =
   '<u><a href="" target="_blank">Скачать приложение на айфон</a>\n\n\n<a href="" target="_blank">Скачать приложение на андроид</a></u>';
 
 //Текст для случая, когда заказывают один товар
-const textForOneOrder =
-  "Отправьте нам ссылку на товар, фотографию самого товара, размер(если это одежда или обувь) и количество";
 
 //Текст для необработанных сообщений
 const unexpectedMessages = "Не понимаю вас, пожалуйста, воспользуйтесь меню ☰";
@@ -34,6 +32,5 @@ module.exports = {
   linkForAppTaobao,
   linkForAppPoizon,
   linkForAppPinduoduo,
-  textForOneOrder,
   unexpectedMessages,
 };

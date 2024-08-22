@@ -1,7 +1,7 @@
-const { env } = require("../../../../env");
-const { getDateAndTime } = require("../../different/dateAndTime");
+const { env } = require("../../../../../env");
+const { getDateAndTime } = require("../../../different/dateAndTime");
 
-async function orderMessageToAdmin(
+async function sendOrderMessageToAdmin(
   ctx,
   url,
   image,
@@ -18,4 +18,4 @@ async function orderMessageToAdmin(
   await ctx.api.sendPhoto(env.admin_id, `${image}`);
 }
 
-module.exports = { orderMessageToAdmin }; //экспорт в src\services\order\singleOrder.js
+module.exports = { sendOrderMessageToAdmin }; //экспорт в src\services\order\singleOrder.js

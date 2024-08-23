@@ -1,4 +1,5 @@
 const { env } = require("../../../../../env");
+const { templateForPhoneNumber } = require("./templateForPhoneNumber");
 const {
   getDateAndTime,
 } = require("../../../../services/different/dateAndTime");
@@ -6,9 +7,9 @@ const {
 async function sendOrderFileToAdmin(ctx, fileId, userPhoneNumber) {
   const messageToAdmin = `Заказ от пользователя ${
     ctx.from.id
-  }\nНомер телефона ${
-    userPhoneNumber.msg.text
-  }\nВремя заказа ${getDateAndTime().fullTime()}`;
+  }\nНомер телефона ${templateForPhoneNumber(
+    userPhoneNumber
+  )}\nВремя заказа ${getDateAndTime().fullTime()}`;
 
   await ctx.api.sendMessage(env.admin_id, messageToAdmin);
   await ctx.api.sendDocument(env.admin_id, fileId);

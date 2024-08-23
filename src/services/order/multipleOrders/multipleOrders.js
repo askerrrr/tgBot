@@ -1,4 +1,5 @@
-const { sendOrderFileToAdmin } = require("./sendOrderFileToAdmin");
+const { sendOrderFileToAdmin } = require("./services/sendOrderFileToAdmin");
+
 
 async function multipleOrders(conversation, ctx) {
   await ctx.reply("Пришлите документ с вашими товарами");
@@ -6,7 +7,8 @@ async function multipleOrders(conversation, ctx) {
   const fileId = message.document.file_id;
 
   await ctx.reply("Документ получили, а теперь напишите номер вашего телефона");
-  const userPhoneNumber = await conversation.wait();
+  let userPhoneNumber = await conversation.wait();
+  userPhoneNumber = userPhoneNumber.msg.text;
 
   await ctx.reply("Спасибо, скоро мы займемся вашим заказом!");
   await sendOrderFileToAdmin(ctx, fileId, userPhoneNumber);

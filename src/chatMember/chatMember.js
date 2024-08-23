@@ -2,7 +2,7 @@ const {
   sendUserDataToServer,
 } = require("../services/different/sendUserDataToServer");
 
-module.exports.chat = async (bot) => {
+module.exports.chatMember = async (bot) => {
   bot.hears("/start", async (ctx) => {
     try {
       await ctx.reply(

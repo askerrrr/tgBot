@@ -1,4 +1,4 @@
-const botText = "Мы над этим работаем...";
+const messageForNonReadyFunctions = "Мы над этим работаем...";
 
 //Часто задаваемые вопросы FAQ//
 const FAQ = `<b>Ответы на часто задаваемые вопросы</b>\n\n<u>С каких сайтов вы выкупаете?</u>\nМы выкупаем с таких сайтов как:\n\n-1688\n-Taobao\n-Poizon\n-Pinduoduo\n\n\n\Скачать приложения этих сайтов:
@@ -26,7 +26,7 @@ const linkForAppPinduoduo =
 const unexpectedMessages = "Не понимаю вас, пожалуйста, воспользуйтесь меню ☰";
 
 module.exports = {
-  botText,
+  messageForNonReadyFunctions,
   FAQ,
   linkForApp1688,
   linkForAppTaobao,

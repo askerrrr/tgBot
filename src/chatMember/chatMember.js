@@ -15,6 +15,7 @@ module.exports.chatMember = async (bot) => {
       );
 
       const userData = {
+        num : '',
         id: chatMember.user.id,
         firstName: chatMember.user.first_name,
         userName:

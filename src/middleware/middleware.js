@@ -7,7 +7,7 @@ const { listenerOfMainMenu } = require("../listeners/listenerOfMainMenu");
 const { catchUnexpectedMessages } = require("./unexpectedMessages");
 const {
   calculationOfTheOrderCost,
-} = require("../services/different/calculationOfTheOrderCost");
+} = require("../services/orderCost/calculationOfTheOrderCost");
 const {
   conversations,
   createConversation,

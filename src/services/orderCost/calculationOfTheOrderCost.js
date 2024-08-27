@@ -1,4 +1,4 @@
-const { gettingTheValueInRubles } = require("./gettingTheValueInRubles");
+const { gettingTheValueInRubles } = require("./service/gettingTheValueInRubles");
 
 async function calculationOfTheOrderCost(conversation, ctx) {
   await ctx.reply("Пришлите стоимость товара, указанную на в магазине");

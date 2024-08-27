@@ -1,4 +1,4 @@
-const { getCNYValuteValue } = require("./service/getCNYValuteValue");
+const { getCNYValuteValue } = require("./getCNYValuteValue");
 
 function gettingTheValueInRubles(value) {
   return value * getCNYValuteValue;

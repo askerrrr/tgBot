@@ -1,6 +1,6 @@
 const {
   shortingStringAndConvertToNumber,
-} = require("../shortingStringAndConvertToNumber");
+} = require("./shortingStringAndConvertToNumber");
 
 async function getCNYValuteValue() {
   let res = await fetch("https://www.cbr-xml-daily.ru/daily_json.js");

@@ -1,6 +1,6 @@
 const { listenersForApp } = require("./listenersForApp");
 const { listenersForOther } = require("./listenersForOther");
-const { listenerOfMainMenu } = require("./listenerOfMainMenu");
+const { listenerOfMainMenu } = require("./listenersOfMainMenu");
 const { getFileId } = require("../listeners/listenersForFile");
 const { middlewareForConversations } = require("../middleware/middleware");
 

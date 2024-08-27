@@ -3,7 +3,7 @@ const { session, MemorySessionStorage } = require("grammy");
 const { chatMembers } = require("@grammyjs/chat-members");
 const { singleOrder } = require("../services/order/singleOrder/singleOrder");
 const { listenersForOrder } = require("../listeners/listenersForOrder");
-const { listenerOfMainMenu } = require("../listeners/listenerOfMainMenu");
+const { listenerOfMainMenu } = require("../listeners/listenersOfMainMenu");
 const { catchUnexpectedMessages } = require("./unexpectedMessages");
 const {
   calculationOfTheOrderCost,

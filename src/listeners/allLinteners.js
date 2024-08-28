@@ -1,6 +1,7 @@
 const { listenersForApp } = require("./listenersForApp");
+const { listenersForOther } = require("./listenersForOther/listenersForOther");
 const {
-  listenersForOther,
+  listenersForOrder,
 } = require("./listenersForTheOrder/listenersForOrder");
 const {
   listenersOfMainMenu,
@@ -10,6 +11,7 @@ const { middlewareForConversations } = require("../middleware/middleware");
 
 async function allListeners(bot) {
   listenersForApp(bot);
+  listenersForOrder(bot);
   listenersForOther(bot);
   listenersOfMainMenu(bot);
   middlewareForConversations(bot);

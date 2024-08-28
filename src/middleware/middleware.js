@@ -1,17 +1,16 @@
+const { chatMembers } = require("@grammyjs/chat-members");
 const { chatMember } = require("../chatMember/chatMember");
 const { session, MemorySessionStorage } = require("grammy");
-const { chatMembers } = require("@grammyjs/chat-members");
+const { calcOrderCost } = require("../services/orderCost/calcOrderCost");
+const { orderCost } = require("../listeners/listenersOfMainMenu/orderCost");
 const { singleOrder } = require("../services/order/singleOrder/singleOrder");
+
 const {
   listenersForOrder,
 } = require("../listeners/listenersForTheOrder/listenersForOrder");
-const {
-  listenersOfMainMenu,
-} = require("../listeners/listenersOfMainMenu/listenersOfMainMenu");
+
 const { catchUnexpectedMessages } = require("./unexpectedMessages");
-const {
-  calculationOfTheOrderCost,
-} = require("../services/orderCost/calculationOfTheOrderCost");
+
 const {
   conversations,
   createConversation,
@@ -26,7 +25,7 @@ const {
 
 const adapter = new MemorySessionStorage();
 
-module.exports.middlewareForConversations = async function (bot) {
+async function middlewareForConversations(bot) {
   bot.use(chatMembers(adapter));
   chatMember(bot);
 
@@ -35,10 +34,10 @@ module.exports.middlewareForConversations = async function (bot) {
 
   bot.use(createConversation(singleOrder));
   bot.use(createConversation(multipleOrders));
-  bot.use(createConversation(calculationOfTheOrderCost));
-
+  bot.use(createConversation(calcOrderCost));
+  orderCost(bot);
   listenersForOrder(bot);
-  listenersOfMainMenu(bot);
 
   bot.on("message", catchUnexpectedMessages);
-};
+}
+module.exports = { middlewareForConversations };

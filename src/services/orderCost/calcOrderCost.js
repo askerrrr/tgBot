@@ -4,9 +4,12 @@ const {
 
 async function calcOrderCost(conversation, ctx) {
   await ctx.reply("Отправьте число");
-  let num = await conversation.wait();
-  num = num.msg.text;
-  await ctx.reply(`${gettingTheValueInRubles(num)}`);
+  let response = await conversation.wait();
+  num = response.msg.text;
+  let val = await gettingTheValueInRubles(num);
+  await ctx.reply(
+    `Ориентировочная стоимость товара ${val} рублей без учета доставки`
+  );
 }
 
 module.exports = { calcOrderCost };

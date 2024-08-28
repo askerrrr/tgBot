@@ -1,4 +1,7 @@
 const { getCNYValuteValue } = require("./getCNYValuteValue");
+const {
+  shortingStringAndConvertToNumber,
+} = require("./shortingStringAndConvertToNumber");
 
 async function gettingTheValueInRubles(value) {
   let num = await getCNYValuteValue();

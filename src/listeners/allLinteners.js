@@ -8,10 +8,12 @@ const {
 } = require("./listenersOfMainMenu/listenersOfMainMenu");
 const { getFileId } = require("./differentListeners/listenersForFile");
 const { backToMainMenu } = require("./differentListeners/backToMainMenu");
+const { backToOtherMenu } = require("./differentListeners/backToOtherMenu");
 const { middlewareForConversations } = require("../middleware/middleware");
 
 async function allListeners(bot) {
   backToMainMenu(bot);
+  backToOtherMenu(bot);
   listenersForApp(bot);
   listenersForOrder(bot);
   listenersForOther(bot);

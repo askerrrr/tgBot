@@ -1,4 +1,4 @@
-const { listenersForApp } = require("./listenersForApp");
+const { listenersForApp } = require("./listenersForApp/listenersForApp");
 const { listenersForOther } = require("./listenersForOther/listenersForOther");
 const {
   listenersForOrder,

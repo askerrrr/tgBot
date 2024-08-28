@@ -1,5 +1,7 @@
 const { listenersForApp } = require("./listenersForApp");
-const { listenersForOther } = require("./listenersForOther");
+const {
+  listenersForOther,
+} = require("./listenersForTheOrder/listenersForOrder");
 const {
   listenersOfMainMenu,
 } = require("./listenersOfMainMenu/listenersOfMainMenu");

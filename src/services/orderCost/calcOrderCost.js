@@ -1,12 +1,12 @@
 const {
-  gettingTheValueInRubles,
-} = require("./service/gettingTheValueInRubles");
+  convertYuanToRubles,
+} = require("./service/convertYuanToRubles");
 
 async function calcOrderCost(conversation, ctx) {
   await ctx.reply("Отправьте число");
   let response = await conversation.wait();
   num = response.msg.text;
-  let val = await gettingTheValueInRubles(num);
+  let val = await convertYuanToRubles(num);
 
   if (num > 0) {
     await ctx.reply(

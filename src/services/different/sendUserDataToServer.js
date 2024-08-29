@@ -3,8 +3,8 @@ const { env } = require("../../../env");
 module.exports.sendUserDataToServer = async (data) => {
   try {
     const response = await fetch(env.siteUrl, {
-      method: "POST",
-      body: JSON.stringify(userData),
+      method: "POST", 
+      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.auth_token}`,

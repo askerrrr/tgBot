@@ -1,6 +1,10 @@
-module.exports = [
-  {
-    command: "menu",
-    description: "Меню",
-  },
-];
+async function installMenu(bot) {
+  bot.api.setMyCommands([
+    {
+      command: "menu",
+      description: "Меню",
+    },
+  ]);
+}
+
+module.exports = { installMenu };

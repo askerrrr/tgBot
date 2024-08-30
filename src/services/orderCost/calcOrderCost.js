@@ -12,7 +12,7 @@ async function calcOrderCost(conversation, ctx) {
     );
   } else if (num > 10000) {
     await ctx.reply(
-      `Боюсь, что у вас нет таких денег)))?. Введите числовое значение, которое больше 0`
+      `Боюсь, что у вас нет таких денег))).\nВведите числовое значение, которое больше 0`
     );
     return await calcOrderCost(conversation, ctx);
   } else {

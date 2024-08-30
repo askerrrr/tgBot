@@ -6,10 +6,15 @@ async function calcOrderCost(conversation, ctx) {
   let num = response.msg.text;
   let result = await convertYuanToRubles(num);
 
-  if (num > 0) {
+  if (num > 0 && num < 10000) {
     await ctx.reply(
       `Ориентировочная стоимость товара ${result} рублей \n*без учета стоимости доставки`
     );
+  } else if (num > 10000) {
+    await ctx.reply(
+      `Боюсь, что у вас нет таких денег)))?. Введите числовое значение, которое больше 0`
+    );
+    return await calcOrderCost(conversation, ctx);
   } else {
     await ctx.reply(`Введите числовое значение, которое больше 0`);
     return await calcOrderCost(conversation, ctx);

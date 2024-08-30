@@ -9,7 +9,7 @@ async function singleOrder(conversation, ctx) {
   const url = urlCtx.msg.text;
 
   await ctx.reply(
-    "Теперь пришлите нам количество товара и размер\n(  в случае если такой параметр есть )\nЕсли это товар не из категории одежды, тогда просто количество"
+    "Теперь пришлите нам \n1)Количество товара \n2)Размер (если такой параметр имеется)"
   );
   const quantityAndSizeCtx = await conversation.wait();
   const quantityAndSize = String(quantityAndSizeCtx.msg.text).split(" ");

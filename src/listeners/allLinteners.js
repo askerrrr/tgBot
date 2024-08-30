@@ -15,7 +15,6 @@ async function allListeners(bot) {
   backToMainMenu(bot);
   backToOtherMenu(bot);
   listenersForApp(bot);
-  listenersForOrder(bot);
   listenersForOther(bot);
   listenersOfMainMenu(bot);
   middlewareForConversations(bot);

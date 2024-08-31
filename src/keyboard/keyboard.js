@@ -34,7 +34,7 @@ const keyboardForAppGuides = new Keyboard()
   .row()
   .text("Гайд по Ponzon")
   .text("Гайд по Pinduoduo")
-  .row("Назад")
+  .row("Основное меню")
   .resized();
 
 const keyboardForOrder = new Keyboard()

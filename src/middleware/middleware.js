@@ -38,6 +38,6 @@ async function middlewareForConversations(bot) {
   await orderCost(bot);
   await listenersForOrder(bot);
 
-  bot.on("message", catchUnexpectedMessages);
+  await bot.on("message", catchUnexpectedMessages);
 }
 module.exports = { middlewareForConversations };

@@ -27,7 +27,7 @@ const adapter = new MemorySessionStorage();
 
 async function middlewareForConversations(bot) {
   bot.use(chatMembers(adapter));
-  chatMember(bot);
+  await chatMember(bot);
 
   bot.use(session({ initial: () => ({}) }));
   bot.use(conversations());
@@ -35,8 +35,8 @@ async function middlewareForConversations(bot) {
   bot.use(createConversation(singleOrder));
   bot.use(createConversation(multipleOrders));
   bot.use(createConversation(calcOrderCost));
-  orderCost(bot);
-  listenersForOrder(bot);
+  await orderCost(bot);
+  await listenersForOrder(bot);
 
   bot.on("message", catchUnexpectedMessages);
 }

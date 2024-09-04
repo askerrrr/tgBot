@@ -26,17 +26,17 @@ const {
 const adapter = new MemorySessionStorage();
 
 async function middlewareForConversations(bot) {
-  bot.use(chatMembers(adapter));
-  chatMember(bot);
+  await bot.use(await chatMembers(adapter));
+  await chatMember(bot);
 
-  bot.use(session({ initial: () => ({}) }));
-  bot.use(conversations());
+  await bot.use(await session({ initial: () => ({}) }));
+  await bot.use(await conversations());
 
-  bot.use(createConversation(singleOrder));
-  bot.use(createConversation(multipleOrders));
-  bot.use(createConversation(calcOrderCost));
-  orderCost(bot);
-  listenersForOrder(bot);
+  await bot.use(await createConversation(singleOrder));
+  await bot.use(await createConversation(multipleOrders));
+  await bot.use(await createConversation(calcOrderCost));
+  await orderCost(bot);
+  await listenersForOrder(bot);
 
   bot.on("message", catchUnexpectedMessages);
 }

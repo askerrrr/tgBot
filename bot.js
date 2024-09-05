@@ -11,8 +11,8 @@ const bot = new Bot(env.bot_token);
 installMenu(bot);
 bot.hears("/menu", mainMenu);
 
-await allListeners(bot);
-await middlewareForConversations(bot);
+allListeners(bot);
+middlewareForConversations(bot);
 
 bot.catch(errorHandler);
 

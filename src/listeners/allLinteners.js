@@ -14,7 +14,7 @@ async function allListeners(bot) {
   await getFileId(bot);
   await backToMainMenu(bot);
   await backToOtherMenu(bot);
-  await listenersForApp(bot);
+  listenersForApp(bot);
   await listenersForOther(bot);
   await listenersOfMainMenu(bot);
   await middlewareForConversations(bot);

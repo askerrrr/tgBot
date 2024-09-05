@@ -10,14 +10,14 @@ const { backToOtherMenu } = require("./differentListeners/backToOtherMenu");
 const { middlewareForConversations } = require("../middleware/middleware");
 
 async function allListeners(bot) {
-  guides(bot);
-  getFileId(bot);
-  backToMainMenu(bot);
-  backToOtherMenu(bot);
-  listenersForApp(bot);
-  listenersForOther(bot);
-  listenersOfMainMenu(bot);
-  middlewareForConversations(bot);
+  await guides(bot);
+  await getFileId(bot);
+  await backToMainMenu(bot);
+  await backToOtherMenu(bot);
+  await listenersForApp(bot);
+  await listenersForOther(bot);
+  await listenersOfMainMenu(bot);
+  await middlewareForConversations(bot);
 }
 
 module.exports = { allListeners };

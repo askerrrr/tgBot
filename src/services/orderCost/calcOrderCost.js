@@ -10,7 +10,7 @@ async function calcOrderCost(conversation, ctx) {
     await ctx.reply(
       `Ориентировочная стоимость товара ${result} рублей \n*без учета стоимости доставки`
     );
-  } else if (num > 10000) {
+  } else if (num > 1000000) {
     await ctx.reply(
       `Боюсь, что у вас нет таких денег)))\nВведите числовое значение, которое больше 0`
     );

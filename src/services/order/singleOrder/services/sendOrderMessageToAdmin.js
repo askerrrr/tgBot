@@ -15,6 +15,7 @@ async function sendOrderMessageToAdmin(
   }\n`;
 
   await ctx.api.sendMessage(env.admin_id, messageToAdmin);
+  await ctx.api.sendMessage(env.admin2_id, messageToAdmin);
   await ctx.api.sendPhoto(env.admin_id, `${image}`);
 }
 

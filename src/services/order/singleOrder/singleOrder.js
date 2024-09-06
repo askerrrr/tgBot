@@ -1,7 +1,9 @@
 const {
   sendOrderMessageToAdmin,
 } = require("./services/sendOrderMessageToAdmin");
-const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
+const {
+  returnOrderDataToUserForVerification,
+} = require("./services/returnOrderDataToUser");
 
 async function singleOrder(conversation, ctx) {
   await ctx.reply("Пришлите ссылку на товар");
@@ -24,7 +26,7 @@ async function singleOrder(conversation, ctx) {
   );
   const userPhoneNumber = await conversation.wait();
 
-  await returnOrderDataToUser(
+  await returnOrderDataToUserForVerification(
     url,
     quantityAndSize,
     ctx,

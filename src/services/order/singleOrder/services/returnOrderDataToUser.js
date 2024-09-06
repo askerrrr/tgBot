@@ -1,7 +1,7 @@
 const { keyboardForSingleOrder } = require("../../../../keyboard/keyboard");
 const { checkStrLength } = require("./checkStrLength");
 
-async function returnOrderDataToUser(
+async function returnOrderDataToUserForVerification(
   url,
   quantityAndSize,
   ctx,
@@ -23,4 +23,4 @@ async function returnOrderDataToUser(
   });
 }
 
-module.exports = { returnOrderDataToUser };
+module.exports = { returnOrderDataToUserForVerification };

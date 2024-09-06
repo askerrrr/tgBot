@@ -58,19 +58,6 @@ async function singleOrder(conversation, ctx) {
     quantityAndSize,
     userPhoneNumber
   );
-  module.exports = { url, image, userPhoneNumber, quantityAndSize };
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"
-
-// const response = await fetch("/telegramuser/order", {
-//   method: "POST",
-//   body: JSON.stringify({
-//     url,
-//     quantityAndSizeStr,
-//     image,
-//   }),
-//   headers: { Accept: "application/json", "Content-Type": "application/json" },
-// });
-// const order = response.json();
-// return order;

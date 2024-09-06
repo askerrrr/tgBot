@@ -1,4 +1,4 @@
-async function checkOrderStatus(orderStartus) {
+async function checkTheCorrectnessOfTheOrder(orderStartus) {
   if (orderStartus.msg.text == "Да, все правильно!") {
     await ctx.reply("Спасибо, скоро начнем обрабатывать заказ", {
       reply_markup: {
@@ -17,4 +17,4 @@ async function checkOrderStatus(orderStartus) {
   }
 }
 
-module.exports = { checkOrderStatus };
+module.exports = { checkTheCorrectnessOfTheOrder };

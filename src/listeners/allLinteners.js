@@ -11,7 +11,7 @@ const { middlewareForConversations } = require("../middleware/middleware");
 
 async function allListeners(bot) {
   guides(bot);
- // getFileId(bot);
+ //  getFileId(bot);
   backToMainMenu(bot);
   backToOtherMenu(bot);
   listenersForApp(bot);

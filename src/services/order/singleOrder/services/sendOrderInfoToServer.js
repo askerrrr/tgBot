@@ -4,6 +4,7 @@ module.exports.sendOrderInfoToServer = async (data) => {
   try {
     const response = await fetch("/url", {
       method: "POST",
+      body : JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.auth_token}`,

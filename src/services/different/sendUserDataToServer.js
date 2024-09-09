@@ -2,8 +2,8 @@ const { env } = require("../../../env");
 
 module.exports.sendUserDataToServer = async (data) => {
   try {
-    const response = await fetch(env.siteUrl, {
-      method: "POST", 
+    const response = await fetch(env.URLForSendingOrderInfo, {
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",

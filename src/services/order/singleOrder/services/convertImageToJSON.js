@@ -6,10 +6,7 @@ async function convertImageToJSON(image) {
 
     const base64img = imgInput.toString("base64");
 
-    const jsonObject = {
-      img: base64img,
-    };
-    return jsonObject;
+    return base64img;
   } catch (err) {
     console.log("Ошибка при чтении или преобразовании файла", err);
   }

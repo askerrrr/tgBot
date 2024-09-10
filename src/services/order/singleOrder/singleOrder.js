@@ -5,7 +5,7 @@ const {
   returnOrderDataToUserForVerification,
 } = require("./services/returnOrderDataToUser");
 
-const { sendOrderInfoToServer } = require("./services/sendOrderInfoToServer");
+const { sendorderContentToServer } = require("./services/sendorderContentToServer");
 
 async function singleOrder(conversation, ctx) {
   await ctx.reply("Пришлите ссылку на товар");
@@ -28,9 +28,9 @@ async function singleOrder(conversation, ctx) {
   );
   const userPhoneNumber = await conversation.wait();
 
-  const orderInfo = { url, image, quantityAndSize, userPhoneNumber };
+  const orderContent = { url, image, quantityAndSize, userPhoneNumber };
 
-  await returnOrderDataToUserForVerification(ctx, orderInfo);
+  await returnOrderDataToUserForVerification(ctx, orderContent);
 
   const orderStartus = await conversation.wait();
 
@@ -51,8 +51,8 @@ async function singleOrder(conversation, ctx) {
     return await singleOrder(conversation, ctx);
   }
 
-  await sendOrderMessageToAdmin(ctx, orderInfo);
-  //await sendOrderInfoToServer(orderInfo);
+  await sendOrderMessageToAdmin(ctx, orderContent);
+  //await sendorderContentToServer(orderContent);
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

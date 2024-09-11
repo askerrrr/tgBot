@@ -7,7 +7,7 @@ const {
 
 const {
   sendorderContentToServer,
-} = require("./services/sendorderContentToServer");
+} = require("./services/sendOrderInfoToServer");
 
 async function singleOrder(conversation, ctx) {
   await ctx.reply("Пришлите ссылку на товар");

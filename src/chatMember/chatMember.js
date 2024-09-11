@@ -21,6 +21,7 @@ module.exports.chatMember = async (bot) => {
           chatMember.user.user_name === undefined
             ? ""
             : chatMember.user.user_name,
+        orders: [],
       };
 
       console.log(JSON.stringify(userData));

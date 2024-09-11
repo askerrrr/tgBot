@@ -5,7 +5,7 @@ module.exports.sendOrderInfoToServer = async (data) => {
   try {
     const image = await convertImageToJSON(data.image);
 
-    const response = await fetch("/url", {
+    const response = await fetch(env.URLForSendingOrderInfo, {
       method: "POST",
       body: JSON.stringify({
         tgId: data.ctx.chat.id,

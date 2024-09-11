@@ -3,12 +3,14 @@ const { convertImageToJSON } = require("./convertImageToJSON");
 
 module.exports.sendOrderInfoToServer = async (data) => {
   try {
+    const image = await convertImageToJSON(data.image);
+
     const response = await fetch("/url", {
       method: "POST",
       body: JSON.stringify({
         url: data.url,
-        img: contentType(data.image),
-        descripteon: data.quantityAndSize,
+        img: image,
+        description: data.quantityAndSize,
         phone: data.userPhoneNumber,
       }),
       headers: {

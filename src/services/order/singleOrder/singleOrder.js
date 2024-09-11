@@ -54,7 +54,13 @@ async function singleOrder(conversation, ctx) {
   }
 
   await sendOrderMessageToAdmin(ctx, orderContent);
-  await sendorderContentToServer(url, image, quantityAndSize, userPhoneNumber);
+  await sendorderContentToServer(
+    ctx.chat.id,
+    url,
+    image,
+    quantityAndSize,
+    userPhoneNumber
+  );
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

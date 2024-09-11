@@ -8,6 +8,7 @@ module.exports.sendOrderInfoToServer = async (data) => {
     const response = await fetch("/url", {
       method: "POST",
       body: JSON.stringify({
+        tgId: data.ctx.chat.id,
         url: data.url,
         img: image,
         description: data.quantityAndSize,

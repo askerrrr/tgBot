@@ -1,4 +1,5 @@
 const { env } = require("../../../../../env");
+const { getDateAndTime } = require("../../../different/dateAndTime");
 const { convertImageToJSON } = require("./convertImageToJSON");
 
 module.exports.sendOrderInfoToServer = async (data) => {
@@ -13,6 +14,7 @@ module.exports.sendOrderInfoToServer = async (data) => {
         img: image,
         description: data.quantityAndSize,
         phone: data.userPhoneNumber,
+        date: getDateAndTime().fullTime(),
       }),
       headers: {
         "Content-Type": "application/json",

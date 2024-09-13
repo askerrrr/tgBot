@@ -1,10 +1,10 @@
 const { env } = require("../../../../../env");
 const { getDateAndTime } = require("../../../different/dateAndTime");
-const { convertImageToJSON } = require("./convertImageToJSON");
+const { convertImageToBase64 } = require("./convertImageToBase64");
 
 module.exports.sendOrderInfoToServer = async (data) => {
   try {
-    const image = await convertImageToJSON(data.image);
+    const image = await convertImageToBase64(data.image);
 
     const response = await fetch(env.URLForSendingOrderInfo, {
       method: "POST",

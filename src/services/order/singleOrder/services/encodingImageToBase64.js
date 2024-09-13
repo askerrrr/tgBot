@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-function convertImageToBase64(image) {
+function encodingImageToBase64(image) {
   try {
     const imgInput = fs.readFileSync(image);
 
@@ -11,4 +11,4 @@ function convertImageToBase64(image) {
   }
 }
 
-module.exports = { convertImageToBase64 };
+module.exports = { encodingImageToBase64 };

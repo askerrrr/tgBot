@@ -1,4 +1,4 @@
-function encodingImageToBase64(fileURL) {
+function encodingToBase64(fileURL) {
   try {
     const blob = fileURL.blob();
 
@@ -14,4 +14,4 @@ function encodingImageToBase64(fileURL) {
   }
 }
 
-module.exports = { encodingImageToBase64 };
+module.exports = { encodingToBase64 };

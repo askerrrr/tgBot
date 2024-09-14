@@ -5,9 +5,7 @@ const {
   returnOrderDataToUserForVerification,
 } = require("./services/returnOrderDataToUser");
 
-const {
-  sendorderContentToServer,
-} = require("./services/sendOrderInfoToServer");
+const { sendOrderInfoToServer } = require("./services/sendOrderInfoToServer");
 
 async function singleOrder(conversation, ctx) {
   await ctx.reply("Пришлите ссылку на товар");
@@ -54,7 +52,8 @@ async function singleOrder(conversation, ctx) {
   }
 
   await sendOrderMessageToAdmin(ctx, orderContent);
-  await sendorderContentToServer(
+  await sendOrderInfoToServer(
+    ctx,
     ctx.chat.id,
     url,
     image,

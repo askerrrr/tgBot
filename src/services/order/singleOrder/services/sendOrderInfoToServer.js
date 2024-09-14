@@ -1,19 +1,28 @@
 const { env } = require("../../../../../env");
 const { getDateAndTime } = require("../../../different/dateAndTime");
-const { encodingImageToBase64 } = require("./encodingImageToBase64");
+const { encodingImageToBase64 } = require("../../../different/encodingImageToBase64");
+const { getFileUrl } = require("../../../different/getFileURL");
 
-module.exports.sendOrderInfoToServer = async (data) => {
+async function sendOrderInfoToServer(
+  ctx,
+  chatID,
+  url,
+  image,
+  quantityAndSize,
+  userPhoneNumber
+) {
   try {
-    const image = await encodingImageToBase64(data.image);
+    const imageURL = await getFileUrl(ctx, image);
+    const imageBase64 = encodingImageToBase64(imageURL);
 
     const response = await fetch(env.URLForSendingOrderInfo, {
       method: "POST",
       body: JSON.stringify({
-        tgId: data.ctx.chat.id,
-        url: data.url,
-        img: image,
-        description: data.quantityAndSize,
-        phone: data.userPhoneNumber,
+        tgId: chatID,
+        url: url,
+        img: imageBase64,
+        description: quantityAndSize,
+        phone: userPhoneNumber,
         date: getDateAndTime().fullTime(),
       }),
       headers: {
@@ -37,4 +46,6 @@ module.exports.sendOrderInfoToServer = async (data) => {
   } catch (err) {
     console.log(err);
   }
-};
+}
+
+module.exports = { sendOrderInfoToServer };

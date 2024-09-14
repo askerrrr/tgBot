@@ -9,7 +9,12 @@ async function getFileUrl(ctx, file) {
     throw new Error(`Ошибка получения файла: ${response.statusText}`);
   }
 
-  return response;
+  const blob = await response.blob();
+
+  const arrayBuffer = await blob.arrayBuffer();
+
+  const buffer = Buffer.from(arrayBuffer);
+  return buffer;
 }
 
 module.exports = { getFileUrl };

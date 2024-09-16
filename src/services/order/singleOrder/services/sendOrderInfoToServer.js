@@ -1,7 +1,6 @@
 const { env } = require("../../../../../env");
 const { getFileUrl } = require("../../../different/getFileURL");
 const { getDateAndTime } = require("../../../different/dateAndTime");
-const { encodingToBase64 } = require("../../../different/encodingToBase64");
 
 async function sendOrderInfoToServer(
   ctx,
@@ -13,17 +12,17 @@ async function sendOrderInfoToServer(
 ) {
   try {
     const imageURL = await getFileUrl(ctx, image);
-    const imageBase64 = encodingToBase64(imageURL);
+    const orderTime = getDateAndTime().fullTime();
 
     const response = await fetch(env.URLForSendingOrderInfo, {
       method: "POST",
       body: JSON.stringify({
-        tgId: chatID,
         url: url,
-        img: imageBase64,
-        description: quantityAndSize,
+        tgId: chatID,
+        img: imageURL,
+        date: orderTime,
         phone: userPhoneNumber,
-        date: getDateAndTime().fullTime(),
+        description: quantityAndSize,
       }),
       headers: {
         "Content-Type": "application/json",

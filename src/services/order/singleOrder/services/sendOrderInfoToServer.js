@@ -14,7 +14,7 @@ async function sendOrderInfoToServer(
     const imageURL = await getFileUrl(ctx, image);
     const orderTime = getDateAndTime().fullTime();
 
-    const response = await fetch(env.URLForSendingUserInfo, {
+    const response = await fetch(env.URLForSendingOrderInfo, {
       method: "POST",
       body: JSON.stringify({
         url: url,

@@ -14,22 +14,24 @@ async function sendOrderInfoToServer(
     const imageURL = await getFileUrl(ctx, image);
     const orderTime = getDateAndTime().fullTime();
 
-    const response = await fetch(env.URLForSendingOrderInfo, {
+    const data = {
+      url: url,
+      tgId: chatID,
+      img: imageURL,
+      date: orderTime,
+      phone: userPhoneNumber,
+      description: quantityAndSize,
+    };
+
+    const response = await fetch(env.orderinfo, {
       method: "POST",
-      body: JSON.stringify({
-        url: url,
-        tgId: chatID,
-        img: imageURL,
-        date: orderTime,
-        phone: userPhoneNumber,
-        description: quantityAndSize,
-      }),
+      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.auth_token}`,
       },
     });
-
+    console.log(JSON.stringify(data));
     if (!response.ok) {
       throw new Error(
         `Server error: ${response.status} ${response.statusText}`

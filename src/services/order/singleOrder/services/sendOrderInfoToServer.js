@@ -19,10 +19,10 @@ async function sendOrderInfoToServer(
       tgId: chatID,
       img: imageURL,
       date: orderTime,
-      phone: userPhoneNumber,
+      phone: userPhoneNumber.msg.text,
       description: quantityAndSize,
     };
-
+    console.log(data);
     const response = await fetch(env.orderinfo, {
       method: "POST",
       body: JSON.stringify(data),
@@ -31,7 +31,7 @@ async function sendOrderInfoToServer(
         Authorization: `Bearer ${env.auth_token}`,
       },
     });
-    console.log(JSON.stringify(data));
+
     if (!response.ok) {
       throw new Error(
         `Server error: ${response.status} ${response.statusText}`

@@ -1,28 +1,21 @@
 const { env } = require("../../../../../env");
-const { getFileUrl } = require("../../../different/getFileURL");
 const { getDateAndTime } = require("../../../different/dateAndTime");
-
-async function sendOrderInfoToServer(
-  ctx,
-  chatId,
-  url,
-  image,
-  quantityAndSize,
-  userPhoneNumber
-) {
+const { getFileUrl } = require("../../../different/getFileURL");
+async function sendOrderDocumentToServer(ctx, chatId, file, userPhoneNumber) {
   try {
-    const imageURL = await getFileUrl(ctx, image);
     const orderTime = getDateAndTime().fullTime();
-
+    const fileURL = await getFileUrl(ctx, file);
     const data = {
-      url: url,
+      url: "",
       tgId: chatId,
-      file: imageURL,
+      file: fileURL,
+      phone: userPhoneNumber,
+      description: "Документ",
       date: orderTime,
-      phone: userPhoneNumber.msg.text,
-      description: quantityAndSize,
     };
+
     console.log(data);
+
     const response = await fetch(env.orderinfo, {
       method: "POST",
       body: JSON.stringify(data),
@@ -33,9 +26,7 @@ async function sendOrderInfoToServer(
     });
 
     if (!response.ok) {
-      throw new Error(
-        `Server error: ${response.status} ${response.statusText}`
-      );
+      throw new Error(`Server error : ${response.status} ${response.text}`);
     }
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
@@ -49,4 +40,4 @@ async function sendOrderInfoToServer(
   }
 }
 
-module.exports = { sendOrderInfoToServer };
+module.exports = { sendOrderDocumentToServer };

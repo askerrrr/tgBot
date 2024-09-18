@@ -1,5 +1,7 @@
 const { sendOrderFileToAdmin } = require("./services/sendOrderFileToAdmin");
-
+const {
+  sendOrderDocumentToServer,
+} = require("./services/sendOrderDocumentToServer");
 async function multipleOrders(conversation, ctx) {
   await ctx.reply("Пришлите документ с вашими товарами");
   const { message } = await conversation.waitFor("message:document");
@@ -14,6 +16,7 @@ async function multipleOrders(conversation, ctx) {
 
   await ctx.reply("Спасибо, скоро мы займемся вашим заказом!");
   await sendOrderFileToAdmin(ctx, fileId, userPhoneNumber, firstName, lastName);
+  await sendOrderDocumentToServer(ctx, ctx.chat.id, fileId, userPhoneNumber);
 }
 
 module.exports = { multipleOrders }; //экспорт в src\middleware\middleware.js

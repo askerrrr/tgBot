@@ -10,8 +10,8 @@ async function sendOrderMessageToAdmin(order) {
     order.userPhoneNumber.msg.text
   }\n`;
 
-  await ctx.api.sendMessage(env.admin_id, messageToAdmin);
-  await ctx.api.sendPhoto(env.admin_id, `${order.image}`);
+  await order.ctx.api.sendMessage(env.admin_id, messageToAdmin);
+  await order.ctx.api.sendPhoto(env.admin_id, `${order.image}`);
 
   // await ctx.api.sendMessage(env.admin2_id, messageToAdmin);
   // await ctx.api.sendPhoto(env.admin2_id, `${orderInfo.image}`);

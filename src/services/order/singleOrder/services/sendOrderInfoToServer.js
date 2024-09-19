@@ -4,7 +4,7 @@ const { getDateAndTime } = require("../../../different/dateAndTime");
 
 async function sendOrderInfoToServer(order) {
   try {
-    const imageURL = await getFileUrl(ctx, order.image);
+    const imageURL = await getFileUrl(order.ctx, order.image);
     const orderTime = getDateAndTime().fullTime();
 
     const data = {

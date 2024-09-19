@@ -7,28 +7,21 @@ const {
 
 const { sendOrderInfoToServer } = require("./services/sendOrderInfoToServer");
 
+const { getUrl } = require("./services/conversation/getUrl");
+const { getImage } = require("./services/conversation/getImage");
+const { getPhone } = require("./services/conversation/getPhone");
+const { getDescriprion } = require("./services/conversation/getDescriprion");
+
 async function singleOrder(conversation, ctx) {
   const chatId = ctx.chat.id;
 
-  await ctx.reply("Пришлите ссылку на товар");
-  const urlCtx = await conversation.wait();
-  const url = urlCtx.msg.text;
+  const url = await getUrl(ctx, conversation);
 
-  await ctx.reply(
-    "Теперь пришлите нам через пробел \n\n1)Количество товара \n2)Размер (если такой параметр имеется)"
-  );
-  const quantityAndSizeCtx = await conversation.wait();
-  const quantityAndSize = String(quantityAndSizeCtx.msg.text).split(" ");
+  const quantityAndSize = await getDescriprion(ctx, conversation);
 
-  await ctx.reply("Отправьте фото товара");
+  const image = await getImage(ctx, conversation);
 
-  const imageCtx = await conversation.wait();
-  const image = imageCtx.msg.photo[imageCtx.msg.photo.length - 1].file_id;
-
-  await ctx.reply(
-    "Напишите номер вашего телефона, чтобы мы могли связаться с вами"
-  );
-  const userPhoneNumber = await conversation.wait();
+  const userPhoneNumber = await getPhone(ctx, conversation);
 
   const orderContent = {
     url,

@@ -1,13 +1,11 @@
-async function checkTheCorrectnessOfTheOrder(orderStartus) {
-  if (orderStartus.msg.text == "Да, все правильно!") {
+async function checkTheCorrectnessOfTheOrder(status) {
+  if (status.msg.text == "Да, все правильно!") {
     await ctx.reply("Спасибо, скоро начнем обрабатывать заказ", {
       reply_markup: {
         remove_keyboard: true,
       },
     });
-  } else if (
-    orderStartus.msg.text == "Нет, тут ошибка, я хочу исправить данные"
-  ) {
+  } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
     await ctx.reply("Давайте исправим", {
       reply_markup: {
         remove_keyboard: true,

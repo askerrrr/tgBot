@@ -8,6 +8,8 @@ const {
 const { sendOrderInfoToServer } = require("./services/sendOrderInfoToServer");
 
 async function singleOrder(conversation, ctx) {
+  const chatId = ctx.chat.id;
+
   await ctx.reply("Пришлите ссылку на товар");
   const urlCtx = await conversation.wait();
   const url = urlCtx.msg.text;
@@ -28,7 +30,14 @@ async function singleOrder(conversation, ctx) {
   );
   const userPhoneNumber = await conversation.wait();
 
-  const orderContent = { url, image, quantityAndSize, userPhoneNumber };
+  const orderContent = {
+    url,
+    ctx,
+    chatId,
+    image,
+    quantityAndSize,
+    userPhoneNumber,
+  };
 
   await returnOrderDataToUserForVerification(ctx, orderContent);
 
@@ -51,15 +60,8 @@ async function singleOrder(conversation, ctx) {
     return await singleOrder(conversation, ctx);
   }
 
-  await sendOrderMessageToAdmin(ctx, orderContent);
-  await sendOrderInfoToServer(
-    ctx,
-    ctx.chat.id,
-    url,
-    image,
-    quantityAndSize,
-    userPhoneNumber
-  );
+  await sendOrderMessageToAdmin(orderContent);
+  await sendOrderInfoToServer(orderContent);
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

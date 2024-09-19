@@ -1,17 +1,17 @@
 const { env } = require("../../../../../env");
 const { getDateAndTime } = require("../../../different/dateAndTime");
 
-async function sendOrderMessageToAdmin(ctx, orderInfo) {
+async function sendOrderMessageToAdmin(order) {
   const messageToAdmin = `ID пользователя : ${
-    ctx.from.id
+    order.chatId
   }\nВремя заказа ${getDateAndTime().fullTime()}\nСсылка на товар : ${
-    orderInfo.url
-  }\nКоличество и размер : ${orderInfo.quantityAndSize}\nНомер телефона : ${
-    orderInfo.userPhoneNumber.msg.text
+    order.url
+  }\nКоличество и размер : ${order.quantityAndSize}\nНомер телефона : ${
+    order.userPhoneNumber.msg.text
   }\n`;
 
   await ctx.api.sendMessage(env.admin_id, messageToAdmin);
-  await ctx.api.sendPhoto(env.admin_id, `${orderInfo.image}`);
+  await ctx.api.sendPhoto(env.admin_id, `${order.image}`);
 
   // await ctx.api.sendMessage(env.admin2_id, messageToAdmin);
   // await ctx.api.sendPhoto(env.admin2_id, `${orderInfo.image}`);

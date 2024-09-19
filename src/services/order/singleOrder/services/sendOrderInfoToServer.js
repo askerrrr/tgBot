@@ -2,25 +2,18 @@ const { env } = require("../../../../../env");
 const { getFileUrl } = require("../../../different/getFileURL");
 const { getDateAndTime } = require("../../../different/dateAndTime");
 
-async function sendOrderInfoToServer(
-  ctx,
-  chatId,
-  url,
-  image,
-  quantityAndSize,
-  userPhoneNumber
-) {
+async function sendOrderInfoToServer(order) {
   try {
-    const imageURL = await getFileUrl(ctx, image);
+    const imageURL = await getFileUrl(ctx, order.image);
     const orderTime = getDateAndTime().fullTime();
 
     const data = {
-      url: url,
-      tgId: chatId,
       file: imageURL,
+      url: order.url,
       date: orderTime,
-      phone: userPhoneNumber.msg.text,
-      description: quantityAndSize,
+      tgId: order.chatId,
+      description: order.quantityAndSize,
+      phone: order.userPhoneNumber.msg.text,
     };
     console.log(data);
     const response = await fetch(env.orderinfo, {

@@ -1,4 +1,6 @@
-async function checkTheCorrectnessOfTheOrder(status) {
+module.exports.checkOrderStatus = async (ctx, conversation, singleOrder) => {
+  const status = await conversation.wait();
+
   if (status.msg.text == "Да, все правильно!") {
     await ctx.reply("Спасибо, скоро начнем обрабатывать заказ", {
       reply_markup: {
@@ -13,6 +15,4 @@ async function checkTheCorrectnessOfTheOrder(status) {
     });
     return await singleOrder(conversation, ctx);
   }
-}
-
-module.exports = { checkTheCorrectnessOfTheOrder };
+};

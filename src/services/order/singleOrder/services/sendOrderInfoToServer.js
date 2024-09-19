@@ -13,7 +13,7 @@ async function sendOrderInfoToServer(order) {
       date: orderTime,
       tgId: order.chatId,
       description: order.quantityAndSize,
-      phone: order.userPhoneNumber.msg.text,
+      phone: order.userPhoneNumber,
     };
     console.log(data);
     const response = await fetch(env.orderinfo, {

@@ -7,7 +7,7 @@ async function sendOrderMessageToAdmin(order) {
   }\nВремя заказа ${getDateAndTime().fullTime()}\nСсылка на товар : ${
     order.url
   }\nКоличество и размер : ${order.quantityAndSize}\nНомер телефона : ${
-    order.userPhoneNumber.msg.text
+    order.userPhoneNumber
   }\n`;
 
   await order.ctx.api.sendMessage(env.admin_id, messageToAdmin);

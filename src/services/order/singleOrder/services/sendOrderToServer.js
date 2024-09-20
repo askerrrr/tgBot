@@ -2,7 +2,7 @@ const { env } = require("../../../../../env");
 const { getFileUrl } = require("../../../different/getFileURL");
 const { getDateAndTime } = require("../../../different/dateAndTime");
 
-async function sendOrderInfoToServer(order) {
+async function sendOrderToServer(order) {
   try {
     const imageURL = await getFileUrl(order.ctx, order.image);
     const orderTime = getDateAndTime().fullTime();
@@ -42,4 +42,4 @@ async function sendOrderInfoToServer(order) {
   }
 }
 
-module.exports = { sendOrderInfoToServer };
+module.exports = { sendOrderToServer };

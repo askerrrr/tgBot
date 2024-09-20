@@ -1,7 +1,7 @@
 const { env } = require("../../../../../env");
 const { getDateAndTime } = require("../../../different/dateAndTime");
 
-async function sendOrderMessageToAdmin(order) {
+async function sendOrderToAdmin(order) {
   const messageToAdmin = `ID пользователя : ${
     order.chatId
   }\nВремя заказа ${getDateAndTime().fullTime()}\nСсылка на товар : ${
@@ -17,4 +17,4 @@ async function sendOrderMessageToAdmin(order) {
   // await ctx.api.sendPhoto(env.admin2_id, `${orderInfo.image}`);
 }
 
-module.exports = { sendOrderMessageToAdmin }; //экспорт в src\services\order\singleOrder.js
+module.exports = { sendOrderToAdmin }; //экспорт в src\services\order\singleOrder.js

@@ -5,10 +5,6 @@ const {
   checkOrderStatus,
 } = require("./services/conversation/checkOrderStatus");
 const { getDescriprion } = require("./services/conversation/getDescriprion");
-const { sendOrderInfoToServer } = require("./services/sendOrderInfoToServer");
-const {
-  sendOrderMessageToAdmin,
-} = require("./services/sendOrderMessageToAdmin");
 const {
   returnOrderDataToUserForVerification,
 } = require("./services/returnOrderDataToUser");
@@ -34,10 +30,7 @@ async function singleOrder(conversation, ctx) {
   };
 
   await returnOrderDataToUserForVerification(ctx, orderContent);
-  await checkOrderStatus(ctx, conversation, singleOrder);
-
-  await sendOrderMessageToAdmin(orderContent);
-  await sendOrderInfoToServer(orderContent);
+  await checkOrderStatus(ctx, conversation, singleOrder, orderContent);
 }
 
 module.exports = { singleOrder }; //экспорт в "./src/middleware/middleware"

@@ -18,11 +18,11 @@ async function sendOrderToServer(order) {
     console.log(data);
     const response = await fetch(env.orderinfo, {
       method: "POST",
-      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.auth_token}`,
       },
+      body: JSON.stringify(data),
     });
 
     if (!response.ok) {

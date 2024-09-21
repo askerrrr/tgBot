@@ -9,9 +9,9 @@ async function sendOrderDocumentToServer(ctx, chatId, file, userPhoneNumber) {
       url: "",
       tgId: chatId,
       file: fileURL,
+      date: orderTime,
       phone: userPhoneNumber,
       description: "Документ",
-      date: orderTime,
     };
 
     console.log(data);

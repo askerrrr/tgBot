@@ -8,8 +8,8 @@ async function sendOrderToServer(order) {
     const orderTime = getDateAndTime().fullTime();
 
     const data = {
-      file: imageURL,
       url: order.url,
+      file: imageURL,
       date: orderTime,
       tgId: order.chatId,
       description: order.quantityAndSize,

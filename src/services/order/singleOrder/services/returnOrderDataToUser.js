@@ -1,5 +1,5 @@
 const { checkStrLength } = require("./checkStrLength");
-const { keyboardForSingleOrder } = require("../../../../keyboard/keyboard");
+const { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
 
 async function returnOrderDataToUserForVerification(ctx, order) {
   await ctx.reply(`Ссылка : ${order.url}`, {
@@ -13,7 +13,7 @@ async function returnOrderDataToUserForVerification(ctx, order) {
   await ctx.reply(`Ваш номер телефона : ${order.userPhoneNumber}`);
 
   await ctx.reply("Все правильно?", {
-    reply_markup: keyboardForSingleOrder,
+    reply_markup: keyboardForСheckingnOrder,
   });
 }
 

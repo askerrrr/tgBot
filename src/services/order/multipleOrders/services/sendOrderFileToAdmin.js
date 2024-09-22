@@ -18,7 +18,7 @@ async function sendOrderFileToAdmin(
   }\nНомер телефона : ${userPhoneNumber}\nВремя заказа ${getDateAndTime().fullTime()}`;
 
   await ctx.api.sendMessage(env.admin_id, messageToAdmin);
-  await ctx.api.sendMessage(env.admin2_id, messageToAdmin);
+  //await ctx.api.sendMessage(env.admin2_id, messageToAdmin);
   await ctx.api.sendDocument(env.admin_id, fileId);
 }
 

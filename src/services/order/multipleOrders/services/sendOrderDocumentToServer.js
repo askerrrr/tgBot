@@ -1,16 +1,16 @@
 const { env } = require("../../../../../env");
 const { getDateAndTime } = require("../../../different/dateAndTime");
 const { getFileUrl } = require("../../../different/getFileURL");
-async function sendOrderDocumentToServer(ctx, chatId, file, userPhoneNumber) {
+async function sendOrderDocumentToServer(ctx, order) {
   try {
     const orderTime = getDateAndTime().fullTime();
-    const fileURL = await getFileUrl(ctx, file);
+    const fileURL = await getFileUrl(ctx, order.file);
     const data = {
       url: "",
-      tgId: chatId,
+      tgId: order.chatId,
       file: fileURL,
       date: orderTime,
-      phone: userPhoneNumber,
+      phone: order.userPhoneNumber,
       description: "Документ",
     };
 

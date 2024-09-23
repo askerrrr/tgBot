@@ -1,17 +1,18 @@
 const { env } = require("../../../../../env");
-const { checkLastName } = require("./checkLastName");
 const {
   getDateAndTime,
 } = require("../../../../services/different/dateAndTime");
 
-async function sendOrderFileToAdmin(ctx, fileId, userPhoneNumber) {
+async function sendOrderFileToAdmin(ctx, order) {
   const messageToAdmin = `Новый заказ\n\n\nID : ${
-    ctx.from.id
-  }\nНомер телефона : ${userPhoneNumber}\nВремя заказа ${getDateAndTime().fullTime()}`;
+    order.chatId
+  }\nНомер телефона : ${
+    order.phone
+  }\nВремя заказа ${getDateAndTime().fullTime()}`;
 
   await ctx.api.sendMessage(env.admin_id, messageToAdmin);
   //await ctx.api.sendMessage(env.admin2_id, messageToAdmin);
-  await ctx.api.sendDocument(env.admin_id, fileId);
+  await ctx.api.sendDocument(env.admin_id, order.fileId);
 }
 
 module.exports = { sendOrderFileToAdmin };

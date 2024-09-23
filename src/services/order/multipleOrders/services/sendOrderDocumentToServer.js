@@ -4,13 +4,13 @@ const { getFileUrl } = require("../../../different/getFileURL");
 async function sendOrderDocumentToServer(ctx, order) {
   try {
     const orderTime = getDateAndTime().fullTime();
-    const fileURL = await getFileUrl(ctx, order.file);
+    const fileURL = await getFileUrl(ctx, order.fileId);
     const data = {
       url: "",
-      tgId: order.chatId,
       file: fileURL,
       date: orderTime,
-      phone: order.userPhoneNumber,
+      tgId: order.chatId,
+      phone: order.phone,
       description: "Документ",
     };
 

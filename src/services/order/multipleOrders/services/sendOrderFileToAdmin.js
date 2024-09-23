@@ -4,7 +4,7 @@ const {
 } = require("../../../../services/different/dateAndTime");
 
 async function sendOrderFileToAdmin(ctx, order) {
-  const messageToAdmin = `Новый заказ\n\n\nID : ${
+  const messageToAdmin = `Новый заказ\n\nID : ${
     order.chatId
   }\nНомер телефона : ${
     order.phone

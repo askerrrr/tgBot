@@ -17,6 +17,7 @@ module.exports.checkOrderStatus = async (
         remove_keyboard: true,
       },
     });
+
     await sendOrderFileToAdmin(ctx, order);
     await sendOrderDocumentToServer(ctx, order);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {

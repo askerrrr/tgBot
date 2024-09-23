@@ -1,5 +1,7 @@
-const { sendOrderFileToAdmin } = require("./sendOrderFileToAdmin");
-const { sendOrderDocumentToServer } = require("./sendOrderDocumentToServer");
+const { sendOrderFileToAdmin } = require("../services/sendOrderFileToAdmin");
+const {
+  sendOrderDocumentToServer,
+} = require("../services/sendOrderDocumentToServer");
 
 module.exports.checkOrderStatus = async (
   ctx,
@@ -15,8 +17,8 @@ module.exports.checkOrderStatus = async (
         remove_keyboard: true,
       },
     });
-    await sendOrderFileToAdmin(order);
-    await sendOrderDocumentToServer(order);
+    await sendOrderFileToAdmin(ctx, order);
+    await sendOrderDocumentToServer(ctx, order);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
     await ctx.reply("Давайте исправим", {
       reply_markup: {

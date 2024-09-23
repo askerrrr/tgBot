@@ -4,16 +4,8 @@ const {
   getDateAndTime,
 } = require("../../../../services/different/dateAndTime");
 
-async function sendOrderFileToAdmin(
-  ctx,
-  fileId,
-  userPhoneNumber,
-  firstName,
-  lastName
-) {
-  const messageToAdmin = `Новый заказ\n\nИмя : ${firstName}\nФамилия : ${checkLastName(
-    lastName
-  )}\nID : ${
+async function sendOrderFileToAdmin(ctx, fileId, userPhoneNumber) {
+  const messageToAdmin = `Новый заказ\n\n\nID : ${
     ctx.from.id
   }\nНомер телефона : ${userPhoneNumber}\nВремя заказа ${getDateAndTime().fullTime()}`;
 

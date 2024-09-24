@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const { env } = require("../../../../../env");
 const { getFileUrl } = require("../../../different/getFileURL");
 const { getDateAndTime } = require("../../../different/dateAndTime");
@@ -6,10 +7,11 @@ async function sendOrderToServer(order) {
   try {
     const imageURL = await getFileUrl(order.ctx, order.image);
     const orderTime = getDateAndTime().fullTime();
+    const randomKey = crypto.randomBytes(10).toString("hex");
 
     const data = {
       url: order.url,
-      file: imageURL,
+      file: { url: imageURL, id: randomKey },
       date: orderTime,
       tgId: order.chatId,
       description: order.quantityAndSize,

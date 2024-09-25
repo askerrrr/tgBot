@@ -2,7 +2,10 @@ const { env } = require("../../../env");
 
 async function getTemplate(bot) {
   bot.hears("Пришли шаблон", async (ctx) => {
-    await ctx.replyWithDocument(env.file_id);
+    await ctx.reply(env.templateDocument, {
+      parse_mode: "HTML",
+      disable_web_page_preview: true,
+    });
   });
 }
 

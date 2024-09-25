@@ -20,8 +20,6 @@ const linkForAppPoizon =
 const linkForAppPinduoduo =
   '<u><a href="" target="_blank">Скачать приложение на айфон</a>\n\n\n<a href="" target="_blank">Скачать приложение на андроид</a></u>';
 
-//Текст для случая, когда заказывают один товар
-
 //Текст для необработанных сообщений
 const unexpectedMessages = "Не понимаю вас, пожалуйста, воспользуйтесь меню ☰";
 
@@ -31,6 +29,7 @@ module.exports = {
   linkForApp1688,
   linkForAppTaobao,
   linkForAppPoizon,
+  templateDocument,
   linkForAppPinduoduo,
   unexpectedMessages,
 };

@@ -29,7 +29,6 @@ module.exports = {
   linkForApp1688,
   linkForAppTaobao,
   linkForAppPoizon,
-  templateDocument,
   linkForAppPinduoduo,
   unexpectedMessages,
 };

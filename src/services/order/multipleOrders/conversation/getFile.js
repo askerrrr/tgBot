@@ -1,11 +1,11 @@
 module.exports.getFile = async (ctx, conversation) => {
   try {
-    await ctx.reply("Пришлите документ с вашими товарами");
+    await ctx.reply("Пришлите ссылку на таблицу с вашими товарами");
 
-    const { message } = await conversation.waitFor("message:document");
-    const fileId = message.document.file_id;
+    const { message } = await conversation.wait();
+    const fileURL = message;
 
-    return fileId;
+    return fileURL;
   } catch (err) {
     console.log(err);
   }

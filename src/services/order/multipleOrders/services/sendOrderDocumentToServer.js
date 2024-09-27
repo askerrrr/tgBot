@@ -3,10 +3,9 @@ const { env } = require("../../../../../env");
 const { getFileUrl } = require("../../../different/getFileURL");
 const { getDateAndTime } = require("../../../different/dateAndTime");
 
-async function sendOrderDocumentToServer(ctx, order) {
+async function sendOrderDocumentToServer(order) {
   try {
     const orderTime = getDateAndTime().fullTime();
-    const fileURL = await getFileUrl(ctx, order.fileId);
     const randomKey = crypto.randomBytes(10).toString("hex");
 
     const data = {

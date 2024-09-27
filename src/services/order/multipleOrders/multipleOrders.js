@@ -6,12 +6,12 @@ const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
 async function multipleOrders(conversation, ctx) {
   const chatId = ctx.chat.id;
 
-  const fileId = await getFile(ctx, conversation);
+  const fileURL = await getFile(ctx, conversation);
   const phone = await getPhone(ctx, conversation);
 
-  const order = { chatId, fileId, phone };
+  const order = { chatId, fileURL, phone };
 
-  await returnOrderDataToUser(ctx, order);
+  await returnOrderDataToUser(order);
   await checkOrderStatus(ctx, conversation, order, multipleOrders);
 }
 

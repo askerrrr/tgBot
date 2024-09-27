@@ -3,7 +3,7 @@ module.exports.getFile = async (ctx, conversation) => {
     await ctx.reply("Пришлите ссылку на таблицу с вашими товарами");
 
     const { message } = await conversation.wait();
-    const fileURL = message;
+    const fileURL = message.text;
 
     return fileURL;
   } catch (err) {

@@ -10,7 +10,7 @@ async function sendOrderDocumentToServer(order) {
 
     const data = {
       url: "",
-      file: { url: fileURL, id: randomKey },
+      file: { url: order.fileURL, id: randomKey },
       date: orderTime,
       tgId: order.chatId,
       phone: order.phone,

@@ -11,7 +11,7 @@ async function multipleOrders(conversation, ctx) {
 
   const order = { chatId, fileURL, phone };
 
-  await returnOrderDataToUser(order);
+  await returnOrderDataToUser(ctx, order);
   await checkOrderStatus(ctx, conversation, order, multipleOrders);
 }
 

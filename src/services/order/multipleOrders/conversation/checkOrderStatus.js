@@ -19,7 +19,7 @@ module.exports.checkOrderStatus = async (
     });
 
     await sendOrderFileToAdmin(ctx, order);
-    await sendOrderDocumentToServer(ctx, order);
+    await sendOrderDocumentToServer(order);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
     await ctx.reply("Давайте исправим", {
       reply_markup: {

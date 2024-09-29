@@ -11,7 +11,7 @@ const keyboardForTheMainMenu = new Keyboard()
   .resized();
 
 const keyboardForOtherQueries = new Keyboard()
-  .text("Пришли шаблон")
+  .text("Получить шаблон")
   .row()
   .text("Скачать приложения")
   .row()

@@ -1,6 +1,5 @@
 const crypto = require("crypto");
 const { env } = require("../../../../env");
-const { getFileUrl } = require("../../different/getFileURL");
 const { getDateAndTime } = require("../../different/dateAndTime");
 
 async function sendOrderDocumentToServer(order) {
@@ -9,12 +8,10 @@ async function sendOrderDocumentToServer(order) {
     const randomKey = crypto.randomBytes(10).toString("hex");
 
     const data = {
-      url: "",
-      file: { url: order.fileURL, id: randomKey },
       date: orderTime,
       tgId: order.chatId,
       phone: order.phone,
-      description: "Документ",
+      file: { url: order.fileURL, id: randomKey },
     };
 
     console.log(data);

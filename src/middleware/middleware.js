@@ -3,21 +3,13 @@ const { chatMember } = require("../chatMember/chatMember");
 const { session, MemorySessionStorage } = require("grammy");
 const { calcOrderCost } = require("../services/orderCost/calcOrderCost");
 const { orderCost } = require("../listeners/listenersOfMainMenu/orderCost");
-const { singleOrder } = require("../services/order/singleOrder/singleOrder");
-
-const {
-  listenersForOrder,
-} = require("../listeners/listenersForTheOrder/listenersForOrder");
-
+const { order } = require("../listeners/listenersOfMainMenu/order");
 const { catchUnexpectedMessages } = require("./unexpectedMessages");
-
 const {
   conversations,
   createConversation,
 } = require("@grammyjs/conversations");
-const {
-  multipleOrders,
-} = require("../services/order/multipleOrders/multipleOrders");
+const { makingAnOrder } = require("../services/order/makingAnOrder");
 
 //
 //
@@ -32,11 +24,11 @@ async function middlewareForConversations(bot) {
   bot.use(session({ initial: () => ({}) }));
   bot.use(conversations());
 
-  bot.use(createConversation(singleOrder));
-  bot.use(createConversation(multipleOrders));
+  bot.use(createConversation(makingAnOrder));
   bot.use(createConversation(calcOrderCost));
+
   orderCost(bot);
-  listenersForOrder(bot);
+  order(bot);
 
   bot.on("message", catchUnexpectedMessages);
 }

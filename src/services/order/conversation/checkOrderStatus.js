@@ -7,7 +7,7 @@ module.exports.checkOrderStatus = async (
   ctx,
   conversation,
   order,
-  multipleOrders
+  makingAnOrder
 ) => {
   const status = await conversation.wait();
 
@@ -26,6 +26,6 @@ module.exports.checkOrderStatus = async (
         remove_keyboard: true,
       },
     });
-    return await multipleOrders(conversation, ctx);
+    return await makingAnOrder(conversation, ctx);
   }
 };

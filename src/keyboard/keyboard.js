@@ -37,14 +37,6 @@ const keyboardForAppGuides = new Keyboard()
   .row("Основное меню")
   .resized();
 
-const keyboardForOrder = new Keyboard()
-  .text("Хочу заказать один товар")
-  .row()
-  .text("Хочу заказать несколько товаров")
-  .row()
-  .text("Основное меню")
-  .resized();
-
 const keyboardForСheckingnOrder = new Keyboard()
   .text("Да, все правильно!")
   .row()
@@ -52,7 +44,6 @@ const keyboardForСheckingnOrder = new Keyboard()
   .resized();
 
 module.exports = {
-  keyboardForOrder,
   keyboardForAppGuides,
   keyboardForСheckingnOrder,
   keyboardForTheMainMenu,

@@ -1,5 +1,3 @@
-
-
 async function conv(ctx, conversation) {
   try {
     await ctx.reply(
@@ -9,14 +7,14 @@ async function conv(ctx, conversation) {
     const { message } = await conversation.wait();
     const fileURL = message.text;
 
-    const order = {};
+    const order = [];
 
     if (!fileURL.startsWith("https://docs.google")) {
       await ctx.reply(
         "Пришлите ссылку на таблицу с вашими товарами\n\n(получить ссылку на файл можно в разделе -  /Другое/Получить шаблон)"
       );
     } else {
-      order.fileURL = fileURL;
+      order.push(fileURL);
 
       await ctx.reply("Напишите номер вашего телефона");
       const message = await conversation.wait();
@@ -25,7 +23,7 @@ async function conv(ctx, conversation) {
       if (!Number(phone)) {
         await ctx.reply("Напишите номер вашего телефона");
       } else {
-        order.phone = phone;
+        order.push(phone);
         return order;
       }
     }

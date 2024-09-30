@@ -7,8 +7,16 @@ async function makingAnOrder(conversation, ctx) {
   try {
     const chatId = ctx.chat.chatId;
 
-    const fileURL = await getFile(ctx, conversation);
-    const phone = await getPhone(ctx, conversation);
+    let fileURL;
+    let phone;
+
+    do {
+      fileURL = await getFile(ctx, conversation);
+    } while (!fileURL);
+
+    do {
+      phone = await getPhone(ctx, conversation);
+    } while (!phone);
 
     const order = { fileURL, phone, chatId };
 

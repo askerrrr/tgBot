@@ -10,7 +10,7 @@ async function getFile(ctx, conversation) {
     if (!fileURL.startsWith("https://docs.google")) {
       await ctx.reply("Это не ссылка на Google Docs. Попробуйте еще раз.");
 
-      return await getFile(conversation, ctx);
+      return null;
     }
 
     return fileURL;

@@ -2,7 +2,7 @@ const { env } = require("../../../../env");
 const { getDateAndTime } = require("../../different/dateAndTime");
 
 async function sendOrderFileToAdmin(ctx, order, randomKey) {
-  const messageToAdmin = `Новый заказ\n\nID : ${
+  const messageToAdmin = `Новый заказ\n\nID пользователя: ${
     order.chatId
   }\nНомер телефона : ${order.phone}\nСсылка на таблицу : ${
     order.fileURL

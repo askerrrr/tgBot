@@ -5,7 +5,7 @@ const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
 
 async function makingAnOrder(conversation, ctx) {
   try {
-    const chatId = ctx.chat.chatId;
+    const chatId = ctx.chat.id;
 
     let fileURL;
     let phone;

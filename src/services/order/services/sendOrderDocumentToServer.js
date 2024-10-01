@@ -1,11 +1,9 @@
-const crypto = require("crypto");
 const { env } = require("../../../../env");
 const { getDateAndTime } = require("../../different/dateAndTime");
 
-async function sendOrderDocumentToServer(order) {
+async function sendOrderDocumentToServer(order, randomKey) {
   try {
     const orderTime = getDateAndTime().fullTime();
-    const randomKey = crypto.randomBytes(10).toString("hex");
 
     const data = {
       date: orderTime,

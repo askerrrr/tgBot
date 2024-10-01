@@ -11,7 +11,7 @@ async function getPhone(ctx, conversation) {
       return null;
     }
 
-    return userPhoneNumber.msg.text;
+    return phone;
   } catch (err) {
     console.log(err);
   }

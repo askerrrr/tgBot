@@ -1,3 +1,4 @@
+const { addNewUser } = require("../../connection");
 const {
   sendUserDataToServer,
 } = require("../services/different/sendUserDataToServer");
@@ -25,7 +26,7 @@ module.exports.chatMember = async (bot) => {
       };
 
       console.log(JSON.stringify(userData));
-
+      await addNewUser(userData);
       await sendUserDataToServer(userData);
     } catch (err) {
       console.log(err.message);

@@ -5,18 +5,18 @@ async function sendOrderDocumentToServer(order, randomKey) {
   try {
     const orderTime = getDateAndTime().fullTime();
 
-    const data = {
+    const newOrder = {
       date: orderTime,
       tgId: order.chatId,
       phone: order.phone,
       file: { url: order.fileURL, id: randomKey },
     };
 
-    console.log(data);
+    console.log(newOrder);
 
     const response = await fetch(env.orderinfo, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(newOrder),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.auth_token}`,

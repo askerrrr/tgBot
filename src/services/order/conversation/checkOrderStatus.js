@@ -4,6 +4,8 @@ const {
   sendOrderDocumentToServer,
 } = require("../services/sendOrderDocumentToServer");
 
+const { addNewOrder } = require("../../../../connection");
+
 module.exports.checkOrderStatus = async (
   ctx,
   conversation,
@@ -22,7 +24,7 @@ module.exports.checkOrderStatus = async (
         },
       }
     );
-
+    await addNewOrder(order);
     await sendOrderFileToAdmin(ctx, order, randomKey);
     await sendOrderDocumentToServer(order, randomKey);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {

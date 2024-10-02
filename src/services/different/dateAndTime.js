@@ -1,20 +1,22 @@
 function getDateAndTime() {
   const date = new Date();
 
-  const second =
-    date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+  let second = date.getSeconds();
+  second = second < 10 ? "0" + second : second;
 
-  const minutes =
-    date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+  let minutes = date.getMinutes();
+  minutes = minutes < 10 ? "0" + minutes : minutes;
 
-  const hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+  let hours = date.getHours();
+  hours = hours < 10 ? "0" + hours : hours;
 
-  const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+  let day = date.getDay();
+  day = day < 10 ? "0" + day : day;
 
-  const month =
-    date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  let month = date.getMonth() + 1;
+  month = month < 10 ? "0" + month : month;
 
-  const year = date.getFullYear();
+  let year = date.getFullYear();
 
   return {
     getTime: () => {
@@ -28,4 +30,5 @@ function getDateAndTime() {
     },
   };
 }
+
 module.exports = { getDateAndTime };

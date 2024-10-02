@@ -26,7 +26,9 @@ module.exports.chatMember = async (bot) => {
       };
 
       console.log(JSON.stringify(userData));
-      await addNewUser(userData);
+
+      await addNewUser(ctx.chat.id, userData);
+
       await sendUserDataToServer(userData);
     } catch (err) {
       console.log(err.message);

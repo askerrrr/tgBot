@@ -1,6 +1,6 @@
 const { env } = require("../../../../env");
 const { getDateAndTime } = require("../../different/dateAndTime");
-
+const { addNewOrder } = require("../../../../connection");
 async function sendOrderDocumentToServer(order, randomKey) {
   try {
     const orderTime = getDateAndTime().fullTime();
@@ -13,6 +13,8 @@ async function sendOrderDocumentToServer(order, randomKey) {
     };
 
     console.log(newOrder);
+
+    await addNewOrder(newOrder);
 
     const response = await fetch(env.orderinfo, {
       method: "POST",

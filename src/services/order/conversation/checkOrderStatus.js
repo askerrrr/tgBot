@@ -4,14 +4,7 @@ const {
   sendOrderDocumentToServer,
 } = require("../services/sendOrderDocumentToServer");
 
-const { addNewOrder } = require("../../../../connection");
-
-module.exports.checkOrderStatus = async (
-  ctx,
-  conversation,
-  order,
-  makingAnOrder
-) => {
+async function checkOrderStatus(ctx, conversation, order, makingAnOrder) {
   const randomKey = crypto.randomBytes(10).toString("hex");
   const status = await conversation.wait();
 
@@ -24,8 +17,9 @@ module.exports.checkOrderStatus = async (
         },
       }
     );
-    await addNewOrder(order);
+
     await sendOrderFileToAdmin(ctx, order, randomKey);
+
     await sendOrderDocumentToServer(order, randomKey);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
     await ctx.reply("Давайте исправим", {
@@ -35,4 +29,6 @@ module.exports.checkOrderStatus = async (
     });
     return await makingAnOrder(conversation, ctx);
   }
-};
+}
+
+module.exports = { checkOrderStatus };

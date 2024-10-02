@@ -1,6 +1,6 @@
 const { env } = require("../../../../env");
 const { getDateAndTime } = require("../../different/dateAndTime");
-const { addNewOrder } = require("../../../../connection");
+const { addNewOrder } = require("../../../../dataBase");
 async function sendOrderDocumentToServer(order, randomKey) {
   try {
     const orderTime = getDateAndTime().fullTime();

@@ -14,12 +14,10 @@ const keyboardForOtherQueries = new Keyboard()
   .text("Получить информацию о последнем заказе")
   .row()
   .text("Получить свой id")
-  .row()
   .text("Получить шаблон")
   .row()
-  .text("Скачать приложения")
-  .row()
   .text("Основное меню")
+  .text("Скачать приложения")
   .resized();
 
 const keyboardForDownloadingApp = new Keyboard()

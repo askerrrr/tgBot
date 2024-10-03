@@ -16,7 +16,7 @@ async function addNewUser(id, user) {
   }
 }
 
-async function addNewOrder(orderContent) {
+async function addNewOrder(ctx, orderContent) {
   await mongodb.connect();
   const db = mongodb.db("telegram_users");
   const collection = db.collection("users");
@@ -30,6 +30,21 @@ async function addNewOrder(orderContent) {
       { tgId: orderContent.tgId },
       { $push: { orders: { orderContent } } }
     );
+  } else {
+    const newUser = {
+      tgId: ctx.chat.id,
+      firstName: ctx.chat.first_name,
+      userName: ctx.chat.user_name === undefined ? "" : ctx.chat.user_name,
+      orders: [],
+    };
+
+    const result = await collection.insertOne(newUser);
+    if (result) {
+      return await collection.updateOne(
+        { tgId: orderContent.tgId },
+        { $push: { orders: { orderContent } } }
+      );
+    }
   }
 }
 

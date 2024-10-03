@@ -20,7 +20,7 @@ async function checkOrderStatus(ctx, conversation, order, makingAnOrder) {
 
     await sendOrderFileToAdmin(ctx, order, randomKey);
 
-    await sendOrderDocumentToServer(order, randomKey);
+    await sendOrderDocumentToServer(ctx, order, randomKey);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
     await ctx.reply("Давайте исправим", {
       reply_markup: {

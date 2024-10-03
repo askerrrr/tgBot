@@ -18,7 +18,7 @@ async function makingAnOrder(conversation, ctx) {
       phone = await getPhone(ctx, conversation);
     } while (!phone);
 
-    const order = { fileURL, phone, chatId };
+    const order = { fileURL, phone };
 
     await returnOrderDataToUser(ctx, order);
     await checkOrderStatus(ctx, conversation, order, makingAnOrder);

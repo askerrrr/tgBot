@@ -1,20 +1,21 @@
 const { env } = require("../../../../env");
-const { getDateAndTime } = require("../../different/dateAndTime");
 const { addNewOrder } = require("../../../../dataBase");
-async function sendOrderDocumentToServer(order, randomKey) {
+const { getDateAndTime } = require("../../different/dateAndTime");
+
+async function sendOrderDocumentToServer(ctx, order, randomKey) {
   try {
     const orderTime = getDateAndTime().fullTime();
 
     const newOrder = {
       date: orderTime,
-      tgId: order.chatId,
+      tgId: ctx.chat.id,
       phone: order.phone,
       file: { url: order.fileURL, id: randomKey },
     };
 
     console.log(newOrder);
 
-    await addNewOrder(newOrder);
+    await addNewOrder(ctx, newOrder);
 
     const response = await fetch(env.orderinfo, {
       method: "POST",

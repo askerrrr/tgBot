@@ -1,16 +1,13 @@
-const { getId } = require("./getId");
 const { getTemplate } = require("./getTemplate");
 const { downloadApp } = require("./downloadApp");
-const { getOrderInfo } = require("./getOrderInfo");
+const { getUserData } = require("./getUserData");
 
 async function listenersForOther(bot) {
-  getId(bot);
+  getUserData(bot);
 
   getTemplate(bot);
 
   downloadApp(bot);
-
-  getOrderInfo(bot);
 }
 
 module.exports = { listenersForOther };

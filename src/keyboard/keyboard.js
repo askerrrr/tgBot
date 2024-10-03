@@ -11,13 +11,13 @@ const keyboardForTheMainMenu = new Keyboard()
   .resized();
 
 const keyboardForOtherQueries = new Keyboard()
-  .text("Получить информацию о последнем заказе")
+  .text("Мои данные")
   .row()
-  .text("Получить свой id")
   .text("Получить шаблон")
   .row()
-  .text("Основное меню")
   .text("Скачать приложения")
+  .row()
+  .text("Основное меню")
   .resized();
 
 const keyboardForDownloadingApp = new Keyboard()
@@ -26,6 +26,14 @@ const keyboardForDownloadingApp = new Keyboard()
   .row()
   .text("Poizon")
   .text("Pinduoduo")
+  .row()
+  .text("Назад")
+  .resized();
+
+const keyboardForUserData = new Keyboard()
+  .text("Получить информацию о последнем заказе")
+  .row()
+  .text("Получить свой id")
   .row()
   .text("Назад")
   .resized();
@@ -46,9 +54,10 @@ const keyboardForСheckingnOrder = new Keyboard()
   .resized();
 
 module.exports = {
+  keyboardForUserData,
   keyboardForAppGuides,
-  keyboardForСheckingnOrder,
   keyboardForTheMainMenu,
   keyboardForOtherQueries,
+  keyboardForСheckingnOrder,
   keyboardForDownloadingApp,
 };

@@ -6,7 +6,7 @@ async function getOrderInfo(bot) {
 
     const order = await getLastOrderInfo(chatId);
     if (!order) {
-      await ctx.reply("Так вы же еще ничего не заказывали");
+      await ctx.reply("Так вы же еще ничего не заказывали...");
     }
     await ctx.reply(
       `Информация о последнем заказе\n\nВаш ID : ${order.tgId}\nНомер телефона : ${order.phone}\nID заказа : ${order.file.id}\nВремя заказа : ${order.date}\n\nСсылка на файл : ${order.file.url}\n`

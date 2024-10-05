@@ -1,5 +1,5 @@
 const { env } = require("../../../../env");
-const { addNewOrder } = require("../../../../dataBase");
+const { addNewOrder } = require("../../../database/addNewOrder");
 const { getDateAndTime } = require("../../different/dateAndTime");
 
 async function sendOrderDocumentToServer(ctx, order, randomKey) {

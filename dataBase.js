@@ -6,7 +6,7 @@ const mongodb = new MongoClient(env.mongo_url);
 async function addNewUser(id, user) {
   try {
     await mongodb.connect();
-    const db = mongodb.db("telegram_users");
+    const db = mongodb.db("database");
     const collection = db.collection("users");
     const existingDocument = await collection.findOne({ tgId: id });
 
@@ -23,7 +23,7 @@ async function addNewUser(id, user) {
 async function addNewOrder(ctx, orderContent) {
   try {
     await mongodb.connect();
-    const db = mongodb.db("telegram_users");
+    const db = mongodb.db("database");
     const collection = db.collection("users");
 
     const existingDocument = await collection.findOne({
@@ -59,7 +59,7 @@ async function addNewOrder(ctx, orderContent) {
 async function getLastOrderInfo(id) {
   try {
     await mongodb.connect();
-    const db = mongodb.db("telegram_users");
+    const db = mongodb.db("database");
     const collection = db.collection("users");
 
     const existingDocument = await collection.findOne({ tgId: id });

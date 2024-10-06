@@ -1,11 +1,15 @@
+const crypto = require("crypto");
 const { getFile } = require("./conversation/getFile");
 const { getPhone } = require("./conversation/getPhone");
+const { getDateAndTime } = require("../different/dateAndTime");
 const { checkOrderStatus } = require("./conversation/checkOrderStatus");
 const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
 
 async function makingAnOrder(conversation, ctx) {
   try {
     const chatId = ctx.chat.id;
+    const orderTime = getDateAndTime().fullTime();
+    const randomKey = crypto.randomBytes(10).toString("hex");
 
     let fileURL;
     let phone;
@@ -18,7 +22,12 @@ async function makingAnOrder(conversation, ctx) {
       phone = await getPhone(ctx, conversation);
     } while (!phone);
 
-    const order = { fileURL, phone };
+    const order = {
+      phone,
+      tgId: chatId,
+      date: orderTime,
+      file: { url: fileURL, id: randomKey },
+    };
 
     await returnOrderDataToUser(ctx, order);
     await checkOrderStatus(ctx, conversation, order, makingAnOrder);

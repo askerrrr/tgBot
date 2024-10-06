@@ -1,25 +1,12 @@
 const { env } = require("../../../../env");
-const { addNewOrder } = require("../../../database/addNewOrder");
-const { getDateAndTime } = require("../../different/dateAndTime");
 
-async function sendOrderDocumentToServer(ctx, order, randomKey) {
+async function sendOrderDocumentToServer(order) {
   try {
-    const orderTime = getDateAndTime().fullTime();
-
-    const newOrder = {
-      date: orderTime,
-      tgId: ctx.chat.id,
-      phone: order.phone,
-      file: { url: order.fileURL, id: randomKey },
-    };
-
-    console.log(newOrder);
-
-    await addNewOrder(ctx, newOrder);
+    console.log(order);
 
     const response = await fetch(env.orderinfo, {
       method: "POST",
-      body: JSON.stringify(newOrder),
+      body: JSON.stringify(order),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${env.auth_token}`,

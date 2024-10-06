@@ -1,23 +1,29 @@
-const { mongodb } = require("./initDB");
+const { mongodb, collection } = require("./initDB");
+const { findDublicateUrl } = require("./findDublicateUrl");
+const { updateOrderContent } = require("./updateOrderContent");
 
 async function addNewOrder(ctx, orderContent) {
   try {
     await mongodb.connect();
-    const db = mongodb.db("database");
-    const collection = db.collection("users");
 
     const existingDocument = await collection.findOne({
       tgId: orderContent.tgId,
     });
 
     if (existingDocument) {
-      await collection.updateOne(
-        { tgId: orderContent.tgId },
-        { $push: { orders: { orderContent } } }
-      );
+      const dublicateUrl = await findDublicateUrl(collection, orderContent);
+
+      if (dublicateUrl) {
+        return await updateOrderContent(collection, orderContent);
+      } else {
+        await collection.updateOne(
+          { tgId: orderContent.tgId },
+          { $push: { orders: { orderContent } } }
+        );
+      }
     } else {
       const newUser = {
-        tgId: ctx.chat.id,
+        tgId: orderContent.tgId,
         firstName: ctx.chat.first_name,
         userName: ctx.chat.user_name === undefined ? "" : ctx.chat.user_name,
         orders: [],

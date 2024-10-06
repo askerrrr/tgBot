@@ -27,6 +27,8 @@ async function makingAnOrder(conversation, ctx) {
       tgId: chatId,
       date: orderTime,
       file: { url: fileURL, id: randomKey },
+      firstName: ctx.chat.first_name,
+      userName: ctx.chat.user_name === undefined ? "" : ctx.chat.user_name,
     };
 
     await returnOrderDataToUser(ctx, order);

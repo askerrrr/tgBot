@@ -15,7 +15,7 @@ module.exports.chatMember = async (bot) => {
         ctx.from.id
       );
 
-      const userData = {
+      const newUser = {
         tgId: chatMember.user.id,
         firstName: chatMember.user.first_name,
         userName:
@@ -25,11 +25,9 @@ module.exports.chatMember = async (bot) => {
         orders: [],
       };
 
-      console.log(JSON.stringify(userData));
+      await addNewUser(newUser);
 
-      await addNewUser(ctx.chat.id, userData);
-
-      await sendUserDataToServer(userData);
+      await sendUserDataToServer(newUser);
     } catch (err) {
       console.log(err.message);
     }

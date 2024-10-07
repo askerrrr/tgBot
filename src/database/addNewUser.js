@@ -1,4 +1,4 @@
-const { mongodb } = require("./initDB");
+const { mongodb } = require("./db");
 
 async function addNewUser(id, user) {
   try {

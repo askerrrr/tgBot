@@ -1,4 +1,4 @@
-const { mongodb, collection } = require("./initDB");
+const { mongodb, collection } = require("./db");
 const { findDublicateUrl } = require("./findDublicateUrl");
 const { updateOrderContent } = require("./updateOrderContent");
 

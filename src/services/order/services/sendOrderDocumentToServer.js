@@ -2,8 +2,6 @@ const { env } = require("../../../../env");
 
 async function sendOrderDocumentToServer(order) {
   try {
-    console.log(order);
-
     const response = await fetch(env.orderinfo, {
       method: "POST",
       body: JSON.stringify(order),

@@ -1,4 +1,6 @@
-const { getLastOrderInfo } = require("../../database/getLastOrderInfo");
+const {
+  getLastOrderInfo,
+} = require("../../database/services/getLastOrderInfo");
 
 async function getOrderInfo(bot) {
   bot.hears("Получить информацию о последнем заказе", async (ctx) => {

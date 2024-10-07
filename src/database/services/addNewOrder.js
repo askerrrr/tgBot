@@ -1,8 +1,8 @@
-const { mongodb, collection } = require("./db");
+const { mongodb, collection } = require("../db");
 const { findDublicateUrl } = require("./findDublicateUrl");
 const { updateOrderContent } = require("./updateOrderContent");
 
-async function addNewOrder(ctx, orderContent) {
+async function addNewOrder(orderContent) {
   try {
     await mongodb.connect();
 
@@ -21,11 +21,11 @@ async function addNewOrder(ctx, orderContent) {
           { $push: { orders: { orderContent } } }
         );
       }
-    } else {
+    } else if (!existingDocument) {
       const newUser = {
         tgId: orderContent.tgId,
-        firstName: ctx.chat.first_name,
-        userName: ctx.chat.user_name === undefined ? "" : ctx.chat.user_name,
+        firstName: orderContent.firstName,
+        userName: orderContent.userName,
         orders: [],
       };
 

@@ -1,4 +1,4 @@
-const { mongodb } = require("./db");
+const { mongodb } = require("../db");
 
 async function getLastOrderInfo(id) {
   try {

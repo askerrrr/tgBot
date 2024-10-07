@@ -1,4 +1,4 @@
-const { addNewOrder } = require("../../../database/addNewOrder");
+const { addNewOrder } = require("../../../database/services/addNewOrder");
 const { sendOrderFileToAdmin } = require("../services/sendOrderFileToAdmin");
 const {
   sendOrderDocumentToServer,
@@ -17,9 +17,9 @@ async function checkOrderStatus(ctx, conversation, order, makingAnOrder) {
       }
     );
 
-    await addNewOrder(ctx, order);
+    await addNewOrder(order);
     await sendOrderFileToAdmin(ctx, order);
-    await sendOrderDocumentToServer(ctx, order);
+    await sendOrderDocumentToServer(order);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
     await ctx.reply("Давайте исправим", {
       reply_markup: {

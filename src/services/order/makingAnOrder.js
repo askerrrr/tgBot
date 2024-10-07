@@ -8,6 +8,10 @@ const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
 async function makingAnOrder(conversation, ctx) {
   try {
     const chatId = ctx.chat.id;
+    const userName = ctx.chat.user_name === undefined ? "" : ctx.chat.user_name;
+    const firstName =
+      ctx.chat.first_name === undefined ? "" : ctx.chat.first_name;
+
     const orderTime = getDateAndTime().fullTime();
     const randomKey = crypto.randomBytes(10).toString("hex");
 
@@ -27,8 +31,8 @@ async function makingAnOrder(conversation, ctx) {
       tgId: chatId,
       date: orderTime,
       file: { url: fileURL, id: randomKey },
-      firstName: ctx.chat.first_name,
-      userName: ctx.chat.user_name === undefined ? "" : ctx.chat.user_name,
+      firstName,
+      userName,
     };
 
     await returnOrderDataToUser(ctx, order);

@@ -1,4 +1,4 @@
-const { addNewUser } = require("../database/addNewUser");
+const { addNewUser } = require("../database/services/addNewOrder");
 const {
   sendUserDataToServer,
 } = require("../services/different/sendUserDataToServer");

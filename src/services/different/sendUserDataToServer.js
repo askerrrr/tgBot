@@ -19,7 +19,6 @@ module.exports.sendUserDataToServer = async (data) => {
     if (contentType && contentType.includes("application/json")) {
       return await response.json();
     } else {
-      // Выводим тело ответа сервера для отладки
       const text = await response.text();
       throw new Error(`Unexpected content type: ${contentType}\n${text}`);
     }

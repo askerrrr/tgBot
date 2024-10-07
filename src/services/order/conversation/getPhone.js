@@ -1,19 +1,17 @@
+const { checkPhoneNumber } = require("../../different/checkPhoneNumber");
+
 async function getPhone(ctx, conversation) {
   try {
-    await ctx.reply("Напишите номер вашего телефона");
+    await ctx.reply(
+      "Напишите номер вашего телефона без пробелов, скобок и дефисов"
+    );
 
     const message = await conversation.wait();
     const phone = Number(message.msg.text);
 
-    if (!phone) {
-      await ctx.reply("Некорректный номер телефона. Попробуйте снова.");
+    const result = checkPhoneNumber(phone);
 
-      return null;
-    } else if (String(phone).length <= 10) {
-      await ctx.reply("Некорректный номер телефона. Попробуйте снова.");
-
-      return null;
-    } else if (String(phone).length >= 12) {
+    if (!result) {
       await ctx.reply("Некорректный номер телефона. Попробуйте снова.");
 
       return null;

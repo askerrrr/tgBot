@@ -1,3 +1,5 @@
+const { checkSpreadSheets } = require("../../different/checkSpreadSheets");
+
 async function getFile(ctx, conversation) {
   try {
     await ctx.reply(
@@ -7,8 +9,10 @@ async function getFile(ctx, conversation) {
     const { message } = await conversation.wait();
     const fileURL = message.text;
 
-    if (!fileURL.startsWith("https://docs.google")) {
-      await ctx.reply("Это не ссылка на Google Docs. Попробуйте еще раз.");
+    const result = checkSpreadSheets(fileURL);
+
+    if (!result) {
+      await ctx.reply("Это не ссылка на Гугл таблицу. Попробуйте еще раз.");
 
       return null;
     }

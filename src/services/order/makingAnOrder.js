@@ -15,12 +15,12 @@ async function makingAnOrder(conversation, ctx) {
     const orderTime = getDateAndTime().fullTime();
     const randomKey = crypto.randomBytes(10).toString("hex");
 
-    let fileURL;
+    let fileUrl;
     let phone;
 
     do {
-      fileURL = await getFile(ctx, conversation);
-    } while (!fileURL);
+      fileUrl = await getFile(ctx, conversation);
+    } while (!fileUrl);
 
     do {
       phone = await getPhone(ctx, conversation);
@@ -30,7 +30,7 @@ async function makingAnOrder(conversation, ctx) {
       phone,
       tgId: chatId,
       date: orderTime,
-      file: { url: fileURL, id: randomKey },
+      file: { url: fileUrl, id: randomKey },
       firstName,
       userName,
     };

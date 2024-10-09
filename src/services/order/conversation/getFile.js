@@ -1,4 +1,4 @@
-const { checkSpreadSheets } = require("../../different/checkSpreadSheets");
+const { getFileUrl } = require("../../different/getFileURL");
 
 async function getFile(ctx, conversation) {
   try {
@@ -7,17 +7,11 @@ async function getFile(ctx, conversation) {
     );
 
     const { message } = await conversation.wait();
-    const fileURL = message.text;
+    const fileId = message.document.file_id;
 
-    const result = checkSpreadSheets(fileURL);
-
-    if (!result) {
-      await ctx.reply("Это не ссылка на Гугл таблицу. Попробуйте еще раз.");
-
-      return null;
-    }
-
-    return fileURL;
+    const fileUrl = await getFileUrl(ctx, fileId);
+   
+    return fileUrl;
   } catch (err) {
     console.log(err);
   }

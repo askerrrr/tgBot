@@ -30,11 +30,16 @@ async function makingAnOrder(conversation, ctx) {
       phone,
       tgId: chatId,
       date: orderTime,
-      file: { url: fileUrl, id: randomKey },
+      file: {
+        url: fileUrl,
+        id: randomKey,
+        pathToFile: `/var/www/userFiles/${chatId}/${randomKey}.xlsx`,
+      },
       firstName,
       userName,
     };
 
+    console.log(order);
     await returnOrderDataToUser(ctx, order);
     await checkOrderStatus(ctx, conversation, order, makingAnOrder);
   } catch (err) {

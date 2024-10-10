@@ -1,4 +1,4 @@
-const { addNewUser } = require("../database/services/addNewOrder");
+const { addNewUser } = require("../database/services/addNewUser");
 const {
   sendUserDataToServer,
 } = require("../services/different/sendUserDataToServer");
@@ -24,7 +24,7 @@ module.exports.chatMember = async (bot) => {
             : chatMember.user.user_name,
         orders: [],
       };
-
+      console.log(newUser);
       await addNewUser(newUser);
 
       await sendUserDataToServer(newUser);

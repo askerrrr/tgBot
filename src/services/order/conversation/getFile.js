@@ -3,7 +3,7 @@ const { getFileUrl } = require("../../different/getFileURL");
 async function getFile(ctx, conversation) {
   try {
     await ctx.reply(
-      "Пришлите эксель таблицу с вашими товарами\n\n(получить файл можно в разделе -  /Другое/Получить шаблон)"
+      "Пришлите эксель таблицу с вашими товарами\n\n(получить шаблон можно в разделе -  /Другое/Получить шаблон)"
     );
 
     const { message } = await conversation.wait();

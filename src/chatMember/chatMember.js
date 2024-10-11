@@ -7,7 +7,7 @@ module.exports.chatMember = async (bot) => {
   bot.hears("/start", async (ctx) => {
     try {
       await ctx.reply(
-        `${ctx.from.first_name}, добро пожаловать в наш бот  🤖\nВам присвоен id-${ctx.chat.id}, в дальнейшем этот ID будет соответствовать номеру вашего заказа\nДля дальнейшей работы воспользуйтесь 'Меню' `
+        `${ctx.from.first_name}, добро пожаловать в наш бот  🤖\nВам присвоен id-${ctx.chat.id}\nДля дальнейшей работы воспользуйтесь 'Меню' `
       );
 
       const chatMember = await ctx.chatMembers.getChatMember(
@@ -24,9 +24,8 @@ module.exports.chatMember = async (bot) => {
             : chatMember.user.user_name,
         orders: [],
       };
-      console.log(newUser);
-      await addNewUser(newUser);
 
+      await addNewUser(newUser);
       await sendUserDataToServer(newUser);
     } catch (err) {
       console.log(err.message);

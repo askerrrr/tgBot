@@ -1,11 +1,10 @@
-const { env } = require("../../../env");
+const { InputFile } = require("grammy");
 
 async function getTemplate(bot) {
   bot.hears("Получить шаблон", async (ctx) => {
-    await ctx.reply(env.templateDocument, {
-      parse_mode: "HTML",
-      disable_web_page_preview: true,
-    });
+    await ctx.replyWithDocument(
+      new InputFile("/home/phosphorus/botDir/tgbot/шаблон.xlsx")
+    );
   });
 }
 

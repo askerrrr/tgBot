@@ -7,9 +7,6 @@ const {
 const { backToMainMenu } = require("./differentListeners/backToMainMenu");
 const { backToOtherMenu } = require("./differentListeners/backToOtherMenu");
 const { middlewareForConversations } = require("../middleware/middleware");
-const {
-  listenersForUserData,
-} = require("./listenersForUserData/listenersForUserData");
 
 async function allListeners(bot) {
   guides(bot);
@@ -18,7 +15,7 @@ async function allListeners(bot) {
   backToOtherMenu(bot);
   listenersForOther(bot);
   listenersOfMainMenu(bot);
-  listenersForUserData(bot);
+
   middlewareForConversations(bot);
 }
 

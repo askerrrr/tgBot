@@ -4,6 +4,10 @@ async function installMenu(bot) {
       command: "menu",
       description: "Меню",
     },
+    {
+      command: "faq",
+      description: "Часто задаваемые вопросы",
+    },
   ]);
 }
 

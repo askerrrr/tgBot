@@ -3,12 +3,11 @@ const { linkTaobao } = require("./Taobao");
 const { linkPoizon } = require("./Poizon");
 const { linkPinduoduo } = require("./Pinduoduo");
 
-function listenersForApp(bot) {
+function downloadApp(bot) {
   link1688(bot);
   linkTaobao(bot);
   linkPoizon(bot);
   linkPinduoduo(bot);
-
 }
 
-module.exports = { listenersForApp };
+module.exports = { downloadApp };

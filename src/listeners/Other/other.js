@@ -2,7 +2,7 @@ const { getTemplate } = require("./getTemplate");
 const { downloadApp } = require("./downloadApp");
 const { getUserData } = require("./getUserData");
 
-async function listenersForOther(bot) {
+async function other(bot) {
   getUserData(bot);
 
   getTemplate(bot);
@@ -10,4 +10,4 @@ async function listenersForOther(bot) {
   downloadApp(bot);
 }
 
-module.exports = { listenersForOther };
+module.exports = { other };

@@ -2,8 +2,8 @@ const { chatMembers } = require("@grammyjs/chat-members");
 const { chatMember } = require("../chatMember/chatMember");
 const { session, MemorySessionStorage } = require("grammy");
 const { calcOrderCost } = require("../services/orderCost/calcOrderCost");
-const { orderCost } = require("../listeners/listenersOfMainMenu/orderCost");
-const { order } = require("../listeners/listenersOfMainMenu/order");
+const { orderCost } = require("../listeners/MainMenu/orderCost");
+const { order } = require("../listeners/MainMenu/order");
 const { catchUnexpectedMessages } = require("./unexpectedMessages");
 const {
   conversations,

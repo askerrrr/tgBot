@@ -1,23 +1,18 @@
-const { FAQ } = require("./listenersForFAQ/FAQ");
-const { guides } = require("./listenersForGuide/Guides");
-const { listenersForApp } = require("./listenersForApp/listenersForApp");
-const { listenersForOther } = require("./listenersForOther/listenersForOther");
-const {
-  listenersOfMainMenu,
-} = require("./listenersOfMainMenu/listenersOfMainMenu");
-const { backToMainMenu } = require("./differentListeners/backToMainMenu");
-const { backToOtherMenu } = require("./differentListeners/backToOtherMenu");
+const { FAQ } = require("./FAQ/FAQ");
+const { guides } = require("./Guides/Guides");
+const { diffListeners } = require("./different/diffListeners");
+const { other } = require("./Other/other");
+const { downloadApp } = require("./downloadApp/downloadApp");
+const { mainMenu } = require("./MainMenu/mainMenu");
 const { middlewareForConversations } = require("../middleware/middleware");
 
 async function allListeners(bot) {
   FAQ(bot);
+  other(bot);
   guides(bot);
-  backToMainMenu(bot);
-  listenersForApp(bot);
-  backToOtherMenu(bot);
-  listenersForOther(bot);
-  listenersOfMainMenu(bot);
-
+  mainMenu(bot);
+  downloadApp(bot);
+  diffListeners(bot);
   middlewareForConversations(bot);
 }
 

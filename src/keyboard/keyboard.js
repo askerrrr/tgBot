@@ -30,14 +30,6 @@ const keyboardForDownloadingApp = new Keyboard()
   .text("Назад")
   .resized();
 
-const keyboardForUserData = new Keyboard()
-  .text("Получить информацию о последнем заказе")
-  .row()
-  .text("Получить свой id")
-  .row()
-  .text("Назад")
-  .resized();
-
 const keyboardForAppGuides = new Keyboard()
   .text("Гайд по 1688")
   .text("Гайд по Taobao")
@@ -54,7 +46,6 @@ const keyboardForСheckingnOrder = new Keyboard()
   .resized();
 
 module.exports = {
-  keyboardForUserData,
   keyboardForAppGuides,
   keyboardForTheMainMenu,
   keyboardForOtherQueries,

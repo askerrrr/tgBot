@@ -1,9 +1,9 @@
-const { FAQText } = require("../../utils/text");
+const { inlineKeyboardForFAQ } = require("../../keyboard/inlineKeyboard");
 
 async function FAQ(bot) {
   bot.hears("Часто задаваемые вопросы FAQ", async (ctx) => {
-    await ctx.reply(FAQText, {
-      parse_mode: "HTML",
+    await ctx.reply("Вот часто задаваемые вопросы", {
+      reply_markup: inlineKeyboardForFAQ,
     });
   });
 }

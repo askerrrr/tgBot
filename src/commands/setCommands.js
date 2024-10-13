@@ -1,4 +1,4 @@
-async function installMenu(bot) {
+async function setCommands(bot) {
   bot.api.setMyCommands([
     {
       command: "menu",
@@ -11,4 +11,4 @@ async function installMenu(bot) {
   ]);
 }
 
-module.exports = { installMenu };
+module.exports = { setCommands };

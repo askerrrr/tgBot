@@ -45,7 +45,18 @@ const keyboardForСheckingnOrder = new Keyboard()
   .text("Нет, тут ошибка, я хочу исправить данные")
   .resized();
 
+const keyboardForFAQ = new Keyboard()
+  .text("С каких сайтов вы выкупаете?")
+  .row()
+  .text("Куда доставляете товар?")
+  .row()
+  .text("Что по срокам доставки?")
+  .row()
+  .text("Какова стоимость услуг?")
+  .resized();
+
 module.exports = {
+  keyboardForFAQ,
   keyboardForAppGuides,
   keyboardForTheMainMenu,
   keyboardForOtherQueries,

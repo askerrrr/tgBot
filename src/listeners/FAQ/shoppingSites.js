@@ -1,6 +1,6 @@
 async function shoppingSites(bot) {
-  bot.callbackQuery("shoppingSites", async (ctx) => {
-    await ctx.answerCallbackQuery({ text: "sadfsdf" });
+  bot.hears("С каких сайтов вы выкупаете?", async (ctx) => {
+    await ctx.reply("");
   });
 }
 

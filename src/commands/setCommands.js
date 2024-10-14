@@ -4,10 +4,6 @@ async function setCommands(bot) {
       command: "menu",
       description: "Меню",
     },
-    {
-      command: "faq",
-      description: "Часто задаваемые вопросы",
-    },
   ]);
 }
 

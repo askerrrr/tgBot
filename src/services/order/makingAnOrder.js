@@ -28,7 +28,7 @@ async function makingAnOrder(conversation, ctx) {
 
     const order = {
       phone,
-      tgId: chatId,
+      userId: chatId,
       date: orderTime,
       file: {
         url: fileUrl,

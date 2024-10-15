@@ -5,7 +5,7 @@ async function addNewUser(user) {
     await mongodb.connect();
     const db = mongodb.db("database");
     const collection = db.collection("users");
-    const existingDocument = await collection.findOne({ tgId: user.tgId });
+    const existingDocument = await collection.findOne({ userId: user.tgId });
 
     if (!existingDocument) {
       await collection.insertOne(user);

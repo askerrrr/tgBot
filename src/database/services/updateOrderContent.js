@@ -1,7 +1,7 @@
 async function updateOrderContent(collection, orderContent) {
   return await collection.updateOne(
     {
-      tgId: orderContent.tgId,
+      userId: orderContent.userId,
       "orders.orderContent.file.url": orderContent.file.url,
     },
     {

@@ -6,7 +6,7 @@ async function getLastOrderInfo(id) {
     const db = mongodb.db("database");
     const collection = db.collection("users");
 
-    const existingDocument = await collection.findOne({ tgId: id });
+    const existingDocument = await collection.findOne({ userId: id });
 
     if (!existingDocument) {
       return null;

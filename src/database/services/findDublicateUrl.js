@@ -1,6 +1,6 @@
 async function findDublicateUrl(collection, orderContent) {
   return await collection.findOne({
-    tgId: orderContent.tgId,
+    tgId: orderContent.userId,
     "orders.orderContent.file.url": orderContent.file.url,
   });
 }

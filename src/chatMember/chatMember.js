@@ -16,7 +16,7 @@ module.exports.chatMember = async (bot) => {
       );
 
       const newUser = {
-        tgId: chatMember.user.id,
+        userId: chatMember.user.id,
         firstName: chatMember.user.first_name,
         userName:
           chatMember.user.user_name === undefined

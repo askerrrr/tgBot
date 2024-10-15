@@ -7,7 +7,7 @@ async function addNewOrder(orderContent) {
     await mongodb.connect();
 
     const existingDocument = await collection.findOne({
-      tgId: orderContent.tgId,
+      userId: orderContent.userId,
     });
 
     if (existingDocument) {
@@ -17,13 +17,13 @@ async function addNewOrder(orderContent) {
         return await updateOrderContent(collection, orderContent);
       } else {
         await collection.updateOne(
-          { tgId: orderContent.tgId },
+          { userId: orderContent.userId },
           { $push: { orders: { orderContent } } }
         );
       }
     } else if (!existingDocument) {
       const newUser = {
-        tgId: orderContent.tgId,
+        userId: orderContent.userId,
         firstName: orderContent.firstName,
         userName: orderContent.userName,
         orders: [],
@@ -32,7 +32,7 @@ async function addNewOrder(orderContent) {
       const result = await collection.insertOne(newUser);
       if (result) {
         return await collection.updateOne(
-          { tgId: orderContent.tgId },
+          { userId: orderContent.userId },
           { $push: { orders: { orderContent } } }
         );
       }

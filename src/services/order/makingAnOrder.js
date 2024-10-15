@@ -17,14 +17,35 @@ async function makingAnOrder(conversation, ctx) {
 
     let fileUrl;
     let phone;
+    let failedAttempt = 0;
 
-    do {
+    while (!fileUrl) {
       fileUrl = await getFile(ctx, conversation);
-    } while (!fileUrl);
 
-    do {
+      if (!fileUrl) {
+        failedAttempt++;
+
+        if (failedAttempt > 3) {
+          await ctx.reply("Вы превысили количество попыток. Беседа завершена.");
+          failedAttempt = 0;
+          return;
+        }
+      }
+    }
+
+    while (!phone) {
       phone = await getPhone(ctx, conversation);
-    } while (!phone);
+
+      if (!phone) {
+        failedAttempt++;
+
+        if (failedAttempt > 3) {
+          await ctx.reply("Вы превысили количество попыток. Беседа завершена.");
+          failedAttempt = 0;
+          return;
+        }
+      }
+    }
 
     const order = {
       phone,

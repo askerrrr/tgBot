@@ -16,14 +16,14 @@ async function getFile(ctx, conversation) {
 
       const fileUrl = await getFileUrl(ctx, fileId);
 
-      const validFile = fileUrl.split(".").reverse()[0] === "xlsx";
+      const validFile = fileUrl.split(".")[3] === "xlsx";
 
       if (!validFile) {
         await ctx.reply("Это не эксель таблица, попробуйте еще раз");
         return null;
       }
 
-      return fileUrl;
+      return `${fileUrl}::${fileId}`;
     }
   } catch (err) {
     console.log(err);

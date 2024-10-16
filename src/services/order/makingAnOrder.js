@@ -16,7 +16,9 @@ async function makingAnOrder(conversation, ctx) {
     const randomKey = crypto.randomBytes(10).toString("hex");
 
     let fileUrl;
+    let fileId;
     let phone;
+
     let failedAttempt = 0;
 
     while (!fileUrl) {
@@ -25,8 +27,10 @@ async function makingAnOrder(conversation, ctx) {
       if (!fileUrl) {
         failedAttempt++;
 
-        if (failedAttempt > 3) {
-          await ctx.reply("Вы превысили количество попыток. Беседа завершена.");
+        if (failedAttempt > 2) {
+          await ctx.reply(
+            "Вы превысили количество неудачных попыток. Беседа завершена. Что бы начать заново, снова нажмите 'Сделать заказ!'"
+          );
           failedAttempt = 0;
           return;
         }
@@ -39,20 +43,21 @@ async function makingAnOrder(conversation, ctx) {
       if (!phone) {
         failedAttempt++;
 
-        if (failedAttempt > 3) {
+        if (failedAttempt > 4) {
           await ctx.reply("Вы превысили количество попыток. Беседа завершена.");
-          failedAttempt = 0;
           return;
         }
       }
     }
+
+    fileId = fileUrl.split("::")[1];
 
     const order = {
       phone,
       userId: chatId,
       date: orderTime,
       file: {
-        url: fileUrl,
+        url: fileUrl.split("::")[0],
         id: randomKey,
         pathToFile: `/var/www/userFiles/${chatId}/${randomKey}.xlsx`,
       },
@@ -60,8 +65,7 @@ async function makingAnOrder(conversation, ctx) {
       userName,
     };
 
-    console.log(order);
-    await returnOrderDataToUser(ctx, order);
+    await returnOrderDataToUser(ctx, phone, fileId);
     await checkOrderStatus(ctx, conversation, order, makingAnOrder);
   } catch (err) {
     console.log(err);

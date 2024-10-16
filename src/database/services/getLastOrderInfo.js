@@ -1,12 +1,12 @@
 const { mongodb } = require("../db");
 
-async function getLastOrderInfo(id) {
+async function getLastOrderInfo(userId) {
   try {
     await mongodb.connect();
     const db = mongodb.db("database");
     const collection = db.collection("users");
 
-    const existingDocument = await collection.findOne({ userId: id });
+    const existingDocument = await collection.findOne({ userId });
 
     if (!existingDocument) {
       return null;

@@ -16,7 +16,6 @@ async function makingAnOrder(conversation, ctx) {
     const randomKey = crypto.randomBytes(10).toString("hex");
 
     let fileUrl;
-    let fileId;
     let phone;
 
     let failedAttempt = 0;
@@ -50,7 +49,7 @@ async function makingAnOrder(conversation, ctx) {
       }
     }
 
-    fileId = fileUrl.split("::")[1];
+    let fileId = fileUrl.split("::")[1];
 
     const order = {
       phone,

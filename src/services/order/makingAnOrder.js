@@ -7,7 +7,7 @@ const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
 
 async function makingAnOrder(conversation, ctx) {
   try {
-    const chatId = ctx.chat.id;
+    const chatId = `${ctx.chat.id}`;
     const userName = ctx.chat.user_name === undefined ? "" : ctx.chat.user_name;
     const firstName =
       ctx.chat.first_name === undefined ? "" : ctx.chat.first_name;
@@ -43,7 +43,9 @@ async function makingAnOrder(conversation, ctx) {
         failedAttempt++;
 
         if (failedAttempt > 4) {
-          await ctx.reply("Вы превысили количество попыток. Беседа завершена.");
+          await ctx.reply(
+            "Вы превысили количество неудачных попыток. Беседа завершена. Что бы начать заново, снова нажмите 'Сделать заказ!'"
+          );
           return;
         }
       }

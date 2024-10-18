@@ -64,6 +64,7 @@ async function makingAnOrder(conversation, ctx) {
       },
       firstName,
       userName,
+      status: "",
     };
 
     await returnOrderDataToUser(ctx, phone, fileId);

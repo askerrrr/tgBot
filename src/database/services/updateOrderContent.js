@@ -1,13 +1,13 @@
-async function updateOrderContent(collection, orderContent) {
+async function updateOrder(collection, order) {
   return await collection.updateOne(
     {
-      userId: orderContent.userId,
-      "orders.orderContent.file.url": orderContent.file.url,
+      userId: order.userId,
+      "orders.order.file.url": order.file.url,
     },
     {
-      $set: { "orders.$.orderContent": orderContent },
+      $set: { "orders.$.order": order },
     }
   );
 }
 
-module.exports = { updateOrderContent };
+module.exports = { updateOrder };

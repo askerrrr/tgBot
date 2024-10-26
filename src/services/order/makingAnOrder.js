@@ -61,7 +61,7 @@ async function makingAnOrder(conversation, ctx) {
         url: fileUrl.split("::")[0],
         id: randomKey,
         pathToFile: `/var/www/userFiles/${chatId}/${randomKey}.xlsx`,
-        status: "not processed",
+        status: "not-accepted-for-processing:",
       },
       firstName,
       userName,

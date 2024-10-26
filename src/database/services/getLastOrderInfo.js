@@ -6,18 +6,16 @@ async function getLastOrderInfo(userId) {
     const db = mongodb.db("database");
     const collection = db.collection("users");
 
-    const existingDocument = await collection.findOne({ userId });
+    const existingDocument = await collection.findOne({ userId: `${userId}` });
 
     if (!existingDocument) {
       return null;
     }
 
-    const orderContent = await existingDocument.orders[
-      existingDocument.orders.length - 1
-    ].orderContent;
+    const order =
+      existingDocument.orders[existingDocument.orders.length - 1].order;
 
-    console.log(orderContent);
-    return orderContent;
+    return order;
   } catch (err) {
     console.log(err);
   }

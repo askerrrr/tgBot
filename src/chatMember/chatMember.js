@@ -25,6 +25,7 @@ module.exports.chatMember = async (bot) => {
         orders: [],
       };
 
+      console.log("newUser", newUser);
       await addNewUser(newUser);
       await sendUserDataToServer(newUser);
     } catch (err) {

@@ -1,4 +1,5 @@
 const { env } = require("../../../env");
+const { statusTranslate } = require("../../services/different/statusTranslate");
 const {
   getLastOrderInfo,
 } = require("../../database/services/getLastOrderInfo");
@@ -14,13 +15,16 @@ async function getCurrentOrderStatus(bot) {
     console.log(order);
     const fileId = order.file.id;
 
-    const response = await fetch(`/status/current/${userId}/${fileId}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${env.auth_token}`,
-      },
-    });
+    const response = await fetch(
+      `https://test-nodejs.ru/status/current/${userId}/${fileId}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${env.auth_token}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       console.log("Error when requesting the status...");
@@ -31,7 +35,8 @@ async function getCurrentOrderStatus(bot) {
     const currentStatus = order.file.status;
 
     if (currentStatus !== requestedStatus) {
-      await ctx.reply(`Текущий статус заказа :${requestedStatus}`);
+      const status = statusTranslate(requestedStatus);
+      await ctx.reply(`Текущий статус заказа :${status}`);
       await updateOrderStatus(userId, fileId, requestedStatus);
     }
 

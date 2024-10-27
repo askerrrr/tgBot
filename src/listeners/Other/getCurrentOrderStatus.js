@@ -30,17 +30,22 @@ async function getCurrentOrderStatus(bot) {
       console.log("Error when requesting the status...");
     }
 
-    const requestedStatus = await response.json();
+    const json = await response.json();
+    const status = json.status.split(":")[1];
+    const statusId = status.split("")[status.length - 1];
 
-    const currentStatus = order.file.status;
+    console.log("json", status);
+    console.log("statusId", statusId);
 
-    if (currentStatus !== requestedStatus) {
-      const status = statusTranslate(requestedStatus);
-      await ctx.reply(`Текущий статус заказа :${status}`);
-      await updateOrderStatus(userId, fileId, requestedStatus);
+    const currentStatus = order.file.status.split(" ")[0];
+    console.log("currentStatus", currentStatus);
+
+    if (currentStatus !== statusId) {
+      const translatedStatus = statusTranslate(statusId);
+
+      await ctx.reply(`Текущий статус заказа : ${translatedStatus}`);
+      await updateOrderStatus(userId, fileId, translatedStatus);
     }
-
-    await ctx.reply(`Текущий статус заказа : ${currentStatus}`);
   });
 }
 

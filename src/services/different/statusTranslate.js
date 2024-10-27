@@ -1,28 +1,29 @@
 function statusTranslate(status) {
+  let translatedStatus;
   switch (status) {
-    case "not-accepted-for-processing":
-      status = "Не взят в обработку";
+    case "0":
+      translatedStatus = "взят в обработку";
       break;
-    case "in-processing":
-      status = "in-processing";
+    case `1`:
+      translatedStatus = `товар выкуплен`;
       break;
-    case `purchased`:
-      status = `purchased`;
+    case "2":
+      translatedStatus = "товар поступил на склад в китае";
       break;
-    case "china-warehouse":
-      status = "china-warehouse";
+    case `3`:
+      translatedStatus = `в пути`;
       break;
-    case `on-the-way`:
-      status = `on-the-way`;
+    case `4`:
+      translatedStatus = `ожидает получения`;
       break;
-    case `awaiting-receipt`:
-      status = `awaiting-receipt`;
+    case "5":
+      translatedStatus = "заказ завершен";
       break;
-    case "order-is-completed":
-      status = "order-is-completed";
-      break;
+    default:
+      translatedStatus = "Не взят в обработку";
   }
-  return status;
+  console.log("translated", translatedStatus);
+  return translatedStatus;
 }
 
 module.exports = { statusTranslate };

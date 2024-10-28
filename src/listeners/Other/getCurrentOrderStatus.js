@@ -8,11 +8,11 @@ const {
 } = require("../../database/services/updateOrderStatus");
 
 async function getCurrentOrderStatus(bot) {
-  bot.hears("Узнать статус заказа", async (ctx) => {
+  bot.hears("Статус заказа", async (ctx) => {
     const userId = ctx.chat.id;
 
     const order = await getLastOrderInfo(userId);
-    console.log(order);
+
     const fileId = order.file.id;
 
     const response = await fetch(
@@ -34,16 +34,12 @@ async function getCurrentOrderStatus(bot) {
     const status = json.status.split(":")[1];
     const statusId = status.split("")[status.length - 1];
 
-    console.log("json", status);
-    console.log("statusId", statusId);
-
     const currentStatus = order.file.status.split(" ")[0];
-    console.log("currentStatus", currentStatus);
 
     if (currentStatus !== statusId) {
       const translatedStatus = statusTranslate(statusId);
 
-      await ctx.reply(`Текущий статус заказа : ${translatedStatus}`);
+      await ctx.reply(`Текущий статус заказа :\n\n${translatedStatus}`);
       await updateOrderStatus(userId, fileId, translatedStatus);
     }
   });

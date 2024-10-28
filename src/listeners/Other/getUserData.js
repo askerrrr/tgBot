@@ -5,10 +5,15 @@ const {
 async function getUserData(bot) {
   bot.hears("Мои данные", async (ctx) => {
     const userId = ctx.chat.id;
-    console.log(userId);
     const lastOrderInfo = await getLastOrderInfo(userId);
-    const lastOrderId = lastOrderInfo.file.id;
 
+    console.log(`lastOrderInfo : ${lastOrderInfo}`);
+
+    if (!lastOrderInfo) {
+      await ctx.reply(`ID пользователя : ${userId}\nЗаказов еще не было`);
+    }
+
+    const lastOrderId = lastOrderInfo.file.id || "заказов еще не было";
     await ctx.reply(
       "Отправьте сообщение ниже админу, если возникнут вопросы по заказу"
     );

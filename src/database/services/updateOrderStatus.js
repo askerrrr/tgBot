@@ -7,17 +7,17 @@ async function updateOrderStatus(userId, fileId, requestedStatus) {
     const collection = db.collection("users");
 
     const updateStatus = await collection.updateOne(
-      { userId, fileId },
+      { userId: `${userId}`, "orders.order.file.id": fileId },
       {
         $set: { "orders.$.order.file.status": requestedStatus },
       }
     );
 
     if (!updateStatus) {
-      console.log("Статус не обновился");
+      console.log("Ошибка при обновлении статуса...");
     }
 
-    console.log("Статус обновлен");
+    console.log(`Статус обновлен на ${updateStatus}`);
     return updateStatus;
   } catch (err) {
     console.log(err);

@@ -13,7 +13,13 @@ async function getCurrentOrderStatus(bot) {
 
     const order = await getLastOrderInfo(userId);
 
-    const fileId = order.file.id;
+    const fileId = order?.file.id;
+
+    if (!fileId) {
+      return await ctx.reply(
+        "Вы еще ничего не заказывали, но вы можете это исправить!"
+      );
+    }
 
     const response = await fetch(
       `https://test-nodejs.ru/status/current/${userId}/${fileId}`,
@@ -29,7 +35,7 @@ async function getCurrentOrderStatus(bot) {
     if (!response.ok) {
       console.log("Error when requesting the status...");
     }
-    console.log(order);
+
     const json = await response.json();
     const status = json.status.split(":")[1];
     const statusId = status.split("")[status.length - 1];
@@ -40,7 +46,7 @@ async function getCurrentOrderStatus(bot) {
       const translatedStatus = statusTranslate(statusId);
 
       await ctx.reply(`Текущий статус заказа :\n\n${translatedStatus}`);
-      await updateOrderStatus(userId, fileId, translatedStatus);
+      await updateOrderStatus(userId, fileId, json.status);
     }
   });
 }

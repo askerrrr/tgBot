@@ -6,12 +6,19 @@ async function updateOrderStatus(userId, fileId, requestedStatus) {
     const db = mongodb.db("database");
     const collection = db.collection("users");
 
-    return await collection.updateOne(
+    const updateStatus = await collection.updateOne(
       { userId, fileId },
       {
         $set: { "orders.$.order.file.status": requestedStatus },
       }
     );
+
+    if (!updateStatus) {
+      console.log("Статус не обновился");
+    }
+
+    console.log("Статус обновлен");
+    return updateStatus;
   } catch (err) {
     console.log(err);
   }

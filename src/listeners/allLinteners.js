@@ -4,6 +4,7 @@ const { guides } = require("./Guides/Guides");
 const { mainMenu } = require("./MainMenu/mainMenu");
 const { downloadApp } = require("./downloadApp/downloadApp");
 const { diffListeners } = require("./different/diffListeners");
+const { personalAccount } = require("./personalAccount/personalAccount");
 const { middlewareForConversations } = require("../middleware/middleware");
 
 async function allListeners(bot) {
@@ -13,6 +14,7 @@ async function allListeners(bot) {
   mainMenu(bot);
   downloadApp(bot);
   diffListeners(bot);
+  personalAccount(bot);
   middlewareForConversations(bot);
 }
 

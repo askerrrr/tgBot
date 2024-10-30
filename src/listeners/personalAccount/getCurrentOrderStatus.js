@@ -1,5 +1,5 @@
 const { env } = require("../../../env");
-const { statusTranslate } = require("../../services/different/statusTranslate"); //добавить раздел с активными и завершенными заказами. этот раздел наверное будет в личном кабинете и отдельно кнопка с статусами активныз заказов
+const { statusTranslate } = require("../../services/different/statusTranslate"); //добавить раздел с активными и завершенными заказами. этот раздел наверное будет в личном кабинете и отдельно кнопка с статусами активныз заказов//добавить динамическое отображение  заказов
 const {
   getLastOrderInfo,
 } = require("../../database/services/getLastOrderInfo");
@@ -29,7 +29,7 @@ async function getCurrentOrderStatus(bot) {
     if (!response.ok) {
       console.log("Error when requesting the status...");
     }
-
+    console.log(order);
     const json = await response.json();
     const status = json.status.split(":")[1];
     const statusId = status.split("")[status.length - 1];

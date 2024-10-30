@@ -15,7 +15,6 @@ const keyboardForOtherQueries = new Keyboard()
   .text("Статус заказа")
   .row()
   .text("Получить шаблон")
-  .row()
   .text("Скачать приложения")
   .row()
   .text("Основное меню")
@@ -37,7 +36,8 @@ const keyboardForAppGuides = new Keyboard()
   .row()
   .text("Гайд по Ponzon")
   .text("Гайд по Pinduoduo")
-  .row("Основное меню")
+  .row()
+  .text("Основное меню")
   .resized();
 
 const keyboardForСheckingnOrder = new Keyboard()
@@ -47,17 +47,25 @@ const keyboardForСheckingnOrder = new Keyboard()
   .resized();
 
 const keyboardForFAQ = new Keyboard()
-  .text("С каких сайтов вы выкупаете?")
+  .text("Доставка")
   .row()
-  .text("Куда доставляете товар?")
+  .text("Маркеплейсы с которыми работаем")
   .row()
-  .text("Что по срокам доставки?")
+  .text("Основное меню")
+  .resized();
+
+const keyboardForDelivery = new Keyboard()
+  .text("Адрес доставки")
+  .text("Стоимость доставки")
   .row()
-  .text("Какова стоимость услуг?")
+  .text("Сроки доставки")
+  .row()
+  .text("Назад к вопросам")
   .resized();
 
 module.exports = {
   keyboardForFAQ,
+  keyboardForDelivery,
   keyboardForAppGuides,
   keyboardForTheMainMenu,
   keyboardForOtherQueries,

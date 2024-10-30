@@ -14,7 +14,7 @@ function statusTranslate(status) {
       translatedStatus = `В пути`;
       break;
     case `4`:
-      translatedStatus = `Ожидает получения`;
+      translatedStatus = `Ожидает получения по адресу\nСолдатский переулок  8,  подъезд 2,  этаж 8,  кв 98`;
       break;
     case "5":
       translatedStatus = "Заказ завершен";

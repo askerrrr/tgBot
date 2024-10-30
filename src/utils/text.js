@@ -1,9 +1,5 @@
 const messageForNonReadyFunctions = "Мы над этим работаем...";
 
-//Часто задаваемые вопросы FAQ//
-const FAQText = `<b>Ответы на часто задаваемые вопросы</b>\n\n<u>С каких сайтов вы выкупаете?</u>\nМы выкупаем с таких сайтов как:\n\n-1688\n-Taobao\n-Poizon\n-Pinduoduo\n\n\n\Скачать приложения этих сайтов:
-\nМеню => Другое => Скачать приложения\n\n\n<u>В течении какого времени товар приедет в Москву?</u>\n\nДоставка из Китая в Москву осуществляется в течении 10-20 дней\n\n\nМогу ли я заказать одни товар?\nДа, но в этом случае доставка будет рассчитываться `;
-
 //Ссылки для скачивания приложения 1688
 const linkForApp1688 =
   '<u><a href="https://apps.apple.com/ru/app/阿里巴巴-1688-货源批发采购进货市场/id507097717" target="_blank">Скачать приложение на айфон</a>\n\n\n<a href="https://play.google.com/store/apps/details?id=com.taobao.taobao" target="_blank">Скачать приложение на андроид</a></u>';
@@ -23,12 +19,27 @@ const linkForAppPinduoduo =
 //Текст для необработанных сообщений
 const unexpectedMessages = "Не понимаю вас, пожалуйста, воспользуйтесь меню ☰";
 
+const deliveryAddressText =
+  "Доставка  осуществляется в Москву.\nПолучить товар можно по адресу Солдатский переулок  8,  подъезд 2,  этаж 8,  кв 98.\n\nДля доставки в другие регионы России условия, сроки и стоимость рассчитываются индивидуально в зависимости от выбранной вами транспортной компании.\nЕсли вам требуется доставка в другой регион, пожалуйста, свяжитесь с нами для уточнения всех деталей.";
+
+const deliveryCostText =
+  "Стоимость доставки до Москвы:\n\nОдежда - 5.5$ за 1кг\nХоз. товары - 3$ за 1кг";
+
+const deliveryTimeText =
+  "Доставка вашего товара до нашего склада в Китае занимает 2–3 дня.\nСредний срок доставки до Москвы составляет 15–17 дней.";
+
+const shoppingSitesText =
+  "Мы выкупаем с таких маркетплейсов как:\n\n-1688\n-Taobao\n-Poizon\n-Pinduoduo\n\n\nСкачать приложения этих площадок:\nМеню => Другое => Скачать приложения";
+
 module.exports = {
-  messageForNonReadyFunctions,
-  FAQText,
   linkForApp1688,
   linkForAppTaobao,
   linkForAppPoizon,
-  linkForAppPinduoduo,
+  deliveryTimeText,
+  deliveryCostText,
+  shoppingSitesText,
   unexpectedMessages,
+  linkForAppPinduoduo,
+  deliveryAddressText,
+  messageForNonReadyFunctions,
 };

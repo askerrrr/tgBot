@@ -1,5 +1,5 @@
 const { env } = require("../../../env");
-const { statusTranslate } = require("../../services/different/statusTranslate");
+const { statusTranslate } = require("../../services/different/statusTranslate"); //добавить раздел с активными и завершенными заказами. этот раздел наверное будет в личном кабинете и отдельно кнопка с статусами активныз заказов
 const {
   getLastOrderInfo,
 } = require("../../database/services/getLastOrderInfo");

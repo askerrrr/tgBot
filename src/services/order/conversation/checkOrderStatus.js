@@ -9,7 +9,7 @@ async function checkOrderStatus(ctx, conversation, order, makingAnOrder) {
 
   if (status.msg.text == "Да, все правильно!") {
     await ctx.reply(
-      `Спасибо, скоро начнем обрабатывать заказ.\nID вашего заказа : ${order.file.id}`,
+      `Спасибо, скоро начнем обрабатывать заказ.\nID вашего заказа : ${order.file.id}\n\nОтслеживайте статус заказа в разделе 'Другое => статус заказа'\n\nТекущий статус заказа:\n\nНе взят в обработку`,
       {
         reply_markup: {
           remove_keyboard: true,

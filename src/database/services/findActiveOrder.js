@@ -1,4 +1,5 @@
 const { mongodb } = require("../db");
+const { statusTranslate } = require("../../services/different/statusTranslate");
 
 async function findActiveOrder(userId) {
   try {
@@ -18,8 +19,14 @@ async function findActiveOrder(userId) {
           order.file.status !== "order-is-completed"
       );
     console.log("active", activeOrders);
-    return activeOrders.map((item) => {
-      return `ID заказа ${item.file.id}\nВремя заказа ${item.date}\nПосмотреть содержимое заказа "ссылка"\nСтатус заказа : ${item.file.status}`;
+    return activeOrders.map((order) => {
+      return `ID заказа ${order.file.id}\nНомер телефона : ${
+        order.phone
+      }\nВремя заказа ${
+        order.date
+      }\nПосмотреть содержимое заказа "ссылка"\nСтатус заказа : ${statusTranslate(
+        order.file.status.split(":")[1]
+      )}`;
     });
   } catch (err) {
     console.log(err);

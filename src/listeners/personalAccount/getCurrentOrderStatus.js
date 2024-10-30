@@ -37,17 +37,20 @@ async function getCurrentOrderStatus(bot) {
     }
 
     const json = await response.json();
-    const status = json.status.split(":")[1];
-    const statusId = status.split("")[status.length - 1];
-    const statusValue = json.status.split(":")[0];
 
-    const currentStatus = order.file.status.split(" ")[0];
+    let [statusValue, statusId] = json.status.split(":");
 
-    if (currentStatus !== statusId) {
+    statusId = statusId.split("")[statusId.length - 1];
+
+    const newStatus = `${statusValue}:${statusId}`;
+
+    const currentStatusValue = order.file.status.split("")[0];
+
+    if (currentStatusValue !== statusValue) {
       const translatedStatus = statusTranslate(statusId);
 
       await ctx.reply(`Текущий статус заказа :\n\n${translatedStatus}`);
-      await updateOrderStatus(userId, fileId, statusValue);
+      await updateOrderStatus(userId, fileId, newStatus);
     }
   });
 }

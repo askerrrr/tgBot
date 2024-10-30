@@ -1,6 +1,6 @@
-function statusTranslate(status) {
+function statusTranslate(statusId) {
   let translatedStatus;
-  switch (status) {
+  switch (statusId) {
     case "0":
       translatedStatus = "Взят в обработку";
       break;

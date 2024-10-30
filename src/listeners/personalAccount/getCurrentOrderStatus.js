@@ -39,6 +39,7 @@ async function getCurrentOrderStatus(bot) {
     const json = await response.json();
     const status = json.status.split(":")[1];
     const statusId = status.split("")[status.length - 1];
+    const statusValue = json.status.split(":")[0];
 
     const currentStatus = order.file.status.split(" ")[0];
 
@@ -46,7 +47,7 @@ async function getCurrentOrderStatus(bot) {
       const translatedStatus = statusTranslate(statusId);
 
       await ctx.reply(`Текущий статус заказа :\n\n${translatedStatus}`);
-      await updateOrderStatus(userId, fileId, json.status);
+      await updateOrderStatus(userId, fileId, statusValue);
     }
   });
 }

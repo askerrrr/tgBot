@@ -1,6 +1,6 @@
 const { mongodb } = require("../db");
 
-async function updateOrderStatus(userId, fileId, requestedStatus) {
+async function updateOrderStatus(userId, fileId, newStatus) {
   try {
     await mongodb.connect();
     const db = mongodb.db("database");
@@ -9,7 +9,7 @@ async function updateOrderStatus(userId, fileId, requestedStatus) {
     const updateStatus = await collection.updateOne(
       { userId: `${userId}`, "orders.order.file.id": fileId },
       {
-        $set: { "orders.$.order.file.status": requestedStatus },
+        $set: { "orders.$.order.file.status": newStatus },
       }
     );
 

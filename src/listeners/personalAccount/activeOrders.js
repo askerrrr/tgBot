@@ -4,9 +4,12 @@ async function getActiveOrders(bot) {
   try {
     bot.hears("Активные заказы", async (ctx) => {
       const userId = ctx.chat.id;
-      const activeOrders = await findActiveOrder(userId);
+      const activeOrders = await findActiveOrder(userId, ctx);
+
       console.log(activeOrders);
-      activeOrders.forEach((item) => ctx.reply(item));
+
+      if (!activeOrders) await ctx.reply("Активных заказов не найдено");
+      else activeOrders.forEach((item) => ctx.reply(item));
     });
   } catch (err) {
     console.log(err);

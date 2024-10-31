@@ -1,7 +1,12 @@
 const { mongodb } = require("../db");
-const { statusTranslate } = require("../../services/different/statusTranslate");
+const {
+  updateCurrentOrderStatus,
+} = require("../../listeners/personalAccount/updateCurrentOrderStatus");
+const {
+  showActiveOrder,
+} = require("../../listeners/personalAccount/showActiveOrder");
 
-async function findActiveOrder(userId) {
+async function findActiveOrder(userId, ctx) {
   try {
     await mongodb.connect();
     const db = mongodb.db("database");
@@ -9,25 +14,22 @@ async function findActiveOrder(userId) {
 
     const orders = await collection.findOne({ userId: `${userId}` });
 
-    console.log("orders", orders);
-
-    const activeOrders = orders.orders
+    const activeOrders = orders?.orders
       .map((orders) => orders.order)
-      .filter(
-        (order) =>
-          order.file.status !== undefined &&
-          order.file.status !== "order-is-completed"
-      );
-    console.log("active", activeOrders);
-    return activeOrders.map((order) => {
-      return `ID заказа ${order.file.id}\nНомер телефона : ${
-        order.phone
-      }\nВремя заказа ${
-        order.date
-      }\nПосмотреть содержимое заказа "ссылка"\nСтатус заказа : ${statusTranslate(
-        order.file.status.split(":")[1]
-      )}`;
-    });
+      .filter((order) => order.file.status !== "order-is-completed:6");
+
+    console.log("activeOrders", activeOrders);
+
+    const updatedActiveOrders = await updateCurrentOrderStatus(
+      activeOrders,
+      ctx
+    );
+
+    if (!updatedActiveOrders) console.log("update error");
+
+    console.log("updatedActiveOrders", updatedActiveOrders);
+
+    return activeOrders.map((order) => showActiveOrder(order));
   } catch (err) {
     console.log(err);
   }

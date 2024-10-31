@@ -1,4 +1,5 @@
 const { findActiveOrder } = require("../../database/services/findActiveOrder");
+const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 
 async function getActiveOrders(bot) {
   try {
@@ -6,10 +7,15 @@ async function getActiveOrders(bot) {
       const userId = ctx.chat.id;
       const activeOrders = await findActiveOrder(userId, ctx);
 
-      console.log(activeOrders);
+      console.log(activeOrders.map((item) => item));
 
       if (!activeOrders) await ctx.reply("Активных заказов не найдено");
-      else activeOrders.forEach((item) => ctx.reply(item));
+
+      const updatedActiveOrders = activeOrders.map(async (orders) => {
+        await updateCurrentOrderStatus(orders, ctx);
+      });
+
+      console.log(updatedActiveOrders);
     });
   } catch (err) {
     console.log(err);

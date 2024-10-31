@@ -14,22 +14,22 @@ async function findActiveOrder(userId, ctx) {
 
     const orders = await collection.findOne({ userId: `${userId}` });
 
-    const activeOrders = orders?.orders
-      .map((orders) => orders.order)
-      .filter((order) => order.file.status !== "order-is-completed:6");
-
-    console.log("activeOrders", activeOrders);
-
-    const updatedActiveOrders = await updateCurrentOrderStatus(
-      activeOrders,
-      ctx
+    const activeOrders = orders?.orders.filter(
+      (orders) => orders.order.file.status !== "order-is-completed:6"
     );
 
-    if (!updatedActiveOrders) console.log("update error");
+    // const updatedActiveOrders = await updateCurrentOrderStatus(
+    //   activeOrders,
+    //   ctx
+    // );
 
-    console.log("updatedActiveOrders", updatedActiveOrders);
+    // if (!updatedActiveOrders) console.log("update error");
 
-    return activeOrders.map((order) => showActiveOrder(order));
+    // console.log("updatedActiveOrders", updatedActiveOrders);
+
+    // return activeOrders.map((order) => showActiveOrder(order));
+
+    return activeOrders;
   } catch (err) {
     console.log(err);
   }

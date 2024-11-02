@@ -1,6 +1,5 @@
 const { mongodb, collection } = require("../db");
-const { findDublicateUrl } = require("./findDublicateUrl");
-const { updateOrder } = require("./updateOrderContent");
+
 
 async function addNewOrder(order) {
   try {
@@ -11,16 +10,10 @@ async function addNewOrder(order) {
     });
 
     if (existingDocument) {
-      const dublicateUrl = await findDublicateUrl(collection, order);
-
-      if (dublicateUrl) {
-        return await updateOrder(collection, order);
-      } else {
-        await collection.updateOne(
-          { userId: order.userId },
-          { $push: { orders: { order } } }
-        );
-      }
+      await collection.updateOne(
+        { userId: order.userId },
+        { $push: { orders: { order } } }
+      );
     } else if (!existingDocument) {
       const newUser = {
         userId: order.userId,

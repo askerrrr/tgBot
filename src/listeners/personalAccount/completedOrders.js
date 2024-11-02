@@ -10,9 +10,11 @@ async function getCompletedOrders(bot) {
       const userId = ctx.chat.id;
 
       const completedOrders = await findCompletedOrder(userId);
-      console.log("active", completedOrders);
-      if (!completedOrders) await ctx.reply("Активных заказов не найдено");
 
+      if (!completedOrders || completedOrders.length < 1) {
+        await ctx.reply("Завершенных заказов не найдено");
+        return;
+      }
       const statusUpdatePromises = completedOrders.map((order) =>
         updateCurrentOrderStatus(order, ctx)
       );
@@ -20,17 +22,15 @@ async function getCompletedOrders(bot) {
       const result = await Promise.all(statusUpdatePromises);
 
       if (result) {
-        console.log("Статусы активных заказов обновлены", result);
         const updatedActiveOrders = await findCompletedOrder(userId);
         if (!updatedActiveOrders) {
-          console.log("Ошибка при повторном поиск активных заказов");
           await ctx.reply("Что-то пошло не так, повторите позже...");
         }
 
         await ctx.reply("Завершенные заказы");
 
         return updatedActiveOrders.map(async (orders) => {
-          await ctx.reply(showOrderContent(orders.order));
+          await ctx.reply(showOrderContent(orders.order, userId));
         });
       }
     });

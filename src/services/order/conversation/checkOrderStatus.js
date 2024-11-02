@@ -1,15 +1,13 @@
 const { addNewOrder } = require("../../../database/services/addNewOrder");
 const { sendOrderFileToAdmin } = require("../services/sendOrderFileToAdmin");
-const {
-  sendOrderDocumentToServer,
-} = require("../services/sendOrderDocumentToServer");
+const { sendOrderFileToServer } = require("../services/sendOrderFileToServer");
 
 async function checkOrderStatus(ctx, conversation, order, makingAnOrder) {
   const status = await conversation.wait();
 
   if (status.msg.text == "Да, все правильно!") {
     await ctx.reply(
-      `Спасибо, скоро начнем обрабатывать заказ.\nID вашего заказа : ${order.file.id}\n\nОтслеживайте статус заказа в разделе 'Другое => статус заказа'\n\nТекущий статус заказа:\n\nНе взят в обработку`,
+      `Спасибо, скоро мы свяжемся с вами для подтверждения и оплаты заказа и начнем обрабатывать его.\nID вашего заказа : ${order.file.id}\n\nОтслеживайте статус заказа в разделе 'Другое => Личный кабинет => Активные заказы'\n\nТекущий статус заказа:\n\nНе взят в обработку`,
       {
         reply_markup: {
           remove_keyboard: true,
@@ -19,7 +17,7 @@ async function checkOrderStatus(ctx, conversation, order, makingAnOrder) {
 
     await addNewOrder(order);
     await sendOrderFileToAdmin(ctx, order);
-    await sendOrderDocumentToServer(order);
+    await sendOrderFileToServer(order);
   } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
     await ctx.reply("Давайте исправим", {
       reply_markup: {

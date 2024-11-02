@@ -1,6 +1,6 @@
 const { env } = require("../../../../env");
 
-async function sendOrderDocumentToServer(order) {
+async function sendOrderFileToServer(order) {
   try {
     const response = await fetch(env.orderinfo, {
       method: "POST",
@@ -26,4 +26,4 @@ async function sendOrderDocumentToServer(order) {
   }
 }
 
-module.exports = { sendOrderDocumentToServer };
+module.exports = { sendOrderFileToServer };

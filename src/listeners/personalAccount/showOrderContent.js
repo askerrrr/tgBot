@@ -1,6 +1,6 @@
 const { statusTranslate } = require("../../services/different/statusTranslate");
 
-function showActiveOrder(order) {
+function showOrderContent(order) {
   return `ID заказа : ${order.file.id}\nНомер телефона : ${
     order.phone
   }\nВремя заказа ${
@@ -10,4 +10,4 @@ function showActiveOrder(order) {
   )}`;
 }
 
-module.exports = { showActiveOrder };
+module.exports = { showOrderContent };

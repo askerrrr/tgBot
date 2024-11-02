@@ -1,4 +1,4 @@
-const { showActiveOrder } = require("./showActiveOrder");
+const { showOrderContent } = require("./showOrderContent");
 const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 const { findActiveOrder } = require("../../database/services/findActiveOrder");
 
@@ -8,6 +8,7 @@ async function getActiveOrders(bot) {
       const userId = ctx.chat.id;
 
       const activeOrders = await findActiveOrder(userId);
+      console.log("active", activeOrders);
       if (!activeOrders) await ctx.reply("Активных заказов не найдено");
 
       const statusUpdatePromises = activeOrders.map((order) =>
@@ -24,9 +25,11 @@ async function getActiveOrders(bot) {
           await ctx.reply("Что-то пошло не так, повторите позже...");
         }
 
-        updatedActiveOrders.forEach((orders) =>
-          ctx.reply(showActiveOrder(orders.order))
-        );
+        await ctx.reply("Активные заказы");
+
+        return updatedActiveOrders.map(async (orders) => {
+          await ctx.reply(showOrderContent(orders.order));
+        });
       }
     });
   } catch (err) {

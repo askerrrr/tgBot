@@ -5,16 +5,11 @@ const {
 } = require("../../database/services/updateOrderStatus");
 
 async function updateCurrentOrderStatus(activeOrders, ctx) {
-  // let userId, file;
-
-  // for (let key in activeOrders) {
-  //   userId = activeOrders[key].userId;
-  //   file = activeOrders[key].file;
-  // }
-
-  const userId = activeOrders.order.userId;
-  const file = activeOrders.order.file;
-  console.log(`userId : ${userId}\nfile : ${file}`);
+  let userId, file;
+  for (let key in activeOrders) {
+    userId = activeOrders[key].userId;
+    file = activeOrders[key].file;
+  }
 
   const response = await fetch(
     `https://test-nodejs.ru/status/current/${userId}/${file.id}`,
@@ -45,6 +40,7 @@ async function updateCurrentOrderStatus(activeOrders, ctx) {
   if (currentStatusValue !== statusValue) {
     return await updateOrderStatus(userId, file.id, newStatus);
   }
+  return null;
 }
 
 module.exports = { updateCurrentOrderStatus };

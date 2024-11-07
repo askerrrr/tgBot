@@ -1,13 +1,16 @@
+const JWT = require("jsonwebtoken");
 const { env } = require("../../../env");
 
 module.exports.sendUserDataToServer = async (data) => {
   try {
-    const response = await fetch(env.rooturl, {
+    const response = await fetch(env.bot_api_users, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${env.auth_token}`,
+        Authorization: `Bearer ${JWT.sign(env.payload, env.secret, {
+          expiresIn: "5m",
+        })}`,
       },
     });
     if (!response.ok) {

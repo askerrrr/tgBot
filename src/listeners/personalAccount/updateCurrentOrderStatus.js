@@ -1,3 +1,4 @@
+const JWT = require("jsonwebtoken");
 const { env } = require("../../../env");
 
 const {
@@ -11,16 +12,15 @@ async function updateCurrentOrderStatus(activeOrders, ctx) {
     file = activeOrders[key].file;
   }
 
-  const response = await fetch(
-    `https://test-nodejs.ru/status/current/${userId}/${file.id}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${env.auth_token}`,
-      },
-    }
-  );
+  const response = await fetch(`${env.bot_api_status}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${JWT.sign(env.payload, env.secret, {
+        expiresIn: "5m",
+      })}`,
+    },
+  });
 
   if (!response.ok) {
     console.log("Ошибка при запросе статуса...");

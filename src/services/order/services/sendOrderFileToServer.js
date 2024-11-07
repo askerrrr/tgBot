@@ -1,13 +1,16 @@
+const JWT = require("jsonwebtoken");
 const { env } = require("../../../../env");
 
 async function sendOrderFileToServer(order) {
   try {
-    const response = await fetch(env.orderinfo, {
+    const response = await fetch(env.bot_api_order, {
       method: "POST",
       body: JSON.stringify(order),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${env.auth_token}`,
+        Authorization: `Bearer ${JWT.sign(env.payload, env.secret, {
+          expiresIn: "5m",
+        })}`,
       },
     });
 

@@ -26,8 +26,6 @@ const keyboardForPersonalAccount = new Keyboard()
   .row()
   .text("Завершенные заказы")
   .row()
-  .text("Мои данные")
-  .row()
   .text("Назад")
   .resized();
 

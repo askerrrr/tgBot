@@ -1,4 +1,5 @@
 const { GrammyError, HttpError } = require("grammy");
+const { env } = require("../../env");
 
 module.exports.errorHandler = async (err) => {
   const ctx = err.ctx;

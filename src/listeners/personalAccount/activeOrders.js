@@ -1,7 +1,7 @@
+const { env } = require("../../../env");
 const { showOrderContent } = require("./showOrderContent");
 const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 const { findActiveOrder } = require("../../database/services/findActiveOrder");
-const { env } = require("../../../env");
 
 async function getActiveOrders(bot) {
   try {
@@ -16,7 +16,7 @@ async function getActiveOrders(bot) {
       }
 
       const statusUpdatePromises = activeOrders.map((order) =>
-        updateCurrentOrderStatus(order, ctx)
+        updateCurrentOrderStatus(order, ctx).catch((err) => console.log(err))
       );
 
       const result = await Promise.all(statusUpdatePromises);

@@ -5,8 +5,28 @@ const express = require("express");
 const app = express();
 const bot = new Bot(env.bot_token);
 
+const corsOptions = {
+  methods: ["POST"],
+  origin: "https://test-nodejs.ru",
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", corsOptions.origin);
+  res.setHeader("Access-Control-Allow-Methods", corsOptions.methods.join(","));
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    corsOptions.allowedHeaders.join(",")
+  );
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
 
 app.post("https://62.109.30.45", async (req, res) => {
   try {

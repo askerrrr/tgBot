@@ -7,12 +7,12 @@ const {
 
 async function updateCurrentOrderStatus(activeOrders, ctx) {
   let userId, file;
-  for (let key in activeOrders) {
+  for (let key in activeOrders) { 
     userId = activeOrders[key].userId;
     file = activeOrders[key].file;
   }
 
-  const response = await fetch(`${env.bot_api_status}`, {
+  const response = await fetch(`${env.bot_api_status}/${userId}/${file.id}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -23,8 +23,11 @@ async function updateCurrentOrderStatus(activeOrders, ctx) {
   });
 
   if (!response.ok) {
-    console.log("Ошибка при запросе статуса...");
-    await ctx.reply("Что то мне плохо, попробуйте позже");
+    console.error("Ошибка при запросе статуса...");
+    await ctx.reply(
+      "Что-то пошло не так при попытке обновить статус, повторите позже..."
+    );
+    return null;
   }
 
   const json = await response.json();
@@ -40,6 +43,7 @@ async function updateCurrentOrderStatus(activeOrders, ctx) {
   if (currentStatusValue !== statusValue) {
     return await updateOrderStatus(userId, file.id, newStatus);
   }
+
   return null;
 }
 

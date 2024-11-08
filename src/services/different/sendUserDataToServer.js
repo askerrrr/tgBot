@@ -3,6 +3,7 @@ const { env } = require("../../../env");
 
 module.exports.sendUserDataToServer = async (data) => {
   try {
+    console.log(data);
     const response = await fetch(env.bot_api_users, {
       method: "POST",
       body: JSON.stringify(data),

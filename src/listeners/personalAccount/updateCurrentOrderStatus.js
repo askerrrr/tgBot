@@ -1,13 +1,12 @@
 const JWT = require("jsonwebtoken");
 const { env } = require("../../../env");
-
 const {
   updateOrderStatus,
 } = require("../../database/services/updateOrderStatus");
 
 async function updateCurrentOrderStatus(activeOrders, ctx) {
   let userId, file;
-  for (let key in activeOrders) { 
+  for (let key in activeOrders) {
     userId = activeOrders[key].userId;
     file = activeOrders[key].file;
   }
@@ -43,8 +42,7 @@ async function updateCurrentOrderStatus(activeOrders, ctx) {
   if (currentStatusValue !== statusValue) {
     return await updateOrderStatus(userId, file.id, newStatus);
   }
-
-  return null;
+  return;
 }
 
 module.exports = { updateCurrentOrderStatus };

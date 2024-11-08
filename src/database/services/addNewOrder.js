@@ -1,6 +1,5 @@
 const { mongodb, collection } = require("../db");
 
-
 async function addNewOrder(order) {
   try {
     await mongodb.connect();

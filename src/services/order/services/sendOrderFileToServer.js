@@ -1,7 +1,9 @@
 const JWT = require("jsonwebtoken");
 const { env } = require("../../../../env");
+const { sendOrderFileToAdmin } = require("./sendOrderFileToAdmin");
+const { addNewOrder } = require("../../../database/services/addNewOrder");
 
-async function sendOrderFileToServer(order) {
+async function sendOrderFileToServer(order, ctx) {
   try {
     const response = await fetch(env.bot_api_order, {
       method: "POST",
@@ -17,6 +19,9 @@ async function sendOrderFileToServer(order) {
     if (!response.ok) {
       throw new Error(`Server error : ${response.status} ${response.text}`);
     }
+
+    await addNewOrder(order);
+    await sendOrderFileToAdmin(ctx, order);
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
       return await response.json();

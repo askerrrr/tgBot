@@ -12,7 +12,7 @@ async function makingAnOrder(conversation, ctx) {
     const firstName =
       ctx.chat.first_name === undefined ? "" : ctx.chat.first_name;
 
-    const orderTime = getDateAndTime().fullTime();
+    const orderTime = getDateAndTime().fullDateTime();
     const randomKey = crypto.randomInt(10, 100000000000) + "0";
 
     let fileUrl;

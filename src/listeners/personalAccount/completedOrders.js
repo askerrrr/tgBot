@@ -15,8 +15,12 @@ async function getCompletedOrders(bot) {
         await ctx.reply("Завершенных заказов не найдено");
         return;
       }
+
       const statusUpdatePromises = completedOrders.map((order) =>
-        updateCurrentOrderStatus(order, ctx)
+        updateCurrentOrderStatus(order, ctx).catch((err) => {
+          console.log(err);
+          return;
+        })
       );
 
       const result = await Promise.all(statusUpdatePromises);

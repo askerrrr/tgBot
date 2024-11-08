@@ -1,4 +1,3 @@
-const { env } = require("../../../env");
 const { showOrderContent } = require("./showOrderContent");
 const { findOrder } = require("../../database/services/findOrder");
 const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
@@ -7,6 +6,7 @@ async function getActiveOrders(bot) {
   try {
     bot.hears("Активные заказы", async (ctx) => {
       const userId = ctx.chat.id;
+
       const activeOrders = await findOrder(userId).then((order) =>
         order.active()
       );
@@ -32,9 +32,7 @@ async function getActiveOrders(bot) {
       );
 
       if (!updatedActiveOrders) {
-        await ctx.reply(
-          "Что-то пошло не такпри попытке обновить статус, повторите позже..."
-        );
+        await ctx.reply("Что-то пошло не так, повторите позже...");
         return;
       }
 
@@ -45,8 +43,7 @@ async function getActiveOrders(bot) {
       });
     });
   } catch (err) {
-    console.log(err);
-    await ctx.api.sendMessage(env.admin_id, err.message);
+    console.error(err);
   }
 }
 

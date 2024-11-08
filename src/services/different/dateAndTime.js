@@ -10,7 +10,7 @@ function getDateAndTime() {
   let hours = date.getHours();
   hours = hours < 10 ? "0" + hours : hours;
 
-  let day = date.getDay();
+  let day = date.getDate();
   day = day < 10 ? "0" + day : day;
 
   let month = date.getMonth() + 1;
@@ -19,13 +19,13 @@ function getDateAndTime() {
   let year = date.getFullYear();
 
   return {
-    getTime: () => {
+    time: () => {
       return `${hours}:${minutes}:${second}`;
     },
-    getDate: () => {
+    date: () => {
       return `${day}.${month}.${year}`;
     },
-    fullTime() {
+    fullDateTime() {
       return `${hours}:${minutes}:${second} - ${day}.${month}.${year}`;
     },
   };

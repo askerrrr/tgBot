@@ -1,10 +1,8 @@
-const { mongodb } = require("../db");
+const { mongodb, collection } = require("../db");
 
 async function updateOrderStatus(userId, fileId, newStatus) {
   try {
     await mongodb.connect();
-    const db = mongodb.db("database");
-    const collection = db.collection("users");
 
     const updateStatus = await collection.updateOne(
       { userId: `${userId}`, "orders.order.file.id": fileId },
@@ -17,7 +15,6 @@ async function updateOrderStatus(userId, fileId, newStatus) {
       console.log("Ошибка при обновлении статуса...");
     }
 
-    console.log(`Статус обновлен на ${updateStatus}`);
     return updateStatus;
   } catch (err) {
     console.log(err);

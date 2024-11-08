@@ -25,4 +25,4 @@ app.post("https://62.109.30.45", async (req, res) => {
   }
 });
 
-app.listen(3000);
+app.listen(3000, () => console.log("Сервер запущен"));

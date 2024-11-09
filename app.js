@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("https://62.109.30.45", async (req, res) => {
+app.post("http://62.109.30.45:3000", async (req, res) => {
   try {
     const requestPayload = req.body;
 

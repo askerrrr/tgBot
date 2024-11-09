@@ -39,6 +39,7 @@ app.post("http://62.109.30.45:3000", async (req, res) => {
     const message = `Статус заказа ${fileId} изменен на ${status}`;
 
     await bot.api.sendMessage(userId, message);
+    return res.status(200);
   } catch (err) {
     console.log(err);
     await bot.api.sendMessage(env.admin_id, `${err.message}`);

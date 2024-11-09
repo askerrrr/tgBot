@@ -5,6 +5,7 @@ const { verifyToken } = require("./src/services/different/verifyToken");
 const {
   updateOrderStatus,
 } = require("./src/database/services/updateOrderStatus");
+const { statusTranslate } = require("./src/services/different/statusTranslate");
 
 const app = express();
 const bot = new Bot(env.bot_token);
@@ -41,7 +42,9 @@ app.post(env.bot_server, async (req, res) => {
 
     await updateOrderStatus(userId, fileId, status);
 
-    const message = `Статус заказа ${fileId} изменен на ${status}`;
+    const message = `Статус заказа ${fileId} изменен на ${statusTranslate(
+      status
+    )}`;
 
     await bot.api.sendMessage(userId, message);
 

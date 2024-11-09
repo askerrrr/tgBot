@@ -6,14 +6,12 @@ async function getLastOrderInfo(userId) {
 
     const existingDocument = await collection.findOne({ userId: `${userId}` });
 
-    if (!existingDocument) {
-      return null;
-    }
+    if (!existingDocument) return null;
 
-    const order =
+    const lastOrder =
       existingDocument.orders[existingDocument.orders.length - 1].order;
 
-    return order;
+    return lastOrder;
   } catch (err) {
     console.log(err);
   }

@@ -8,12 +8,7 @@ async function addNewOrder(order) {
       userId: order.userId,
     });
 
-    if (existingDocument) {
-      await collection.updateOne(
-        { userId: order.userId },
-        { $push: { orders: { order } } }
-      );
-    } else if (!existingDocument) {
+    if (!existingDocument) {
       const newUser = {
         userId: order.userId,
         firstName: order.firstName,
@@ -22,13 +17,19 @@ async function addNewOrder(order) {
       };
 
       const result = await collection.insertOne(newUser);
-      if (result) {
-        return await collection.updateOne(
-          { userId: order.userId },
-          { $push: { orders: { order } } }
-        );
-      }
+
+      if (!result) console.log("Ошибка при добавлении нового пользователя");
+
+      return await collection.updateOne(
+        { userId: order.userId },
+        { $push: { orders: { order } } }
+      );
     }
+
+    await collection.updateOne(
+      { userId: order.userId },
+      { $push: { orders: { order } } }
+    );
   } catch (err) {
     console.log(err);
   }

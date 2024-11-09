@@ -6,11 +6,9 @@ async function addNewUser(user) {
 
     const existingDocument = await collection.findOne({ userId: user.userId });
 
-    if (!existingDocument) {
-      await collection.insertOne(user);
-    } else {
-      return null;
-    }
+    if (!existingDocument) return await collection.insertOne(user);
+
+    return null;
   } catch (err) {
     console.log(err);
   }

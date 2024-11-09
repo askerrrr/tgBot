@@ -1,7 +1,7 @@
 const { env } = require("./env");
 const { Bot } = require("grammy");
-const { verifyToken } = require("./src/services/different/verifyToken");
 const express = require("express");
+const { verifyToken } = require("./src/services/different/verifyToken");
 const {
   updateOrderStatus,
 } = require("./src/database/services/updateOrderStatus");
@@ -13,7 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", ["POST"].join(","));
+  res.setHeader("Access-Control-Allow-Methods", "POST");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Headers",
     ["Content-Type", "Authorization"].join(",")
@@ -26,7 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("http://62.109.30.45:3000", async (req, res) => {
+app.post(env.bot_server, async (req, res) => {
   try {
     const requestPayload = req.body;
 
@@ -43,6 +44,7 @@ app.post("http://62.109.30.45:3000", async (req, res) => {
     const message = `Статус заказа ${fileId} изменен на ${status}`;
 
     await bot.api.sendMessage(userId, message);
+
     return res.sendStatus(200);
   } catch (err) {
     console.log(err);

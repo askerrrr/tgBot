@@ -7,16 +7,14 @@ async function findOrder(userId) {
     const orders = await collection.findOne({ userId: `${userId}` });
 
     return {
-      active: async () => {
-        return orders?.orders.filter(
+      active: async () =>
+        orders?.orders.filter(
           (data) => data.order.file.status !== "order-is-completed:6"
-        );
-      },
-      completed: async () => {
-        return orders?.orders.filter(
+        ),
+      completed: async () =>
+        orders?.orders.filter(
           (data) => data.order.file.status == "order-is-completed:6"
-        );
-      },
+        ),
     };
   } catch (err) {
     console.log(err);

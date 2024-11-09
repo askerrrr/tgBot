@@ -4,18 +4,19 @@ async function updateOrderStatus(userId, fileId, newStatus) {
   try {
     await mongodb.connect();
 
-    const updateStatus = await collection.updateOne(
+    const updatedStatus = await collection.updateOne(
       { userId: `${userId}`, "orders.order.file.id": fileId },
       {
         $set: { "orders.$.order.file.status": newStatus },
       }
     );
 
-    if (!updateStatus) {
+    if (!updatedStatus) {
       console.log("Ошибка при обновлении статуса...");
+      return;
     }
 
-    return updateStatus;
+    return updatedStatus;
   } catch (err) {
     console.log(err);
   }

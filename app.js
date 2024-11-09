@@ -1,24 +1,22 @@
 const { env } = require("./env");
 const { Bot } = require("grammy");
+const { verifyToken } = require("./src/services/different/verifyToken");
 const express = require("express");
+const {
+  updateOrderStatus,
+} = require("./src/database/services/updateOrderStatus");
 
 const app = express();
 const bot = new Bot(env.bot_token);
 
-const corsOptions = {
-  methods: ["POST"],
-  origin: "https://test-nodejs.ru",
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", corsOptions.origin);
-  res.setHeader("Access-Control-Allow-Methods", corsOptions.methods.join(","));
+  res.setHeader("Access-Control-Allow-Origin", env.main_server);
+  res.setHeader("Access-Control-Allow-Methods", ["POST"].join(","));
   res.setHeader(
     "Access-Control-Allow-Headers",
-    corsOptions.allowedHeaders.join(",")
+    ["Content-Type", "Authorization"].join(",")
   );
 
   if (req.method === "OPTIONS") {
@@ -35,6 +33,12 @@ app.post("http://62.109.30.45:3000", async (req, res) => {
     const userId = requestPayload.userId;
     const fileId = requestPayload.fileId;
     const status = requestPayload.status;
+
+    const validToken = verifyToken(req.headers.authorization);
+
+    if (!validToken) return res.status(401);
+
+    await updateOrderStatus(userId, fileId, status);
 
     const message = `Статус заказа ${fileId} изменен на ${status}`;
 

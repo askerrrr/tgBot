@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -38,7 +38,7 @@ app.post(env.bot_server, async (req, res) => {
 
     const validToken = verifyToken(req.headers.authorization);
 
-    if (!validToken) return res.status(401);
+    if (!validToken) return res.status(401).json({ error: "Unauthorized" });
 
     await updateOrderStatus(userId, fileId, status);
 

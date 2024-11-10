@@ -2,17 +2,15 @@ const JWT = require("jsonwebtoken");
 
 function verifyToken(authHeader) {
   try {
-    if (!authHeader) return res.status(401);
+    if (!authHeader) return null;
 
     const token = authHeader.split(" ")[1];
 
-    if (!token) return res.status(401);
+    if (!token) return null;
 
-    const validToken = JWT.verify(token, env.secretKey);
-
-    return validToken;
+    return JWT.verify(token, env.secretKey);
   } catch (err) {
-    return res.status(500);
+    return null;
   }
 }
 

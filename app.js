@@ -36,17 +36,23 @@ app.post("/", async (req, res) => {
     const fileId = requestPayload.fileId;
     const status = requestPayload.status;
 
-    const validToken = verifyToken(req.headers.authorization);
+    const authHeader = req.headers.authorization;
 
-    if (!validToken) return res.status(401).json({ error: "Unauthorized" });
+    if (!authHeader && authHeader.split(" ")[1] !== env.secretKey)
+      return res.status(401).json({ error: "Unauthorized" });
 
-    await updateOrderStatus(userId, fileId, status);
+    // const validToken = verifyToken(req.headers.authorization);
+
+    // if (!validToken) return res.status(401).json({ error: "Unauthorized" });
+
+    const updatedStatus = await updateOrderStatus(userId, fileId, status);
+
+    if (!updatedStatus) console.log("Ошибка при обновлении статуса");
 
     const message = `Статус заказа ${fileId} изменен на ${statusTranslate(
       status
     )}`;
 
-    console.log("POST запрос принят");
     await bot.api.sendMessage(userId, message);
 
     return res.sendStatus(200);

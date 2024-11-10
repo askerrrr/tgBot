@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post(env.bot_server, async (req, res) => {
+app.post("/", async (req, res) => {
   try {
     const requestPayload = req.body;
 
@@ -45,6 +45,7 @@ app.post(env.bot_server, async (req, res) => {
     const message = `Статус заказа ${fileId} изменен на ${statusTranslate(
       status
     )}`;
+
     console.log("POST запрос принят");
     await bot.api.sendMessage(userId, message);
 

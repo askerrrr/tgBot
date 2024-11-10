@@ -10,7 +10,7 @@ async function getFile(ctx, conversation) {
 
     if (!message.hasOwnProperty("document")) {
       await ctx.reply("Это вообще не документ...");
-      return null;
+      return;
     } else {
       const fileId = message.document.file_id;
 

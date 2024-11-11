@@ -12,7 +12,7 @@ const bot = new Bot(env.bot_token);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", `${env.main_server}`);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
@@ -44,7 +44,7 @@ app.post("/", async (req, res) => {
 
     if (!updatedStatus) console.log("Ошибка при обновлении статуса");
 
-    const message = `Статус заказа ${fileId} изменен на ${statusTranslate(
+    const message = `Статус заказа ${fileId} изменен.\nТекущий статус:\n${statusTranslate(
       status
     )}`;
 

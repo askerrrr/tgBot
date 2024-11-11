@@ -67,7 +67,6 @@ async function makingAnOrder(conversation, ctx) {
       userName,
     };
 
-    console.log(order);
     await returnOrderDataToUser(ctx, phone, fileId);
     await checkOrderStatus(ctx, conversation, order, makingAnOrder);
   } catch (err) {

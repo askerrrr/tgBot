@@ -1,7 +1,7 @@
 const JWT = require("jsonwebtoken");
-const { env } = require("../../../../env");
+const { env } = require("../../../../../env");
 const { sendOrderFileToAdmin } = require("./sendOrderFileToAdmin");
-const { addNewOrder } = require("../../../database/services/addNewOrder");
+const { addNewOrder } = require("../../../../database/services/addNewOrder");
 
 async function sendOrderFileToServer(order, ctx) {
   try {

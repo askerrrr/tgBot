@@ -1,13 +1,13 @@
 const crypto = require("crypto");
 const { getFile } = require("./conversation/getFile");
 const { getPhone } = require("./conversation/getPhone");
-const { getDateAndTime } = require("../different/dateAndTime");
+const { getDateAndTime } = require("../../different/dateAndTime");
 const { checkOrderStatus } = require("./conversation/checkOrderStatus");
 const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
 
-async function makingAnOrder(conversation, ctx) {
+async function multiple(conversation, ctx) {
   try {
-    const chatId = `${ctx.chat.id}`;
+    const userId = `${ctx.chat.id}`;
     const userName = ctx.chat.user_name === undefined ? "" : ctx.chat.user_name;
     const firstName =
       ctx.chat.first_name === undefined ? "" : ctx.chat.first_name;
@@ -55,12 +55,12 @@ async function makingAnOrder(conversation, ctx) {
 
     const order = {
       phone,
-      userId: chatId,
+      userId,
       date: orderTime,
       file: {
         url: fileUrl.split("::")[0],
         id: randomKey,
-        pathToFile: `/var/www/userFiles/${chatId}/${randomKey}.xlsx`,
+        pathToFile: `/var/www/userFiles/${userId}/${randomKey}.xlsx`,
         status: "not-accepted-for-processing:0",
       },
       firstName,
@@ -74,4 +74,4 @@ async function makingAnOrder(conversation, ctx) {
   }
 }
 
-module.exports = { makingAnOrder }; //экспорт в src\middleware\middleware.js
+module.exports = { multiple }; //экспорт в src\middleware\middleware.js

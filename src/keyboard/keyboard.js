@@ -55,6 +55,12 @@ const keyboardForСheckingnOrder = new Keyboard()
   .text("Нет, тут ошибка, я хочу исправить данные")
   .resized();
 
+const keyboardForOrder = new Keyboard()
+  .text("Заказать один товар")
+  .row()
+  .text("Заказать несколько товаров")
+  .resized();
+
 const keyboardForFAQ = new Keyboard()
   .text("Доставка")
   .row()
@@ -74,6 +80,7 @@ const keyboardForDelivery = new Keyboard()
 
 module.exports = {
   keyboardForFAQ,
+  keyboardForOrder,
   keyboardForDelivery,
   keyboardForAppGuides,
   keyboardForTheMainMenu,

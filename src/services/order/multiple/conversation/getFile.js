@@ -1,4 +1,4 @@
-const { getFileUrl } = require("../../different/getFileURL");
+const { getFileUrl } = require("../../../different/getFileURL");
 
 async function getFile(ctx, conversation) {
   try {

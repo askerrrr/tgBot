@@ -1,4 +1,4 @@
-const { keyboardForСheckingnOrder } = require("../../../keyboard/keyboard");
+const { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
 
 async function returnOrderDataToUser(ctx, phone, fileId) {
   await ctx.reply("Ваш файл");

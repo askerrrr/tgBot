@@ -1,4 +1,4 @@
-const { checkPhoneNumber } = require("../../different/checkPhoneNumber");
+const { checkPhoneNumber } = require("../../../different/checkPhoneNumber");
 
 async function getPhone(ctx, conversation) {
   try {

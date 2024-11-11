@@ -1,4 +1,4 @@
-const { env } = require("../../../../env");
+const { env } = require("../../../../../env");
 
 async function sendOrderFileToAdmin(ctx, order) {
   const fileURL = `<u><a href="https://test-nodejs.ru/download/var/www/userFiles/${order.userId}/${order.file.id}>Файл</a>"</u>`;

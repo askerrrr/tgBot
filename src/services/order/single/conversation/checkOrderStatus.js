@@ -1,11 +1,12 @@
 const { sendOrderToServer } = require("../services/sendOrderToServer");
-const { sendOrderToAdmin } = require("../services/sendOrderDataToAdmin");
+const { sendOrderToAdmin } = require("../services/sendOrderToAdmin");
 
 module.exports.checkOrderStatus = async (
   ctx,
   conversation,
-  singleOrder,
-  orderContent
+  single,
+  order,
+  imageId
 ) => {
   try {
     const status = await conversation.wait();
@@ -16,15 +17,14 @@ module.exports.checkOrderStatus = async (
           remove_keyboard: true,
         },
       });
-      await sendOrderToServer(orderContent);
-      await sendOrderToAdmin(orderContent);
+      return await sendOrderToServer(order, ctx, imageId);
     } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
       await ctx.reply("Давайте исправим", {
         reply_markup: {
           remove_keyboard: true,
         },
       });
-      return await singleOrder(conversation, ctx);
+      return await single(conversation, ctx);
     }
   } catch (err) {
     console.log(err);

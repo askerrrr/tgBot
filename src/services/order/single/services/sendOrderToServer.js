@@ -1,30 +1,19 @@
-const crypto = require("crypto");
+const JWT = require("jsonwebtoken");
 const { env } = require("../../../../../env");
-const { getFileUrl } = require("../../../different/getFileURL");
-const { getDateAndTime } = require("../../../different/dateAndTime");
+const { sendOrderToAdmin } = require("./sendOrderToAdmin");
+const { addNewOrder } = require("../../../../database/services/addNewOrder");
 
-async function sendOrderToServer(order) {
+async function sendOrderToServer(order, ctx, imageId) {
   try {
-    const imageURL = await getFileUrl(order.ctx, order.image);
-    const orderTime = getDateAndTime().fullTime();
-    const randomKey = crypto.randomBytes(10).toString("hex");
-
-    const data = {
-      url: order.url,
-      file: { url: imageURL, id: randomKey },
-      date: orderTime,
-      tgId: order.chatId,
-      description: order.quantityAndSize,
-      phone: order.userPhoneNumber,
-    };
-    console.log(data);
-    const response = await fetch(env.orderinfo, {
+    const response = await fetch(env.bot_api_order, {
       method: "POST",
+      body: JSON.stringify(order),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${env.auth_token}`,
+        Authorization: `Bearer ${JWT.sign(env.payload, env.bot_secret_key, {
+          expiresIn: "5m",
+        })}`,
       },
-      body: JSON.stringify(data),
     });
 
     if (!response.ok) {
@@ -32,6 +21,9 @@ async function sendOrderToServer(order) {
         `Server error: ${response.status} ${response.statusText}`
       );
     }
+
+    await addNewOrder(order);
+    await sendOrderToAdmin(ctx, order, imageId);
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
       return await response.json();

@@ -8,11 +8,14 @@ module.exports.getImage = async (ctx, conversation) => {
 
     const imageId = imageCtx.msg.photo[imageCtx.msg.photo.length - 1].file_id;
 
-    const validFileExtension = await checkFileExtension(fileUrl);
+    const validFile = await checkFileExtension(fileUrl);
 
-    if (!validFileExtension) return;
+    if (!validFile) {
+      await ctx.reply("Что то не похоже на фото, попробуйте еще раз");
+      return;
+    }
 
-    return imageId;
+    return validFile;
   } catch (err) {
     console.log(err);
   }

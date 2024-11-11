@@ -15,7 +15,7 @@ async function updateCurrentOrderStatus(activeOrders, ctx) {
     method: "GET",
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer ${JWT.sign(env.payload, env.secret, {
+      Authorization: `Bearer ${JWT.sign(env.payload, env.bot_secret_key, {
         expiresIn: "5m",
       })}`,
     },

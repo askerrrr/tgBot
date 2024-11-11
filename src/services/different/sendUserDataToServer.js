@@ -9,7 +9,7 @@ module.exports.sendUserDataToServer = async (data) => {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${JWT.sign(env.payload, env.secret, {
+        Authorization: `Bearer ${JWT.sign(env.payload, env.bot_secret_key, {
           expiresIn: "5m",
         })}`,
       },

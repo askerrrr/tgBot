@@ -10,7 +10,7 @@ async function sendOrderFileToServer(order, ctx) {
       body: JSON.stringify(order),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${JWT.sign(env.payload, env.secret, {
+        Authorization: `Bearer ${JWT.sign(env.payload, env.bot_secret_key, {
           expiresIn: "5m",
         })}`,
       },

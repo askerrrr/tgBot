@@ -1,7 +1,6 @@
 const { env } = require("./env");
 const { Bot } = require("grammy");
 const express = require("express");
-const { verifyToken } = require("./src/services/different/verifyToken");
 const {
   updateOrderStatus,
 } = require("./src/database/services/updateOrderStatus");
@@ -38,12 +37,8 @@ app.post("/", async (req, res) => {
 
     const authHeader = req.headers.authorization;
 
-    if (!authHeader && authHeader.split(" ")[1] !== env.secretKey)
+    if (!authHeader && authHeader.split(" ")[1] !== env.bearer_token)
       return res.status(401).json({ error: "Unauthorized" });
-
-    // const validToken = verifyToken(req.headers.authorization);
-
-    // if (!validToken) return res.status(401).json({ error: "Unauthorized" });
 
     const updatedStatus = await updateOrderStatus(userId, fileId, status);
 
@@ -62,4 +57,4 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Сервер запущен"));
+app.listen(env.PORT, () => console.log("Сервер запущен"));

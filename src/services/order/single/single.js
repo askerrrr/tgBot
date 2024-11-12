@@ -69,6 +69,7 @@ async function single(conversation, ctx) {
         status: "not-accepted-for-processing:0",
         pathToFile: `/var/www/userFiles/${userId}/images/${randomKey}.jpg`,
         url,
+        itemUrl: image.split("::")[0],
       },
       date: orderTime,
       type: "single",

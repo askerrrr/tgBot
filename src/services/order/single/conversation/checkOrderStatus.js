@@ -1,5 +1,4 @@
 const { sendOrderToServer } = require("../services/sendOrderToServer");
-const { sendOrderToAdmin } = require("../services/sendOrderToAdmin");
 
 module.exports.checkOrderStatus = async (
   ctx,

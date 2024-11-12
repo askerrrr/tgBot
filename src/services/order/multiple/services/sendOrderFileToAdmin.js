@@ -1,15 +1,10 @@
 const { env } = require("../../../../../env");
+const {
+  makeOrderNotification,
+} = require("../../../different/makeOrderNotification");
 
 async function sendOrderFileToAdmin(ctx, order) {
-  const fileURL = `<u><a href="https://test-nodejs.ru/download/var/www/userFiles/${order.userId}/${order.file.id}>Файл</a>"</u>`;
-
-  const messageToAdmin = `Новый заказ\n\nID пользователя: ${
-    order.userId
-  }\nНомер телефона : ${order.phone}\nСсылка на таблицу : ${
-    order.file.url
-  }\nСсылка на файл : ${""}\nВремя заказа : ${order.date}\nID заказа : ${
-    order.file.id
-  }`;
+  const messageToAdmin = makeOrderNotification(order);
 
   await ctx.api.sendMessage(env.admin_id, messageToAdmin);
 

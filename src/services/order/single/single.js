@@ -19,34 +19,20 @@ async function single(conversation, ctx) {
 
     let url, image, description, phone;
 
-    let countForUrl = 0;
     let countForImage = 0;
     let countForPhone = 0;
 
-    while (!url) {
-      url = await getUrl(ctx, conversation);
-
-      if (!url) {
-        countForUrl++;
-
-        if (countForUrl > 2) {
-          await ctx.reply(
-            "Вы превысили количество неудачных попыток. Беседа завершена. Что бы начать заново, снова нажмите 'Сделать заказ!'"
-          );
-          return;
-        }
-      }
-    }
+    url = await getUrl(ctx, conversation);
 
     while (!image) {
       image = await getImage(ctx, conversation);
 
       if (!image) {
         countForImage++;
-
+        console.log("countForImage", countForImage);
         if (countForImage > 2) {
           await ctx.reply(
-            "Вы превысили количество неудачных попыток. Беседа завершена. Что бы начать заново, снова нажмите 'Сделать заказ!'"
+            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
           );
           return;
         }
@@ -60,10 +46,10 @@ async function single(conversation, ctx) {
 
       if (!phone) {
         countForPhone++;
-
+        console.log("countForPhone", countForPhone);
         if (countForPhone > 2) {
           await ctx.reply(
-            "Вы превысили количество неудачных попыток. Беседа завершена. Что бы начать заново, снова нажмите 'Сделать заказ!'"
+            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
           );
           return;
         }
@@ -73,20 +59,22 @@ async function single(conversation, ctx) {
     let imageId = image.split("::")[1];
 
     const order = {
-      phone,
       userId,
       firstName,
       userName,
-      date: orderTime,
+      phone,
       file: {
-        url: image.split("::")[0],
         id: randomKey,
-        pathToFile: `/var/www/userFiles/${userId}/images/${randomKey}.jpg`,
+        description,
         status: "not-accepted-for-processing:0",
+        pathToFile: `/var/www/userFiles/${userId}/images/${randomKey}.jpg`,
+        url,
       },
-
-      description,
+      date: orderTime,
+      type: "single",
     };
+
+    console.log(order);
 
     await returnOrderToUser(ctx, url, phone, imageId, description);
     await checkOrderStatus(ctx, conversation, single, order, imageId);

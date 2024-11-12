@@ -28,7 +28,7 @@ async function multiple(conversation, ctx) {
 
         if (failedAttempt > 2) {
           await ctx.reply(
-            "Вы превысили количество неудачных попыток. Беседа завершена. Что бы начать заново, снова нажмите 'Сделать заказ!'"
+            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
           );
           failedAttempt = 0;
           return;
@@ -44,7 +44,7 @@ async function multiple(conversation, ctx) {
 
         if (failedAttempt > 4) {
           await ctx.reply(
-            "Вы превысили количество неудачных попыток. Беседа завершена. Что бы начать заново, снова нажмите 'Сделать заказ!'"
+            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
           );
           return;
         }
@@ -54,21 +54,21 @@ async function multiple(conversation, ctx) {
     let fileId = fileUrl.split("::")[1];
 
     const order = {
-      phone,
       userId,
-      date: orderTime,
+      firstName,
+      userName,
+      phone,
       file: {
         url: fileUrl.split("::")[0],
         id: randomKey,
         pathToFile: `/var/www/userFiles/${userId}/doc/${randomKey}.xlsx`,
         status: "not-accepted-for-processing:0",
       },
-      firstName,
-      userName,
+      date: orderTime,
     };
 
     await returnOrderDataToUser(ctx, phone, fileId);
-    await checkOrderStatus(ctx, conversation, order, makingAnOrder);
+    await checkOrderStatus(ctx, conversation, order, multiple);
   } catch (err) {
     console.log(err);
   }

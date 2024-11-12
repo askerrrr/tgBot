@@ -16,6 +16,7 @@ async function getPhone(ctx, conversation) {
 
       return null;
     }
+
     return phone;
   } catch (err) {
     console.log(err);

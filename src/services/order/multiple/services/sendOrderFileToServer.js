@@ -17,7 +17,9 @@ async function sendOrderFileToServer(order, ctx) {
     });
 
     if (!response.ok) {
-      throw new Error(`Server error : ${response.status} ${response.text}`);
+      const err = await response.text();
+      console.log("Ошибка при отправлении заказа", err);
+      return;
     }
 
     await addNewOrder(order);

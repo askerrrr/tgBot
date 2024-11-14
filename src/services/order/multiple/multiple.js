@@ -61,7 +61,7 @@ async function multiple(conversation, ctx) {
       file: {
         url: fileUrl.split("::")[0],
         id: randomKey,
-        pathToFile: `/var/www/userFiles/${userId}/doc/${randomKey}.xlsx`,
+        pathToFile: `/var/www/userFiles/${userId}/docs/${randomKey}.xlsx`,
         status: "not-accepted-for-processing:0",
       },
       date: orderTime,

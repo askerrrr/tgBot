@@ -53,7 +53,7 @@ app.patch("/", async (req, res) => {
     return res.sendStatus(200);
   } catch (err) {
     console.log(err);
-    await bot.api.sendMessage(env.admin_id, `${err.message}`);
+    return await bot.api.sendMessage(env.admin_id, `${err.message}`);
   }
 });
 

@@ -48,9 +48,10 @@ app.patch("/", async (req, res) => {
       status
     )}`;
 
-    await bot.api.sendMessage(userId, message);
-
-    return res.sendStatus(200);
+    await bot.api.sendMessage(userId, message).then(() => {
+      console.log(message);
+      return res.sendStatus(200);
+    });
   } catch (err) {
     console.log(err);
     return await bot.api.sendMessage(env.admin_id, `${err.message}`);
@@ -68,7 +69,10 @@ app.delete("/", async (req, res) => {
   const orderId = requestPayload.orderId;
 
   await deleteOrder(userId, orderId)
-    .then(() => res.status(204))
+    .then(() => {
+      console.log(`Удален заказ ${orderId}`);
+      returnres.status(204);
+    })
     .catch(() => res.status(404));
 });
 

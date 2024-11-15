@@ -24,13 +24,6 @@ async function sendOrderToServer(order, ctx, imageId) {
 
     await addNewOrder(order);
     await sendOrderToAdmin(ctx, order, imageId);
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      return await response.json();
-    } else {
-      const text = await response.text();
-      throw new Error(`Unexpected content type: ${contentType}\n${text}`);
-    }
   } catch (err) {
     console.log(err);
   }

@@ -1,12 +1,12 @@
 const JWT = require("jsonwebtoken");
 const { env } = require("../../../env");
+const { addNewUser } = require("../../database/services/addNewUser");
 
-module.exports.sendUserDataToServer = async (data) => {
+module.exports.sendUserDataToServer = async (userData) => {
   try {
-    console.log(data);
     const response = await fetch(env.bot_api_users, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(userData),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${JWT.sign(env.payload, env.bot_secret_key, {
@@ -14,18 +14,14 @@ module.exports.sendUserDataToServer = async (data) => {
         })}`,
       },
     });
+
     if (!response.ok) {
       throw new Error(
         `Server error: ${response.status} ${response.statusText}`
       );
     }
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      return await response.json();
-    } else {
-      const text = await response.text();
-      throw new Error(`Unexpected content type: ${contentType}\n${text}`);
-    }
+
+    await addNewUser(userData);
   } catch (err) {
     console.error("Failed to send user data to server:", err);
     throw err;

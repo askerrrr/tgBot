@@ -24,7 +24,7 @@ module.exports.getImage = async (ctx, conversation) => {
       return;
     }
 
-    console.log(imageId);
+   
     return validFile;
   } catch (err) {
     console.log(err);

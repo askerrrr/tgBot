@@ -75,7 +75,7 @@ async function single(conversation, ctx) {
       type: "single",
     };
 
-    console.log(order);
+
 
     await returnOrderToUser(ctx, url, phone, imageId, description);
     await checkOrderStatus(ctx, conversation, single, order, imageId);

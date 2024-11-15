@@ -18,6 +18,9 @@ async function findOrder(userId) {
     };
   } catch (err) {
     console.log(err);
+    throw err;
+  } finally {
+    await mongodb.close();
   }
 }
 

@@ -32,6 +32,9 @@ async function addNewOrder(order) {
     );
   } catch (err) {
     console.log(err);
+    throw err;
+  } finally {
+    await mongodb.close();
   }
 }
 

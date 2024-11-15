@@ -32,7 +32,9 @@ app.patch("/", async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader && authHeader.split(" ")[1] !== env.bearer_token)
+    if (!authHeader) return res.sendStatus(401);
+
+    if (authHeader.split(" ")[1] !== env.bearer_token)
       return res.sendStatus(401);
 
     const requestPayload = req.body;
@@ -58,15 +60,16 @@ app.patch("/", async (req, res) => {
 app.delete("/", async (req, res) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader && authHeader.split(" ")[1] !== env.bearer_token)
-    return res.sendStatus(401);
+  if (!authHeader) return res.sendStatus(401);
+
+  if (authHeader.split(" ")[1] !== env.bearer_token) return res.sendStatus(401);
 
   const requestPayload = req.body;
   const userId = requestPayload.userId;
   const orderId = requestPayload.orderId;
 
   await deleteOrder(userId, orderId)
-    .then(() => res.sendStatus(204))
+    .then(() => res.sendStatus(200))
     .catch(() => res.sendStatus(404));
 });
 

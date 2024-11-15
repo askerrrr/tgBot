@@ -19,6 +19,9 @@ async function updateOrderStatus(userId, fileId, newStatus) {
     return updatedStatus;
   } catch (err) {
     console.log(err);
+    throw err;
+  } finally {
+    await mongodb.close();
   }
 }
 

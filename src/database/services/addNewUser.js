@@ -11,6 +11,9 @@ async function addNewUser(user) {
     return null;
   } catch (err) {
     console.log(err);
+    throw err;
+  } finally {
+   await mongodb.close();
   }
 }
 

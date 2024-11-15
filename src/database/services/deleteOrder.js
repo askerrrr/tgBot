@@ -4,7 +4,7 @@ module.exports.deleteOrder = async (userId, orderId) => {
   try {
     await mongodb.connect();
 
-    return await collection.updateOne(
+    const result = await collection.updateOne(
       {
         userId,
         "orders.order.file.id": orderId,
@@ -15,7 +15,14 @@ module.exports.deleteOrder = async (userId, orderId) => {
         },
       }
     );
+
+    if (result.modifiedCount === 0) return null;
+
+    return result;
   } catch (err) {
     console.log(err);
+    throw err;
+  } finally {
+    mongodb.close();
   }
 };

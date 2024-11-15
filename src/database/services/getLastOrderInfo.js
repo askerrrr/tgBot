@@ -14,6 +14,9 @@ async function getLastOrderInfo(userId) {
     return lastOrder;
   } catch (err) {
     console.log(err);
+    throw err;
+  } finally {
+    await mongodb.close();
   }
 }
 

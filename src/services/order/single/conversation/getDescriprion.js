@@ -6,13 +6,10 @@ module.exports.getDescriprion = async (ctx, conversation) => {
     const desctiptionCtx = await conversation.wait();
 
     const desctiption = String(desctiptionCtx.msg.text).split(" ");
-    console.log({
-      quantity: desctiption[0],
-      size: desctiption[1],
-    });
+
     return {
       quantity: desctiption[0],
-      size: desctiption[1],
+      size: desctiption[1] || "",
     };
   } catch (err) {
     console.log(err);

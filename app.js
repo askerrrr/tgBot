@@ -40,13 +40,13 @@ app.patch("/", async (req, res) => {
     const requestPayload = req.body;
 
     const userId = requestPayload.userId;
-    const fileId = requestPayload.fileId;
+    const orderId = requestPayload.orderId;
     const status = requestPayload.status;
-    const updatedStatus = await updateOrderStatus(userId, fileId, status);
+    const updatedStatus = await updateOrderStatus(userId, orderId, status);
 
     if (!updatedStatus) console.log("Ошибка при обновлении статуса");
 
-    const message = `Статус заказа ${fileId} изменен.\nТекущий статус:\n${statusTranslate(
+    const message = `Статус заказа ${orderId} изменен.\nТекущий статус:\n${statusTranslate(
       status
     )}`;
 

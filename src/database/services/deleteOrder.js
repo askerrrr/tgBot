@@ -7,11 +7,11 @@ module.exports.deleteOrder = async (userId, orderId) => {
     const result = await collection.updateOne(
       {
         userId,
-        "orders.order.file.id": orderId,
+        "orders.order.id": orderId,
       },
       {
         $pull: {
-          orders: { "order.file.id": orderId },
+          orders: { "order.id": orderId },
         },
       }
     );

@@ -54,17 +54,17 @@ async function multiple(conversation, ctx) {
     let fileId = fileUrl.split("::")[1];
 
     const order = {
+      id: randomKey,
       userId,
       firstName,
       userName,
       phone,
-      file: {
-        url: fileUrl.split("::")[0],
-        id: randomKey,
-        pathToFile: `/var/www/userFiles/${userId}/docs/${randomKey}.xlsx`,
-        status: "not-accepted-for-processing:0",
-      },
       date: orderTime,
+      orderStatus: "not-accepted-for-processing:0",
+      file: {
+        telegramUrl: fileUrl.split("::")[0],
+        path: `/var/www/userFiles/${userId}/docs/${randomKey}.xlsx`,
+      },
     };
 
     await returnOrderDataToUser(ctx, phone, fileId);

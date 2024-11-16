@@ -4,16 +4,16 @@ async function findOrder(userId) {
   try {
     await mongodb.connect();
 
-    const orders = await collection.findOne({ userId: `${userId}` });
+    const orders = await collection.findOne({ userId });
 
     return {
       active: async () =>
         orders?.orders.filter(
-          (data) => data.order.file.status !== "order-is-completed:6"
+          (data) => data.order.orderStatus !== "order-is-completed:6"
         ),
       completed: async () =>
         orders?.orders.filter(
-          (data) => data.order.file.status == "order-is-completed:6"
+          (data) => data.order.orderStatus == "order-is-completed:6"
         ),
     };
   } catch (err) {

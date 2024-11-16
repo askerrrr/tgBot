@@ -59,23 +59,22 @@ async function single(conversation, ctx) {
     let imageId = image.split("::")[1];
 
     const order = {
+      id: randomKey,
       userId,
       firstName,
       userName,
       phone,
-      file: {
-        id: randomKey,
-        description,
-        status: "not-accepted-for-processing:0",
-        pathToFile: `/var/www/userFiles/${userId}/images/${randomKey}.jpg`,
-        url: image.split("::")[0],
-        itemUrl: url,
-      },
+      itemUrl: image.split("::")[0],
       date: orderTime,
       type: "single",
+      description,
+      orderStatus: "not-accepted-for-processing:0",
+      type: "single",
+      file: {
+        path: `/var/www/userFiles/${userId}/images/${randomKey}.jpg`,
+        telegramUrl: url,
+      },
     };
-
-
 
     await returnOrderToUser(ctx, url, phone, imageId, description);
     await checkOrderStatus(ctx, conversation, single, order, imageId);

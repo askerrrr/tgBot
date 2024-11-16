@@ -51,7 +51,7 @@ async function multiple(conversation, ctx) {
       }
     }
 
-    let fileId = fileUrl.split("::")[1];
+    const [telegramApiFileUrl, fileId] = image.split("::");
 
     const order = {
       id: randomKey,
@@ -62,8 +62,8 @@ async function multiple(conversation, ctx) {
       date: orderTime,
       orderStatus: "not-accepted-for-processing:0",
       file: {
-        telegramUrl: fileUrl.split("::")[0],
         path: `/var/www/userFiles/${userId}/docs/${randomKey}.xlsx`,
+        telegramApiFileUrl,
       },
     };
 

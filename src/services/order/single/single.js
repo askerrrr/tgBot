@@ -17,12 +17,12 @@ async function single(conversation, ctx) {
     const firstName =
       ctx.chat.first_name === undefined ? "" : ctx.chat.first_name;
 
-    let url, image, description, phone;
+    let itemUrl, image, description, phone;
 
     let countForImage = 0;
     let countForPhone = 0;
 
-    url = await getUrl(ctx, conversation);
+    itemUrl = await getUrl(ctx, conversation);
 
     while (!image) {
       image = await getImage(ctx, conversation);
@@ -56,7 +56,7 @@ async function single(conversation, ctx) {
       }
     }
 
-    let imageId = image.split("::")[1];
+    const [telegramApiFileUrl, imageId] = image.split("::");
 
     const order = {
       id: randomKey,
@@ -64,7 +64,7 @@ async function single(conversation, ctx) {
       firstName,
       userName,
       phone,
-      itemUrl: image.split("::")[0],
+      itemUrl,
       date: orderTime,
       type: "single",
       description,
@@ -72,11 +72,11 @@ async function single(conversation, ctx) {
       type: "single",
       file: {
         path: `/var/www/userFiles/${userId}/images/${randomKey}.jpg`,
-        telegramUrl: url,
+        telegramApiFileUrl,
       },
     };
 
-    await returnOrderToUser(ctx, url, phone, imageId, description);
+    await returnOrderToUser(ctx, itemUrl, phone, imageId, description);
     await checkOrderStatus(ctx, conversation, single, order, imageId);
   } catch (err) {
     console.log(err);

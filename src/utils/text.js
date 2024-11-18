@@ -31,6 +31,9 @@ const deliveryTimeText =
 const shoppingSitesText =
   "Мы выкупаем с таких маркетплейсов как:\n\n-1688\n-Taobao\n-Poizon\n-Pinduoduo\n\n\nСкачать приложения этих площадок:\nМеню => Другое => Скачать приложения";
 
+const textForFailedAttempt =
+  "Вы превысили количество неудачных попыток. Оформление заказа завершено. Чтобы начать заново, снова нажмите 'Сделать заказ!'";
+
 module.exports = {
   linkForApp1688,
   linkForAppTaobao,
@@ -41,5 +44,6 @@ module.exports = {
   unexpectedMessages,
   linkForAppPinduoduo,
   deliveryAddressText,
+  textForFailedAttempt,
   messageForNonReadyFunctions,
 };

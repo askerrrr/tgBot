@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const { getUrl } = require("./conversation/getUrl");
 const { getImage } = require("./conversation/getImage");
 const { getPhone } = require("./conversation/getPhone");
+const { textForFailedAttempt } = require("../../../utils/text");
 const { getDateAndTime } = require("../../different/dateAndTime");
 const { getDescriprion } = require("./conversation/getDescriprion");
 const { returnOrderToUser } = require("./services/returnOrderToUser");
@@ -13,50 +14,69 @@ async function single(conversation, ctx) {
     const orderTime = getDateAndTime().fullDateTime();
     const randomKey = crypto.randomInt(10, 100000000000) + "0";
 
-    const userName = ctx.chat.user_name === undefined ? "" : ctx.chat.user_name;
-    const firstName =
-      ctx.chat.first_name === undefined ? "" : ctx.chat.first_name;
+    const userName = ctx.chat.user_name || "";
+    const firstName = ctx.chat.first_name || "";
 
-    let itemUrl, image, description, phone;
+    let itemUrl, imageData, description, phone;
 
-    let countForImage = 0;
+    let countForItemUrl = 0;
+    let countForImageData = 0;
+    let countForDescription = 0;
     let countForPhone = 0;
 
-    itemUrl = await getUrl(ctx, conversation);
+    while (!itemUrl) {
+      itemUrl = await getUrl(ctx, conversation);
 
-    while (!image) {
-      image = await getImage(ctx, conversation);
+      if (!itemUrl) {
+        countForItemUrl++;
 
-      if (!image) {
-        countForImage++;
-        console.log("countForImage", countForImage);
-        if (countForImage > 2) {
-          await ctx.reply(
-            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
-          );
+        if (countForItemUrl > 2) {
+          await ctx.reply(textForFailedAttempt);
           return;
         }
       }
     }
 
-    description = await getDescriprion(ctx, conversation);
+    while (!imageData) {
+      imageData = await getImage(ctx, conversation);
+
+      if (!imageData) {
+        countForImageData++;
+
+        if (countForImageData > 2) {
+          await ctx.reply(textForFailedAttempt);
+          return;
+        }
+      }
+    }
+
+    while (!description) {
+      description = await getDescriprion(ctx, conversation);
+
+      if (!description) {
+        countForDescription++;
+
+        if (countForDescription > 2) {
+          await ctx.reply(textForFailedAttempt);
+          return;
+        }
+      }
+    }
 
     while (!phone) {
       phone = await getPhone(ctx, conversation);
 
       if (!phone) {
         countForPhone++;
-        console.log("countForPhone", countForPhone);
+
         if (countForPhone > 2) {
-          await ctx.reply(
-            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
-          );
+          await ctx.reply(textForFailedAttempt);
           return;
         }
       }
     }
 
-    const [telegramApiFileUrl, imageId] = image.split("::");
+    const [telegramApiFileUrl, imageId] = imageData.split("::");
 
     const order = {
       id: randomKey,

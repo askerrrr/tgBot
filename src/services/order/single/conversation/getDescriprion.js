@@ -1,3 +1,5 @@
+const { checkDescription } = require("../services/checkDescription");
+
 module.exports.getDescriprion = async (ctx, conversation) => {
   try {
     await ctx.reply(
@@ -6,6 +8,13 @@ module.exports.getDescriprion = async (ctx, conversation) => {
     const desctiptionCtx = await conversation.wait();
 
     const desctiption = String(desctiptionCtx.msg.text).split(" ");
+
+    const result = await checkDescription(desctiption);
+
+    if (!result) {
+      await ctx.reply("Попробуйте еще раз");
+      return;
+    }
 
     return {
       quantity: desctiption[0],

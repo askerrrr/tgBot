@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 const { getFile } = require("./conversation/getFile");
 const { getPhone } = require("./conversation/getPhone");
+const { textForFailedAttempt } = require("../../../utils/text");
 const { getDateAndTime } = require("../../different/dateAndTime");
 const { checkOrderStatus } = require("./conversation/checkOrderStatus");
 const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
@@ -8,28 +9,25 @@ const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
 async function multiple(conversation, ctx) {
   try {
     const userId = `${ctx.chat.id}`;
-    const userName = ctx.chat.user_name === undefined ? "" : ctx.chat.user_name;
-    const firstName =
-      ctx.chat.first_name === undefined ? "" : ctx.chat.first_name;
+
+    const userName = ctx.chat.user_name || "";
+    const firstName = ctx.chat.first_name || "";
 
     const orderTime = getDateAndTime().fullDateTime();
     const randomKey = crypto.randomInt(10, 100000000000) + "0";
 
-    let fileUrl;
-    let phone;
+    let fileData, phone;
 
     let failedAttempt = 0;
 
-    while (!fileUrl) {
-      fileUrl = await getFile(ctx, conversation);
+    while (!fileData) {
+      fileData = await getFile(ctx, conversation);
 
-      if (!fileUrl) {
+      if (!fileData) {
         failedAttempt++;
 
         if (failedAttempt > 2) {
-          await ctx.reply(
-            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
-          );
+          await ctx.reply(textForFailedAttempt);
           failedAttempt = 0;
           return;
         }
@@ -43,15 +41,13 @@ async function multiple(conversation, ctx) {
         failedAttempt++;
 
         if (failedAttempt > 4) {
-          await ctx.reply(
-            "Вы превысили количество неудачных попыток. Оформление заказа завершено. Что бы начать заново, снова нажмите 'Сделать заказ!'"
-          );
+          await ctx.reply(textForFailedAttempt);
           return;
         }
       }
     }
 
-    const [telegramApiFileUrl, fileId] = image.split("::");
+    const [telegramApiFileUrl, fileId] = fileData.split("::");
 
     const order = {
       id: randomKey,

@@ -20,6 +20,7 @@ async function checkOrderStatus(ctx, conversation, order, makingAnOrder) {
         remove_keyboard: true,
       },
     });
+
     return await makingAnOrder(conversation, ctx);
   }
 }

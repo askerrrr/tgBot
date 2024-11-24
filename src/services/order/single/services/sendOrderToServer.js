@@ -19,6 +19,9 @@ async function sendOrderToServer(order, ctx, imageId) {
     if (!response.ok) {
       const err = await response.text();
       console.log("Ошибка при отправлении заказа", err);
+      await ctx.reply(
+        "Произошла ошибка при формировании заказа, попробуйте еще раз"
+      );
       return;
     }
 

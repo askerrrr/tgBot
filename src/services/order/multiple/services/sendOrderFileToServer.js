@@ -3,7 +3,7 @@ const { env } = require("../../../../../env");
 const { sendOrderFileToAdmin } = require("./sendOrderFileToAdmin");
 const { addNewOrder } = require("../../../../database/services/addNewOrder");
 
-async function sendOrderFileToServer(order, ctx) {
+async function sendOrderFileToServer(order, ctx, fileId) {
   try {
     const response = await fetch(env.bot_api_order, {
       method: "POST",
@@ -23,7 +23,7 @@ async function sendOrderFileToServer(order, ctx) {
     }
 
     await addNewOrder(order);
-    await sendOrderFileToAdmin(ctx, order);
+    await sendOrderFileToAdmin(ctx, order, fileId);
   } catch (err) {
     console.log(err);
   }

@@ -1,4 +1,4 @@
-const { checkDescription } = require("../services/checkDescription");
+const { checkDescription } = require("../../services/checkDescription");
 
 module.exports.getDescriprion = async (ctx, conversation) => {
   try {

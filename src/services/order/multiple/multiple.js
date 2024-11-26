@@ -2,9 +2,9 @@ const crypto = require("crypto");
 const { getFile } = require("./conversation/getFile");
 const { getPhone } = require("./conversation/getPhone");
 const { textForFailedAttempt } = require("../../../utils/text");
-const { getDateAndTime } = require("../../different/dateAndTime");
-const { checkOrderStatus } = require("./conversation/checkOrderStatus");
-const { returnOrderDataToUser } = require("./services/returnOrderDataToUser");
+const { getDateAndTime } = require("../services/dateAndTime");
+const { checkOrderStatus } = require("../services/checkOrderStatus");
+const { returnOrderToUser } = require("./conversation/returnOrderToUser");
 
 async function multiple(conversation, ctx) {
   try {
@@ -63,8 +63,8 @@ async function multiple(conversation, ctx) {
       },
     };
 
-    await returnOrderDataToUser(ctx, phone, fileId);
-    await checkOrderStatus(ctx, conversation, order, multiple, fileId);
+    await returnOrderToUser(ctx, phone, fileId);
+    await checkOrderStatus(ctx, conversation, order, fileId, multiple);
   } catch (err) {
     console.log(err);
   }

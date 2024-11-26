@@ -1,9 +1,7 @@
 const { getActiveOrders } = require("./activeOrders");
 const { getCompletedOrders } = require("./completedOrders");
 
-async function personalAccount(bot) {
+module.exports.personalAccount = async (bot) => {
   getActiveOrders(bot);
   getCompletedOrders(bot);
-}
-
-module.exports = { personalAccount };
+};

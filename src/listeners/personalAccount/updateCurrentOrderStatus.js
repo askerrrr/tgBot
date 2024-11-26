@@ -4,7 +4,7 @@ const {
   updateOrderStatus,
 } = require("../../database/services/updateOrderStatus");
 
-async function updateCurrentOrderStatus(activeOrders, ctx) {
+module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
   let userId, file;
   for (let key in activeOrders) {
     userId = activeOrders[key].userId;
@@ -43,6 +43,4 @@ async function updateCurrentOrderStatus(activeOrders, ctx) {
     return await updateOrderStatus(userId, file.id, newStatus);
   }
   return;
-}
-
-module.exports = { updateCurrentOrderStatus };
+};

@@ -7,7 +7,7 @@ const { diffListeners } = require("./different/diffListeners");
 const { personalAccount } = require("./personalAccount/personalAccount");
 const { middlewareForConversations } = require("../middleware/middleware");
 
-async function allListeners(bot) {
+module.exports.allListeners = async (bot) => {
   FAQ(bot);
   other(bot);
   guides(bot);
@@ -16,6 +16,4 @@ async function allListeners(bot) {
   diffListeners(bot);
   personalAccount(bot);
   middlewareForConversations(bot);
-}
-
-module.exports = { allListeners };
+};

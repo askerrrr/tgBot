@@ -1,11 +1,11 @@
-const { sendOrderToServer } = require("../services/sendOrderToServer");
+const { sendOrderToServer } = require("./sendOrderToServer");
 
 module.exports.checkOrderStatus = async (
   ctx,
   conversation,
-  single,
   order,
-  imageId
+  fileId,
+  orderFunc
 ) => {
   try {
     const status = await conversation.wait();
@@ -19,7 +19,7 @@ module.exports.checkOrderStatus = async (
           },
         }
       );
-      return await sendOrderToServer(order, ctx, imageId);
+      return await sendOrderToServer(order, ctx, fileId);
     } else if (status.msg.text == "Нет, тут ошибка, я хочу исправить данные") {
       await ctx.reply("Давайте исправим", {
         reply_markup: {
@@ -27,7 +27,7 @@ module.exports.checkOrderStatus = async (
         },
       });
 
-      return await single(conversation, ctx);
+      return await orderFunc(conversation, ctx);
     }
   } catch (err) {
     console.log(err);

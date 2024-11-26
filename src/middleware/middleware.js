@@ -19,7 +19,7 @@ const {
 
 const adapter = new MemorySessionStorage();
 
-async function middlewareForConversations(bot) {
+module.exports.middlewareForConversations = async (bot) => {
   bot.use(chatMembers(adapter));
   chatMember(bot);
 
@@ -35,5 +35,4 @@ async function middlewareForConversations(bot) {
   orderMultipleItems(bot);
 
   bot.on("message", catchUnexpectedMessages);
-}
-module.exports = { middlewareForConversations };
+};

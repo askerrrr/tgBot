@@ -1,6 +1,6 @@
-const { getFileUrl } = require("../../../different/getFileURL");
+const { getFileUrl } = require("../../services/getFileURL");
 
-module.exports.getFile = async function (ctx, conversation) {
+module.exports.getFile = async (ctx, conversation) => {
   try {
     await ctx.reply(
       `Пришлите эксель таблицу с вашими товарами\n\nПолучить шаблон можно в разделе -  /Другое/Получить шаблон`,

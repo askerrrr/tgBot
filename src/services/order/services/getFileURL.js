@@ -1,6 +1,6 @@
-const { env } = require("../../../env");
+const { env } = require("../../../../env");
 
-async function getFileUrl(ctx, fileId) {
+module.exports.getFileUrl = async (ctx, fileId) => {
   try {
     const fileLink = await ctx.api.getFile(fileId);
     const filePath = fileLink.file_path;
@@ -9,6 +9,4 @@ async function getFileUrl(ctx, fileId) {
   } catch (err) {
     console.log(err);
   }
-}
-
-module.exports = { getFileUrl };
+};

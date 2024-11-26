@@ -2,7 +2,7 @@ const { showOrderContent } = require("./showOrderContent");
 const { findOrder } = require("../../database/services/findOrder");
 const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 
-async function getCompletedOrders(bot) {
+module.exports.getCompletedOrders = async (bot) => {
   try {
     bot.hears("Завершенные заказы", async (ctx) => {
       const userId = ctx.chat.id;
@@ -45,6 +45,4 @@ async function getCompletedOrders(bot) {
   } catch (err) {
     console.log(err);
   }
-}
-
-module.exports = { getCompletedOrders };
+};

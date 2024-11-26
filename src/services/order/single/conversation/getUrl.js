@@ -1,4 +1,4 @@
-const { checkUrl } = require("../services/checkUrl");
+const { checkUrl } = require("../../services/checkUrl");
 
 exports.getUrl = async (ctx, conversation) => {
   try {

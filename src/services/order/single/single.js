@@ -2,11 +2,11 @@ const crypto = require("crypto");
 const { getUrl } = require("./conversation/getUrl");
 const { getImage } = require("./conversation/getImage");
 const { getPhone } = require("./conversation/getPhone");
+const { getDateAndTime } = require("../services/dateAndTime");
 const { textForFailedAttempt } = require("../../../utils/text");
-const { getDateAndTime } = require("../../different/dateAndTime");
 const { getDescriprion } = require("./conversation/getDescriprion");
-const { returnOrderToUser } = require("./services/returnOrderToUser");
-const { checkOrderStatus } = require("./conversation/checkOrderStatus");
+const { checkOrderStatus } = require("../services/checkOrderStatus");
+const { returnOrderToUser } = require("./conversation/returnOrderToUser");
 
 async function single(conversation, ctx) {
   try {
@@ -97,7 +97,7 @@ async function single(conversation, ctx) {
     };
 
     await returnOrderToUser(ctx, itemUrl, phone, imageId, description);
-    await checkOrderStatus(ctx, conversation, single, order, imageId);
+    await checkOrderStatus(ctx, conversation, order, imageId, single);
   } catch (err) {
     console.log(err);
   }

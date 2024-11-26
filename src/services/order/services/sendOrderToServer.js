@@ -1,9 +1,9 @@
 const JWT = require("jsonwebtoken");
-const { env } = require("../../../../../env");
+const { env } = require("../../../../env");
 const { sendOrderToAdmin } = require("./sendOrderToAdmin");
-const { addNewOrder } = require("../../../../database/services/addNewOrder");
+const { addNewOrder } = require("../../../database/services/addNewOrder");
 
-async function sendOrderToServer(order, ctx, imageId) {
+module.exports.sendOrderToServer = async (order, ctx, fileId) => {
   try {
     const response = await fetch(env.bot_api_order, {
       method: "POST",
@@ -26,10 +26,8 @@ async function sendOrderToServer(order, ctx, imageId) {
     }
 
     await addNewOrder(order);
-    await sendOrderToAdmin(ctx, order, imageId);
+    await sendOrderToAdmin(ctx, order, fileId);
   } catch (err) {
     console.log(err);
   }
-}
-
-module.exports = { sendOrderToServer };
+};

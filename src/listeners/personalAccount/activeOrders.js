@@ -2,7 +2,7 @@ const { showOrderContent } = require("./showOrderContent");
 const { findOrder } = require("../../database/services/findOrder");
 const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 
-async function getActiveOrders(bot) {
+module.exports.getActiveOrders = async (bot) => {
   try {
     bot.hears("Активные заказы", async (ctx) => {
       const userId = ctx.chat.id;
@@ -45,6 +45,5 @@ async function getActiveOrders(bot) {
   } catch (err) {
     console.error(err);
   }
-}
+};
 
-module.exports = { getActiveOrders };

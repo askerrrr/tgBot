@@ -1,4 +1,4 @@
-const { checkFileExtension } = require("../services/checkFileExtension");
+const { checkFileExtension } = require("../../services/checkFileExtension");
 
 module.exports.getImage = async (ctx, conversation) => {
   try {
@@ -24,7 +24,6 @@ module.exports.getImage = async (ctx, conversation) => {
       return;
     }
 
-   
     return validFile;
   } catch (err) {
     console.log(err);

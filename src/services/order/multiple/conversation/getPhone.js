@@ -1,6 +1,6 @@
-const { checkPhoneNumber } = require("../../../different/checkPhoneNumber");
+const { checkPhoneNumber } = require("../../services/checkPhoneNumber");
 
-async function getPhone(ctx, conversation) {
+module.exports.getPhone = async (ctx, conversation) => {
   try {
     await ctx.reply(
       "Напишите номер вашего телефона без пробелов, скобок и дефисов"
@@ -20,6 +20,4 @@ async function getPhone(ctx, conversation) {
   } catch (err) {
     console.log(err);
   }
-}
-
-module.exports = { getPhone };
+};

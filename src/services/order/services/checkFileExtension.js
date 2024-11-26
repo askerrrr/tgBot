@@ -1,4 +1,4 @@
-const { getFileUrl } = require("../../../different/getFileURL");
+const { getFileUrl } = require("./getFileURL");
 
 module.exports.checkFileExtension = async (ctx, fileId) => {
   const fileUrl = await getFileUrl(ctx, fileId);

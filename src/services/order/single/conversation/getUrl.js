@@ -1,6 +1,6 @@
 const { checkUrl } = require("../../services/checkUrl");
 
-exports.getUrl = async (ctx, conversation) => {
+module.exports.getUrl = async (ctx, conversation) => {
   try {
     await ctx.reply("Пришлите ссылку на товар", {
       reply_markup: { remove_keyboard: true },

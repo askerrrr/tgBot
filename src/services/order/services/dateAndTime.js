@@ -1,4 +1,4 @@
-function getDateAndTime() {
+module.exports.getDateAndTime = () => {
   const date = new Date();
 
   let second = date.getSeconds();
@@ -29,6 +29,4 @@ function getDateAndTime() {
       return `${hours}:${minutes}:${second} - ${day}.${month}.${year}`;
     },
   };
-}
-
-module.exports = { getDateAndTime };
+};

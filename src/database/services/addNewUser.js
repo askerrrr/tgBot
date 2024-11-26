@@ -1,6 +1,6 @@
 const { mongodb, collection } = require("../db");
 
-async function addNewUser(user) {
+module.exports.addNewUser = async (user) => {
   try {
     await mongodb.connect();
 
@@ -13,8 +13,6 @@ async function addNewUser(user) {
     console.log(err);
     throw err;
   } finally {
-   await mongodb.close();
+    await mongodb.close();
   }
-}
-
-module.exports = { addNewUser };
+};

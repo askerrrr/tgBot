@@ -3,11 +3,9 @@ const { guideForTaobao } = require("./Taobao");
 const { guideForPoizon } = require("./Poizon");
 const { guideForPinduoduo } = require("./Pinduoduo");
 
-async function guides(bot) {
+module.exports.guides = async (bot) => {
   guideFor1688(bot);
   guideForTaobao(bot);
   guideForPoizon(bot);
   guideForPinduoduo(bot);
-}
-
-module.exports = { guides };
+};

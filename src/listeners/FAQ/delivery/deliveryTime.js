@@ -1,9 +1,7 @@
 const { deliveryTimeText } = require("../../../utils/text");
 
-async function deliveryTime(bot) {
+module.exports.deliveryTime = async (bot) => {
   bot.hears("Сроки доставки", async (ctx) => {
     await ctx.reply(deliveryTimeText);
   });
-}
-
-module.exports = { deliveryTime };
+};

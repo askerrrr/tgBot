@@ -1,10 +1,9 @@
 const { keyboardForDownloadingApp } = require("../../keyboard/keyboard");
 
-async function downloadApp(bot) {
+module.exports.downloadApp = async (bot) => {
   bot.hears("Скачать приложения", async (ctx) => {
     await ctx.reply("Выберите приложения", {
       reply_markup: keyboardForDownloadingApp,
     });
   });
-}
-module.exports = { downloadApp };
+};

@@ -1,6 +1,6 @@
 const { env } = require("../../../env");
 
-async function guideForPinduoduo(bot) {
+module.exports.guideForPinduoduo = async (bot) => {
   const guideURL = `Посмотреть гайд на youtube ${env.guideURLPinduoduo}`;
 
   bot.hears("Гайд по Pinduoduo", async (ctx) => {
@@ -9,6 +9,4 @@ async function guideForPinduoduo(bot) {
       disable_web_page_preview: true,
     });
   });
-}
-
-module.exports = { guideForPinduoduo };
+};

@@ -1,6 +1,6 @@
 const { mongodb, collection } = require("../db");
 
-async function findOrder(userId) {
+module.exports.findOrder = async (userId) => {
   try {
     await mongodb.connect();
 
@@ -22,6 +22,4 @@ async function findOrder(userId) {
   } finally {
     await mongodb.close();
   }
-}
-
-module.exports = { findOrder };
+};

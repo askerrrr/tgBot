@@ -70,4 +70,5 @@ async function multiple(conversation, ctx) {
   }
 }
 
-module.exports = { multiple }; //экспорт в src\middleware\middleware.js
+module.exports = { multiple };
+//экспорт в src\middleware\middleware.js

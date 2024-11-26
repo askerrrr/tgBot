@@ -1,7 +1,7 @@
-async function orderMultipleItems(bot) {
+module.exports.orderMultipleItems = async (bot) => {
   bot.hears("Заказать несколько товаров", async (ctx) => {
     await ctx.conversation.enter("multiple");
   });
-}
+};
 
-module.exports = { orderMultipleItems }; //export to src\middleware\middleware.js
+//export to src\middleware\middleware.js

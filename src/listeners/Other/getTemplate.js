@@ -1,9 +1,7 @@
 const { InputFile } = require("grammy");
 
-async function getTemplate(bot) {
+module.exports.getTemplate = async (bot) => {
   bot.hears("Получить шаблон", async (ctx) => {
     await ctx.replyWithDocument(new InputFile("src/utils/template.xlsx"));
   });
-}
-
-module.exports = { getTemplate };
+};

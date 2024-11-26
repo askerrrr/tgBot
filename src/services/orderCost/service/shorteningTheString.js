@@ -1,4 +1,4 @@
- function shorteningTheString(val) {
+module.exports.shorteningTheString = async (val) => {
   const arr = [];
   const arr1 = [];
 
@@ -15,7 +15,5 @@
     arr1.push(b[i]);
   }
   val = arr.join("") + "." + arr1.reverse().slice(0, 2).join("");
-  return Number(val)
-}
-
-module.exports = { shorteningTheString };
+  return Number(val);
+};

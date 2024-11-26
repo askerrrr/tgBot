@@ -103,4 +103,4 @@ async function single(conversation, ctx) {
   }
 }
 
-module.exports = { single }; //экспорт в "./src/middleware/middleware"
+module.exports = { single };

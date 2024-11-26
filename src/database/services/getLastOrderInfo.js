@@ -1,6 +1,6 @@
 const { mongodb, collection } = require("../db");
 
-async function getLastOrderInfo(userId) {
+module.exports.getLastOrderInfo = async (userId) => {
   try {
     await mongodb.connect();
 
@@ -18,6 +18,4 @@ async function getLastOrderInfo(userId) {
   } finally {
     await mongodb.close();
   }
-}
-
-module.exports = { getLastOrderInfo };
+};

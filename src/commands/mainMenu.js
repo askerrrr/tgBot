@@ -1,9 +1,7 @@
 const { keyboardForTheMainMenu } = require("../keyboard/keyboard");
 
-async function mainMenu(ctx) {
+module.exports.mainMenu = async (ctx) => {
   await ctx.reply("Меню", {
     reply_markup: keyboardForTheMainMenu,
   });
-}
-
-module.exports = { mainMenu };
+};

@@ -1,6 +1,6 @@
 const { mongodb, collection } = require("../db");
 
-async function addNewOrder(order) {
+module.exports.addNewOrder = async (order) => {
   try {
     await mongodb.connect();
 
@@ -36,6 +36,4 @@ async function addNewOrder(order) {
   } finally {
     await mongodb.close();
   }
-}
-
-module.exports = { addNewOrder };
+};

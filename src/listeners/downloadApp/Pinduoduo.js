@@ -1,12 +1,10 @@
-const { linkForAppPinduoduo } = require("../../utils/text");
+const { linkForAppPinduoduo } = require('../../utils/text');
 
-async function linkPinduoduo(bot) {
+module.exports.linkPinduoduo = async (bot) => {
   bot.hears("Pinduoduo", async (ctx) => {
     await ctx.reply(linkForAppPinduoduo, {
       parse_mode: "HTML",
       disable_web_page_preview: true,
     });
   });
-}
-
-module.exports = { linkPinduoduo };
+};

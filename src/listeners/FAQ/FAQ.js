@@ -1,9 +1,7 @@
 const { shoppingSites } = require("./shoppingSites");
 const { delivery } = require("./delivery/delivery");
 
-async function FAQ(bot) {
+module.exports.FAQ = async (bot) => {
   delivery(bot);
   shoppingSites(bot);
-}
-
-module.exports = { FAQ };
+};

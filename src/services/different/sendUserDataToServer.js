@@ -16,9 +16,9 @@ module.exports.sendUserDataToServer = async (userData) => {
     });
 
     if (!response.ok) {
-      throw new Error(
-        `Server error: ${response.status} ${response.statusText}`
-      );
+      const err = await response.text();
+      console.log(err);
+      return;
     }
 
     await addNewUser(userData);

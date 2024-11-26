@@ -1,12 +1,10 @@
-const { linkForAppPoizon } = require("../../utils/text");
+const { linkForAppPoizon } = require('../../utils/text');
 
-async function linkPoizon(bot) {
+module.exports.linkPoizon = async (bot) => {
   bot.hears("Poizon", async (ctx) => {
     await ctx.reply(linkForAppPoizon, {
       parse_mode: "HTML",
       disable_web_page_preview: true,
     });
   });
-}
-
-module.exports = { linkPoizon };
+};

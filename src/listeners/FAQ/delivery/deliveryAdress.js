@@ -1,9 +1,7 @@
 const { deliveryAddressText } = require("../../../utils/text");
 
-async function deliveryAddress(bot) {
+module.exports.deliveryAddress = async (bot) => {
   bot.hears("Адрес доставки", async (ctx) => {
     await ctx.reply(deliveryAddressText);
   });
-}
-
-module.exports = { deliveryAddress };
+};

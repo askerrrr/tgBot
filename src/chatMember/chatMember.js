@@ -16,11 +16,8 @@ module.exports.chatMember = async (bot) => {
 
       const newUser = {
         userId: `${chatMember.user.id}`,
-        firstName: chatMember.user.first_name,
-        userName:
-          chatMember.user.user_name === undefined
-            ? ""
-            : chatMember.user.user_name,
+        firstName: chatMember.user.first_name || "",
+        userName: chatMember.user.user_name || "",
         orders: [],
       };
 

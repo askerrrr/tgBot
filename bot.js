@@ -2,8 +2,8 @@ const { Bot } = require("grammy");
 const { env } = require("./env.js");
 const { mainMenu } = require("./src/commands/mainMenu");
 const { allListeners } = require("./src/listeners/allLinteners");
-const { errorHandler } = require("./src/middleware/errorHandler");
 const { setCommands } = require("./src/commands/setCommands.js");
+const { errorHandler } = require("./src/middleware/errorHandler");
 const { middlewareForConversations } = require("./src/middleware/middleware");
 
 const bot = new Bot(env.bot_token);

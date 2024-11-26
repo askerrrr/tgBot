@@ -1,6 +1,6 @@
 const { env } = require("../../../env");
 
-async function guideForTaobao(bot) {
+module.exports.guideForTaobao = async (bot) => {
   const guideURL = `Посмотреть гайд на youtube ${env.guideURLTaobao}`;
 
   bot.hears("Гайд по Taobao", async (ctx) => {
@@ -9,6 +9,4 @@ async function guideForTaobao(bot) {
       disable_web_page_preview: true,
     });
   });
-}
-
-module.exports = { guideForTaobao };
+};

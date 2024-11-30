@@ -7,29 +7,28 @@ module.exports.getCompletedOrders = async (bot) => {
     bot.hears("Завершенные заказы", async (ctx) => {
       const userId = ctx.chat.id;
 
-      const completedOrders = await findOrder(userId).then((order) =>
-        order.completed()
-      );
+      const completedOrders = await (await findOrder(userId)).completed();
 
       if (!completedOrders || completedOrders.length < 1) {
         await ctx.reply("Завершенных заказов не найдено");
+
         return;
       }
 
-      const statusUpdatePromises = completedOrders.map((order) =>
-        updateCurrentOrderStatus(order, ctx).catch((err) => {
-          console.log(err);
-          return;
-        })
+      const statusUpdatePromises = completedOrders.map(
+        async (order) =>
+          await updateCurrentOrderStatus(order, ctx).catch((err) => {
+            console.log(err);
+
+            return;
+          })
       );
 
       const result = await Promise.all(statusUpdatePromises);
 
       if (result.includes(null)) return;
 
-      const updatedActiveOrders = await findOrder(userId).then((order) =>
-        order.completed()
-      );
+      const updatedActiveOrders = await (await findOrder(userId)).completed();
 
       if (!updatedActiveOrders) {
         await ctx.reply("Что-то пошло не так, повторите позже...");

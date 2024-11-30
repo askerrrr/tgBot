@@ -11,14 +11,17 @@ module.exports.getActiveOrders = async (bot) => {
 
       if (!activeOrders || activeOrders.length < 1) {
         await ctx.reply("Активных заказов не найдено");
+
         return;
       }
 
-      const statusUpdatePromises = activeOrders.map((order) =>
-        updateCurrentOrderStatus(order, ctx).catch((err) => {
-          console.log(err);
-          return;
-        })
+      const statusUpdatePromises = activeOrders.map(
+        async (order) =>
+          await updateCurrentOrderStatus(order, ctx).catch((err) => {
+            console.log(err);
+
+            return;
+          })
       );
 
       const result = await Promise.all(statusUpdatePromises);
@@ -29,6 +32,7 @@ module.exports.getActiveOrders = async (bot) => {
 
       if (!updatedActiveOrders) {
         await ctx.reply("Что-то пошло не так, повторите позже...");
+
         return;
       }
 

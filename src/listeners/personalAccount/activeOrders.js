@@ -7,32 +7,32 @@ module.exports.getActiveOrders = async (bot) => {
     bot.hears("Активные заказы", async (ctx) => {
       var userId = ctx.chat.id;
 
-      var activeOrders = await findOrder(userId).then((order) =>
-        order.active()
-      );
+      var activeOrders = await (await findOrder(userId)).active();
 
       if (!activeOrders || activeOrders.length < 1) {
         await ctx.reply("Активных заказов не найдено");
+
         return;
       }
 
-      var statusUpdatePromises = activeOrders.map((order) =>
-        updateCurrentOrderStatus(order, ctx).catch((err) => {
-          console.log(err);
-          return;
-        })
+      var statusUpdatePromises = activeOrders.map(
+        async (order) =>
+          await updateCurrentOrderStatus(order, ctx).catch((err) => {
+            console.log(err);
+
+            return;
+          })
       );
 
       var result = await Promise.all(statusUpdatePromises);
 
       if (result.includes(null)) return;
 
-      var updatedActiveOrders = await findOrder(userId).then((order) =>
-        order.active()
-      );
+      var updatedActiveOrders = await (await findOrder(userId)).active();
 
       if (!updatedActiveOrders) {
         await ctx.reply("Что-то пошло не так, повторите позже...");
+
         return;
       }
 

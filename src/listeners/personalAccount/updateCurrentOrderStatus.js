@@ -6,6 +6,7 @@ var {
 
 module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
   let userId, file;
+
   for (let key in activeOrders) {
     userId = activeOrders[key].userId;
     file = activeOrders[key].file;
@@ -26,7 +27,8 @@ module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
     await ctx.reply(
       "Что-то пошло не так при попытке обновить статус, повторите позже..."
     );
-    return null;
+
+    return;
   }
 
   var json = await response.json();
@@ -42,5 +44,6 @@ module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
   if (currentStatusValue !== statusValue) {
     return await updateOrderStatus(userId, file.id, newStatus);
   }
+
   return;
 };

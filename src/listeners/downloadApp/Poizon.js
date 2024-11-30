@@ -1,4 +1,4 @@
-const { linkForAppPoizon } = require('../../utils/text');
+var { linkForAppPoizon } = require('../../utils/text');
 
 module.exports.linkPoizon = async (bot) => {
   bot.hears("Poizon", async (ctx) => {

@@ -1,6 +1,6 @@
-const { env } = require("../../../../env");
-const { getCNYValuteValue } = require("./getCNYValuteValue");
-const { shorteningTheString } = require("./shorteningTheString");
+var { env } = require("../../../../env");
+var { getCNYValuteValue } = require("./getCNYValuteValue");
+var { shorteningTheString } = require("./shorteningTheString");
 
 module.exports.convertYuanToRubles = async (userValue) => {
   let valuteValue = await getCNYValuteValue();

@@ -1,28 +1,28 @@
-const crypto = require("crypto");
-const { getUrl } = require("./conversation/getUrl");
-const { getImage } = require("./conversation/getImage");
-const { getPhone } = require("./conversation/getPhone");
-const { getDateAndTime } = require("../services/dateAndTime");
-const { textForFailedAttempt } = require("../../../utils/text");
-const { getDescriprion } = require("./conversation/getDescriprion");
-const { checkOrderStatus } = require("../services/checkOrderStatus");
-const { returnOrderToUser } = require("./conversation/returnOrderToUser");
+var crypto = require("crypto");
+var { getUrl } = require("./conversation/getUrl");
+var { getImage } = require("./conversation/getImage");
+var { getPhone } = require("./conversation/getPhone");
+var { getDateAndTime } = require("../services/dateAndTime");
+var { textForFailedAttempt } = require("../../../utils/text");
+var { getDescriprion } = require("./conversation/getDescriprion");
+var { checkOrderStatus } = require("../services/checkOrderStatus");
+var { returnOrderToUser } = require("./conversation/returnOrderToUser");
 
 async function single(conversation, ctx) {
   try {
-    const userId = `${ctx.chat.id}`;
-    const orderTime = getDateAndTime().fullDateTime();
-    const randomKey = crypto.randomInt(10, 100000000000) + "0";
+    var userId = `${ctx.chat.id}`;
+    var orderTime = getDateAndTime().fullDateTime();
+    var randomKey = crypto.randomInt(10, 100000000000) + "0";
 
-    const userName = ctx.chat.user_name || "";
-    const firstName = ctx.chat.first_name || "";
+    var userName = ctx.chat.user_name || "";
+    var firstName = ctx.chat.first_name || "";
 
-    let itemUrl, imageData, description, phone;
+    var itemUrl, imageData, description, phone;
 
-    let countForItemUrl = 0;
-    let countForImageData = 0;
-    let countForDescription = 0;
-    let countForPhone = 0;
+    var countForItemUrl = 0;
+    var countForImageData = 0;
+    var countForDescription = 0;
+    var countForPhone = 0;
 
     while (!itemUrl) {
       itemUrl = await getUrl(ctx, conversation);
@@ -76,9 +76,9 @@ async function single(conversation, ctx) {
       }
     }
 
-    const [telegramApiFileUrl, imageId] = imageData.split("::");
+    var [telegramApiFileUrl, imageId] = imageData.split("::");
 
-    const order = {
+    var order = {
       id: randomKey,
       userId,
       firstName,

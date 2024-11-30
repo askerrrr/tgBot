@@ -1,4 +1,4 @@
-const { checkPhoneNumber } = require("../../services/checkPhoneNumber");
+var { checkPhoneNumber } = require("../../services/checkPhoneNumber");
 
 module.exports.getPhone = async (ctx, conversation) => {
   try {
@@ -6,10 +6,10 @@ module.exports.getPhone = async (ctx, conversation) => {
       "Напишите номер вашего телефона без пробелов, скобок и дефисов"
     );
 
-    const message = await conversation.wait();
-    const phone = Number(message.msg.text);
+    var message = await conversation.wait();
+    var phone = Number(message.msg.text);
 
-    const result = checkPhoneNumber(phone);
+    var result = checkPhoneNumber(phone);
 
     if (!result) {
       await ctx.reply("Некорректный номер телефона. Попробуйте снова.");

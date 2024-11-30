@@ -1,13 +1,13 @@
-const { showOrderContent } = require("./showOrderContent");
-const { findOrder } = require("../../database/services/findOrder");
-const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
+var { showOrderContent } = require("./showOrderContent");
+var { findOrder } = require("../../database/services/findOrder");
+var { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 
 module.exports.getCompletedOrders = async (bot) => {
   try {
     bot.hears("Завершенные заказы", async (ctx) => {
-      const userId = ctx.chat.id;
+      var userId = ctx.chat.id;
 
-      const completedOrders = await findOrder(userId).then((order) =>
+      var completedOrders = await findOrder(userId).then((order) =>
         order.completed()
       );
 
@@ -16,18 +16,18 @@ module.exports.getCompletedOrders = async (bot) => {
         return;
       }
 
-      const statusUpdatePromises = completedOrders.map((order) =>
+      var statusUpdatePromises = completedOrders.map((order) =>
         updateCurrentOrderStatus(order, ctx).catch((err) => {
           console.log(err);
           return;
         })
       );
 
-      const result = await Promise.all(statusUpdatePromises);
+      var result = await Promise.all(statusUpdatePromises);
 
       if (result.includes(null)) return;
 
-      const updatedActiveOrders = await findOrder(userId).then((order) =>
+      var updatedActiveOrders = await findOrder(userId).then((order) =>
         order.completed()
       );
 

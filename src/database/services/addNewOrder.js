@@ -1,22 +1,22 @@
-const { mongodb, collection } = require("../db");
+var { mongodb, collection } = require("../db");
 
 module.exports.addNewOrder = async (order) => {
   try {
     await mongodb.connect();
 
-    const existingDocument = await collection.findOne({
+    var existingDocument = await collection.findOne({
       userId: order.userId,
     });
 
     if (!existingDocument) {
-      const newUser = {
+      var newUser = {
         userId: order.userId,
         firstName: order.firstName,
         userName: order.userName,
         orders: [],
       };
 
-      const result = await collection.insertOne(newUser);
+      var result = await collection.insertOne(newUser);
 
       if (!result) console.log("Ошибка при добавлении нового пользователя");
 

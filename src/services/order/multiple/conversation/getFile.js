@@ -1,4 +1,4 @@
-const { getFileUrl } = require("../../services/getFileURL");
+var { getFileUrl } = require("../../services/getFileURL");
 
 module.exports.getFile = async (ctx, conversation) => {
   try {
@@ -9,20 +9,20 @@ module.exports.getFile = async (ctx, conversation) => {
       }
     );
 
-    const { message } = await conversation.wait();
+    var { message } = await conversation.wait();
 
     if (!message.hasOwnProperty("document")) {
       await ctx.reply("Это вообще не документ...");
 
       return;
     } else {
-      const fileId = message.document.file_id;
+      var fileId = message.document.file_id;
 
-      const fileUrl = await getFileUrl(ctx, fileId);
+      var fileUrl = await getFileUrl(ctx, fileId);
 
-      const fileExtension = fileUrl.split(".")[3];
+      var fileExtension = fileUrl.split(".")[3];
 
-      const validFile = fileExtension.toLowerCase() === "xlsx";
+      var validFile = fileExtension.toLowerCase() === "xlsx";
 
       if (!validFile) {
         await ctx.reply("Это не эксель таблица, попробуйте еще раз");

@@ -1,10 +1,10 @@
-const { mongodb, collection } = require("../db");
+var { mongodb, collection } = require("../db");
 
 module.exports.addNewUser = async (user) => {
   try {
     await mongodb.connect();
 
-    const existingDocument = await collection.findOne({ userId: user.userId });
+    var existingDocument = await collection.findOne({ userId: user.userId });
 
     if (!existingDocument) return await collection.insertOne(user);
 

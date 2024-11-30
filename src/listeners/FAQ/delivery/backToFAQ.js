@@ -1,4 +1,4 @@
-const { keyboardForFAQ } = require("../../../keyboard/keyboard");
+var { keyboardForFAQ } = require("../../../keyboard/keyboard");
 
 module.exports.backToFAQ = async (bot) => {
   bot.hears("Назад к вопросам", async (ctx) => {

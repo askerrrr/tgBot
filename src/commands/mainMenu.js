@@ -1,4 +1,4 @@
-const { keyboardForTheMainMenu } = require("../keyboard/keyboard");
+var { keyboardForTheMainMenu } = require("../keyboard/keyboard");
 
 module.exports.mainMenu = async (ctx) => {
   await ctx.reply("Меню", {

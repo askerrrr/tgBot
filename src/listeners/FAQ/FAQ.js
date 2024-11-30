@@ -1,5 +1,5 @@
-const { shoppingSites } = require("./shoppingSites");
-const { delivery } = require("./delivery/delivery");
+var { shoppingSites } = require("./shoppingSites");
+var { delivery } = require("./delivery/delivery");
 
 module.exports.FAQ = async (bot) => {
   delivery(bot);

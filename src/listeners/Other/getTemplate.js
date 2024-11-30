@@ -1,4 +1,4 @@
-const { InputFile } = require("grammy");
+var { InputFile } = require("grammy");
 
 module.exports.getTemplate = async (bot) => {
   bot.hears("Получить шаблон", async (ctx) => {

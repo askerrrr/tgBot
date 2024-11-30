@@ -1,4 +1,4 @@
-const { keyboardForOrder } = require("../../keyboard/keyboard");
+var { keyboardForOrder } = require("../../keyboard/keyboard");
 
 module.exports.order = async (bot) => {
   bot.hears("Сделать заказ!", async (ctx) => {

@@ -1,6 +1,6 @@
 module.exports.encodingToBase64 = async (buffer) => {
   try {
-    const base64 = buffer.toString("base64");
+    var base64 = buffer.toString("base64");
 
     return base64;
   } catch (err) {

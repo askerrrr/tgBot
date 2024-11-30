@@ -1,7 +1,7 @@
-const { env } = require("../../../env");
+var { env } = require("../../../env");
 
 module.exports.guideForPinduoduo = async (bot) => {
-  const guideURL = `Посмотреть гайд на youtube ${env.guideURLPinduoduo}`;
+  var guideURL = `Посмотреть гайд на youtube ${env.guideURLPinduoduo}`;
 
   bot.hears("Гайд по Pinduoduo", async (ctx) => {
     await ctx.reply(guideURL, {

@@ -1,6 +1,6 @@
-const JWT = require("jsonwebtoken");
-const { env } = require("../../../env");
-const {
+var JWT = require("jsonwebtoken");
+var { env } = require("../../../env");
+var {
   updateOrderStatus,
 } = require("../../database/services/updateOrderStatus");
 
@@ -11,7 +11,7 @@ module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
     file = activeOrders[key].file;
   }
 
-  const response = await fetch(`${env.bot_api_status}/${userId}/${file.id}`, {
+  var response = await fetch(`${env.bot_api_status}/${userId}/${file.id}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -29,15 +29,15 @@ module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
     return null;
   }
 
-  const json = await response.json();
+  var json = await response.json();
 
   let [statusValue, statusId] = json.status.split(":");
 
   statusId = statusId.split("")[statusId.length - 1];
 
-  const newStatus = `${statusValue}:${statusId}`;
+  var newStatus = `${statusValue}:${statusId}`;
 
-  const currentStatusValue = file.status.split(":")[0];
+  var currentStatusValue = file.status.split(":")[0];
 
   if (currentStatusValue !== statusValue) {
     return await updateOrderStatus(userId, file.id, newStatus);

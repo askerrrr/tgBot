@@ -1,10 +1,10 @@
-const { mongodb, collection } = require("../db");
+var { mongodb, collection } = require("../db");
 
 module.exports.deleteOrder = async (userId, orderId) => {
   try {
     await mongodb.connect();
 
-    const result = await collection.updateOne(
+    var result = await collection.updateOne(
       {
         userId,
         "orders.order.id": orderId,

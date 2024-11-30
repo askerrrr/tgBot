@@ -1,4 +1,4 @@
-const { sendOrderToServer } = require("./sendOrderToServer");
+var { sendOrderToServer } = require("./sendOrderToServer");
 
 module.exports.checkOrderStatus = async (
   ctx,
@@ -8,7 +8,7 @@ module.exports.checkOrderStatus = async (
   orderFunc
 ) => {
   try {
-    const status = await conversation.wait();
+    var status = await conversation.wait();
 
     if (status.msg.text == "Да, все правильно!") {
       await ctx.reply(

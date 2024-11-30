@@ -1,9 +1,9 @@
-const { env } = require("../../../../env");
-const { makeOrderNotification } = require("./makeOrderNotification");
+var { env } = require("../../../../env");
+var { makeOrderNotification } = require("./makeOrderNotification");
 
 module.exports.sendOrderToAdmin = async (ctx, order, fileId) => {
   try {
-    const messageToAdmin = makeOrderNotification(order);
+    var messageToAdmin = makeOrderNotification(order);
 
     if (order?.type) {
       await ctx.api.sendMessage(env.admin_id, messageToAdmin);

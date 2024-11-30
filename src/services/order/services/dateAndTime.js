@@ -1,22 +1,22 @@
 module.exports.getDateAndTime = () => {
-  const date = new Date();
+  var date = new Date();
 
-  let second = date.getSeconds();
+  var second = date.getSeconds();
   second = second < 10 ? "0" + second : second;
 
-  let minutes = date.getMinutes();
+  var minutes = date.getMinutes();
   minutes = minutes < 10 ? "0" + minutes : minutes;
 
-  let hours = date.getHours();
+  var hours = date.getHours();
   hours = hours < 10 ? "0" + hours : hours;
 
-  let day = date.getDate();
+  var day = date.getDate();
   day = day < 10 ? "0" + day : day;
 
-  let month = date.getMonth() + 1;
+  var month = date.getMonth() + 1;
   month = month < 10 ? "0" + month : month;
 
-  let year = date.getFullYear();
+  var year = date.getFullYear();
 
   return {
     time: () => {

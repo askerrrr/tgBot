@@ -1,4 +1,4 @@
-const { linkForAppPinduoduo } = require('../../utils/text');
+var { linkForAppPinduoduo } = require('../../utils/text');
 
 module.exports.linkPinduoduo = async (bot) => {
   bot.hears("Pinduoduo", async (ctx) => {

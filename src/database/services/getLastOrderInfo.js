@@ -1,14 +1,14 @@
-const { mongodb, collection } = require("../db");
+var { mongodb, collection } = require("../db");
 
 module.exports.getLastOrderInfo = async (userId) => {
   try {
     await mongodb.connect();
 
-    const existingDocument = await collection.findOne({ userId });
+    var existingDocument = await collection.findOne({ userId });
 
     if (!existingDocument) return null;
 
-    const lastOrder =
+    var lastOrder =
       existingDocument.orders[existingDocument.orders.length - 1].order;
 
     return lastOrder;

@@ -1,11 +1,11 @@
-const { FAQ } = require("./FAQ/FAQ");
-const { other } = require("./Other/other");
-const { guides } = require("./Guides/Guides");
-const { mainMenu } = require("./MainMenu/mainMenu");
-const { downloadApp } = require("./downloadApp/downloadApp");
-const { diffListeners } = require("./different/diffListeners");
-const { personalAccount } = require("./personalAccount/personalAccount");
-const { middlewareForConversations } = require("../middleware/middleware");
+var { FAQ } = require("./FAQ/FAQ");
+var { other } = require("./Other/other");
+var { guides } = require("./Guides/Guides");
+var { mainMenu } = require("./MainMenu/mainMenu");
+var { downloadApp } = require("./downloadApp/downloadApp");
+var { diffListeners } = require("./different/diffListeners");
+var { personalAccount } = require("./personalAccount/personalAccount");
+var { middlewareForConversations } = require("../middleware/middleware");
 
 module.exports.allListeners = async (bot) => {
   FAQ(bot);

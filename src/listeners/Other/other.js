@@ -1,6 +1,6 @@
-const { getTemplate } = require("./getTemplate");
-const { downloadApp } = require("./downloadApp");
-const { personalAccount } = require("./personalAccount");
+var { getTemplate } = require("./getTemplate");
+var { downloadApp } = require("./downloadApp");
+var { personalAccount } = require("./personalAccount");
 
 module.exports.other = async (bot) => {
   getTemplate(bot);

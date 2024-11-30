@@ -1,14 +1,14 @@
-const { convertYuanToRubles } = require("./service/convertYuanToRubles");
+var { convertYuanToRubles } = require("./service/convertYuanToRubles");
 
 async function calcOrderCost(conversation, ctx) {
   await ctx.reply("Отправьте число");
 
-  const response = await conversation.wait();
+  var response = await conversation.wait();
 
-  const num = response.msg.text;
+  var num = response.msg.text;
 
   if (num > 0 && num < 1000000) {
-    const result = await convertYuanToRubles(num);
+    var result = await convertYuanToRubles(num);
     await ctx.reply(
       `Ориентировочная стоимость товара ${result} рублей \n*без учета стоимости доставки\n\nПодробнее о тарифах доставки можно узнать в разделе "Часто задаваемые вопросы"`
     );

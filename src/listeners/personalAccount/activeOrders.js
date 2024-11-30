@@ -7,9 +7,7 @@ module.exports.getActiveOrders = async (bot) => {
     bot.hears("Активные заказы", async (ctx) => {
       const userId = ctx.chat.id;
 
-      const activeOrders = await findOrder(userId).then((order) =>
-        order.active()
-      );
+      const activeOrders = await (await findOrder(userId)).active();
 
       if (!activeOrders || activeOrders.length < 1) {
         await ctx.reply("Активных заказов не найдено");
@@ -27,9 +25,7 @@ module.exports.getActiveOrders = async (bot) => {
 
       if (result.includes(null)) return;
 
-      const updatedActiveOrders = await findOrder(userId).then((order) =>
-        order.active()
-      );
+      const updatedActiveOrders = await (await findOrder(userId)).completed();
 
       if (!updatedActiveOrders) {
         await ctx.reply("Что-то пошло не так, повторите позже...");
@@ -46,4 +42,3 @@ module.exports.getActiveOrders = async (bot) => {
     console.error(err);
   }
 };
-

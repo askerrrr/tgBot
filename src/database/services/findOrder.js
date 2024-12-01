@@ -4,7 +4,7 @@ module.exports.findOrder = async (userId) => {
   try {
     await mongodb.connect();
 
-    const orders = await collection.findOne({ userId });
+    const orders = await collection.findOne({ userId: `${userId}` });
 
     return {
       active: async () =>

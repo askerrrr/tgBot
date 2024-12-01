@@ -7,7 +7,9 @@ module.exports.getActiveOrders = async (bot) => {
     bot.hears("Активные заказы", async (ctx) => {
       const userId = ctx.chat.id;
 
-      const activeOrders = await (await findOrder(userId)).active();
+      const activeOrders = await findOrder(userId).then((order) =>
+        order.active()
+      );
 
       if (!activeOrders || activeOrders.length < 1) {
         await ctx.reply("Активных заказов не найдено");
@@ -15,20 +17,23 @@ module.exports.getActiveOrders = async (bot) => {
         return;
       }
 
-      const statusUpdatePromises = activeOrders.map(
-        async (order) =>
-          await updateCurrentOrderStatus(order, ctx).catch((err) => {
-            console.log(err);
-
-            return;
-          })
+      const statusUpdatePromises = await activeOrders.map(
+        async (order) => await updateCurrentOrderStatus(order, ctx)
       );
 
-      const result = await Promise.all(statusUpdatePromises);
+      const result = await Promise.all(statusUpdatePromises).catch((err) =>
+        console.log(err)
+      );
 
-      if (result.includes(null)) return;
+      if (!result || result.includes(null) || result.includes(undefined)) {
+        await ctx.reply("Что-то пошло не так, повторите позже...");
 
-      const updatedActiveOrders = await (await findOrder(userId)).completed();
+        return;
+      }
+
+      const updatedActiveOrders = await findOrder(userId).then((order) =>
+        order.active()
+      );
 
       if (!updatedActiveOrders) {
         await ctx.reply("Что-то пошло не так, повторите позже...");

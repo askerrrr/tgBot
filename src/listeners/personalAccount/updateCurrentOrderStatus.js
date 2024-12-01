@@ -5,14 +5,15 @@ const {
 } = require("../../database/services/updateOrderStatus");
 
 module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
-  let userId, file;
+  let userId, orderId;
 
   for (let key in activeOrders) {
     userId = activeOrders[key].userId;
-    file = activeOrders[key].file;
+    orderId = activeOrders[key].id;
+    orderStatus = activeOrders[key].orderStatus;
   }
 
-  const response = await fetch(`${env.bot_api_status}/${userId}/${file.id}`, {
+  const response = await fetch(`${env.bot_api_status}/${userId}/${orderId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -23,26 +24,25 @@ module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
   });
 
   if (!response.ok) {
-    console.error("Ошибка при запросе статуса...");
-    await ctx.reply(
-      "Что-то пошло не так при попытке обновить статус, повторите позже..."
-    );
+    const err = await response.text();
+    console.log("response.err", err);
 
     return;
   }
 
   const json = await response.json();
 
+  console.log(json);
   let [statusValue, statusId] = json.status.split(":");
 
   statusId = statusId.split("")[statusId.length - 1];
 
   const newStatus = `${statusValue}:${statusId}`;
 
-  const currentStatusValue = file.status.split(":")[0];
+  const currentStatusValue = orderStatus.split(":")[0];
 
   if (currentStatusValue !== statusValue) {
-    return await updateOrderStatus(userId, file.id, newStatus);
+    return await updateOrderStatus(userId, orderId, newStatus);
   }
 
   return;

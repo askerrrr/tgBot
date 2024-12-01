@@ -41,7 +41,7 @@ app.patch("/", async (req, res) => {
 
     const userId = requestPayload.userId;
     const orderId = requestPayload.orderId;
-    const status = requestPayload.status;
+    const status = requestPayload.updatedStatus;
 
     const updatedStatus = await updateOrderStatus(userId, orderId, status);
 

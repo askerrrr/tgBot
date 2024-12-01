@@ -33,16 +33,11 @@ module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
   const json = await response.json();
 
   console.log(json);
-  let [statusValue, statusId] = json.status.split(":");
-
-  statusId = statusId.split("")[statusId.length - 1];
-
-  const newStatus = `${statusValue}:${statusId}`;
 
   const currentStatusValue = orderStatus.split(":")[0];
 
-  if (currentStatusValue !== statusValue) {
-    return await updateOrderStatus(userId, orderId, newStatus);
+  if (currentStatusValue !== json.status) {
+    return await updateOrderStatus(userId, orderId, json.status);
   }
 
   return;

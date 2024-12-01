@@ -4,7 +4,7 @@ const {
   updateOrderStatus,
 } = require("../../database/services/updateOrderStatus");
 
-module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
+module.exports.updateCurrentOrderStatus = async (activeOrders) => {
   let userId, orderId;
 
   for (let key in activeOrders) {
@@ -32,13 +32,15 @@ module.exports.updateCurrentOrderStatus = async (activeOrders, ctx) => {
 
   const json = await response.json();
 
-  console.log(json);
-
   const currentStatusValue = orderStatus.split(":")[0];
 
-  if (currentStatusValue !== json.status) {
+  if (json.status !== undefined && currentStatusValue !== json.status) {
     return await updateOrderStatus(userId, orderId, json.status);
   }
 
   return;
 };
+// json.map(
+//       async (order) =>
+//         await updateOrderStatus(order.userId, order.orderId, order.status)
+//     );

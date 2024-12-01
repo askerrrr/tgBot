@@ -4,6 +4,7 @@ module.exports.updateOrderStatus = async (userId, orderId, newStatus) => {
   try {
     await mongodb.connect();
 
+    console.log("newStatus", newStatus);
     const updatedStatus = await collection.updateOne(
       { userId, "orders.order.id": orderId },
       {
@@ -19,7 +20,8 @@ module.exports.updateOrderStatus = async (userId, orderId, newStatus) => {
     return updatedStatus;
   } catch (err) {
     console.log(err);
-    throw err;
+
+    return;
   } finally {
     await mongodb.close();
   }

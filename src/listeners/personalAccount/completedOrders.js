@@ -17,7 +17,7 @@ module.exports.getCompletedOrders = async (bot) => {
 
       const statusUpdatePromises = completedOrders.map(
         async (order) =>
-          await updateCurrentOrderStatus(order, ctx).catch((err) => {
+          await updateCurrentOrderStatus(order).catch((err) => {
             console.log(err);
 
             return;

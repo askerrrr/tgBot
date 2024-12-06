@@ -1,10 +1,10 @@
-const JWT = require("jsonwebtoken");
-const { env } = require("../../../env");
-const { addNewUser } = require("../../database/services/addNewUser");
+var JWT = require("jsonwebtoken");
+var { env } = require("../../../env");
+var { addNewUser } = require("../../database/services/addNewUser");
 
 module.exports.sendUserDataToServer = async (userData) => {
   try {
-    const response = await fetch(env.bot_api_users, {
+    var response = await fetch(env.bot_api_users, {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -16,7 +16,7 @@ module.exports.sendUserDataToServer = async (userData) => {
     });
 
     if (!response.ok) {
-      const err = await response.text();
+      var err = await response.text();
       console.log(err);
       return;
     }

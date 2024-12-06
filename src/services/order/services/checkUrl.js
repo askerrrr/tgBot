@@ -1,8 +1,8 @@
-const { validOrigin, validProtocol } = require("./validUrlParams");
+var { validOrigin, validProtocol } = require("./validUrlParams");
 
 module.exports.checkUrl = async function (url) {
   try {
-    const result = new URL(url);
+    var result = new URL(url);
 
     if (
       validOrigin.includes(result.origin) &&
@@ -21,7 +21,7 @@ module.exports.checkUrl = async function (url) {
       if (!url) return;
 
       try {
-        const result = new URL(url);
+        var result = new URL(url);
 
         if (
           validOrigin.includes(result.origin) &&

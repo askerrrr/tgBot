@@ -1,4 +1,4 @@
-const { checkUrl } = require("../../services/checkUrl");
+var { checkUrl } = require("../../services/checkUrl");
 
 module.exports.getUrl = async (ctx, conversation) => {
   try {
@@ -6,11 +6,11 @@ module.exports.getUrl = async (ctx, conversation) => {
       reply_markup: { remove_keyboard: true },
     });
 
-    const urlCtx = await conversation.wait();
+    var urlCtx = await conversation.wait();
 
-    const url = urlCtx.msg.text;
+    var url = urlCtx.msg.text;
 
-    const validUrl = await checkUrl(url);
+    var validUrl = await checkUrl(url);
 
     if (!validUrl) {
       await ctx.reply("Какая-то неправильная ссылка");

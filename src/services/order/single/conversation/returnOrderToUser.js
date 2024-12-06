@@ -1,4 +1,4 @@
-const { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
+var { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
 
 module.exports.returnOrderToUser = async (
   ctx,

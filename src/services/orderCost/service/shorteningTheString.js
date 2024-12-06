@@ -1,9 +1,9 @@
 module.exports.shorteningTheString = async (val) => {
-  const arr = [];
-  const arr1 = [];
+  var arr = [];
+  var arr1 = [];
 
-  const a = String(val).split("");
-  const b = String(val).split("").reverse();
+  var a = String(val).split("");
+  var b = String(val).split("").reverse();
 
   for (let i = 0; i < a.length; i++) {
     if (a[i].includes(".")) break;

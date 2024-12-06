@@ -1,11 +1,11 @@
-const JWT = require("jsonwebtoken");
-const { env } = require("../../../../env");
-const { sendOrderToAdmin } = require("./sendOrderToAdmin");
-const { addNewOrder } = require("../../../database/services/addNewOrder");
+var JWT = require("jsonwebtoken");
+var { env } = require("../../../../env");
+var { sendOrderToAdmin } = require("./sendOrderToAdmin");
+var { addNewOrder } = require("../../../database/services/addNewOrder");
 
 module.exports.sendOrderToServer = async (order, ctx, fileId) => {
   try {
-    const response = await fetch(env.bot_api_order, {
+    var response = await fetch(env.bot_api_order, {
       method: "POST",
       body: JSON.stringify(order),
       headers: {
@@ -17,7 +17,7 @@ module.exports.sendOrderToServer = async (order, ctx, fileId) => {
     });
 
     if (!response.ok) {
-      const err = await response.text();
+      var err = await response.text();
       console.log("Ошибка при отправлении заказа", err);
       await ctx.reply(
         "Произошла ошибка при формировании заказа, попробуйте еще раз"

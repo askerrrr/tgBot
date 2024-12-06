@@ -1,5 +1,5 @@
 module.exports.statusTranslate = (statusId) => {
-  let translatedStatus;
+  var translatedStatus;
   switch (statusId.split(":")[1]) {
     case "0":
       translatedStatus = "Не взят в обработку";

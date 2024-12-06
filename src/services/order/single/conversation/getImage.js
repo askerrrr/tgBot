@@ -1,21 +1,21 @@
-const { checkFileExtension } = require("../../services/checkFileExtension");
+var { checkFileExtension } = require("../../services/checkFileExtension");
 
 module.exports.getImage = async (ctx, conversation) => {
   try {
     await ctx.reply("Отправьте фото товара");
 
-    const imageCtx = await conversation.wait();
+    var imageCtx = await conversation.wait();
 
     if (!imageCtx.msg.photo) {
       await ctx.reply("Что то не похоже на фото, попробуйте еще раз");
       return;
     }
 
-    const imageId =
+    var imageId =
       imageCtx.msg.photo[imageCtx.msg.photo.length - 1].file_id ||
       imageCtx.msg.photo.file_id;
 
-    const validFile = await checkFileExtension(ctx, imageId);
+    var validFile = await checkFileExtension(ctx, imageId);
 
     if (!validFile) {
       await ctx.reply(

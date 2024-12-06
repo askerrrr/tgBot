@@ -1,14 +1,14 @@
-const { env } = require("./env");
-const { Bot } = require("grammy");
-const express = require("express");
-const { deleteOrder } = require("./src/database/services/deleteOrder");
-const { statusTranslate } = require("./src/services/different/statusTranslate");
-const {
+var { env } = require("./env");
+var { Bot } = require("grammy");
+var express = require("express");
+var { deleteOrder } = require("./src/database/services/deleteOrder");
+var { statusTranslate } = require("./src/services/different/statusTranslate");
+var {
   updateOrderStatus,
 } = require("./src/database/services/updateOrderStatus");
 
-const app = express();
-const bot = new Bot(env.bot_token);
+var app = express();
+var bot = new Bot(env.bot_token);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,27 +30,27 @@ app.use((req, res, next) => {
 
 app.patch("/", async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
+    var authHeader = req.headers.authorization;
 
     if (!authHeader) return res.sendStatus(401);
 
     if (authHeader.split(" ")[1] !== env.bearer_token)
       return res.sendStatus(401);
 
-    const requestPayload = req.body;
+    var requestPayload = req.body;
 
-    const userId = requestPayload.userId;
-    const orderId = requestPayload.orderId;
-    const status = requestPayload.updatedStatus;
+    var userId = requestPayload.userId;
+    var orderId = requestPayload.orderId;
+    var status = requestPayload.updatedStatus;
 
-    const updatedStatus = await updateOrderStatus(userId, orderId, status);
+    var updatedStatus = await updateOrderStatus(userId, orderId, status);
 
     if (!updatedStatus) {
       console.log("Ошибка при обновлении статуса");
       return;
     }
 
-    const message = `Статус заказа ${orderId} изменен.\nТекущий статус:\n${statusTranslate(
+    var message = `Статус заказа ${orderId} изменен.\nТекущий статус:\n${statusTranslate(
       status
     )}`;
 
@@ -63,16 +63,16 @@ app.patch("/", async (req, res) => {
 
 app.delete("/", async (req, res) => {
   try {
-    const authHeader = req.headers.authorization;
+    var authHeader = req.headers.authorization;
 
     if (!authHeader) return res.sendStatus(401);
 
     if (authHeader.split(" ")[1] !== env.bearer_token)
       return res.sendStatus(401);
 
-    const requestPayload = req.body;
-    const userId = requestPayload.userId;
-    const orderId = requestPayload.orderId;
+    var requestPayload = req.body;
+    var userId = requestPayload.userId;
+    var orderId = requestPayload.orderId;
 
     await deleteOrder(userId, orderId)
       .then(() => res.sendStatus(200))

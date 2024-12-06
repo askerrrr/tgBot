@@ -1,20 +1,20 @@
-const crypto = require("crypto");
-const { getFile } = require("./conversation/getFile");
-const { getPhone } = require("./conversation/getPhone");
-const { textForFailedAttempt } = require("../../../utils/text");
-const { getDateAndTime } = require("../services/dateAndTime");
-const { checkOrderStatus } = require("../services/checkOrderStatus");
-const { returnOrderToUser } = require("./conversation/returnOrderToUser");
+var crypto = require("crypto");
+var { getFile } = require("./conversation/getFile");
+var { getPhone } = require("./conversation/getPhone");
+var { textForFailedAttempt } = require("../../../utils/text");
+var { getDateAndTime } = require("../services/dateAndTime");
+var { checkOrderStatus } = require("../services/checkOrderStatus");
+var { returnOrderToUser } = require("./conversation/returnOrderToUser");
 
 async function multiple(conversation, ctx) {
   try {
-    const userId = `${ctx.chat.id}`;
+    var userId = `${ctx.chat.id}`;
 
-    const userName = ctx.chat.user_name || "";
-    const firstName = ctx.chat.first_name || "";
+    var userName = ctx.chat.user_name || "";
+    var firstName = ctx.chat.first_name || "";
 
-    const orderTime = getDateAndTime().fullDateTime();
-    const randomKey = crypto.randomInt(10, 100000000000) + "0";
+    var orderTime = getDateAndTime().fullDateTime();
+    var randomKey = crypto.randomInt(10, 100000000000) + "0";
 
     let fileData, phone;
 
@@ -47,9 +47,9 @@ async function multiple(conversation, ctx) {
       }
     }
 
-    const [telegramApiFileUrl, fileId] = fileData.split("::");
+    var [telegramApiFileUrl, fileId] = fileData.split("::");
 
-    const order = {
+    var order = {
       id: randomKey,
       userId,
       firstName,

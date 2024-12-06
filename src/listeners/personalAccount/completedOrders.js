@@ -26,7 +26,16 @@ module.exports.getCompletedOrders = async (bot) => {
 
       var result = await Promise.all(statusUpdatePromises);
 
-      if (result.includes(null)) return;
+      if (result.includes(null)) {
+        await ctx.reply(
+          `Не удалось запросить новые статусы для активных заказов.\nПоэтому покажу активные заказы с текущими статусами `
+        );
+
+        return completedOrders.map(
+          async (orders) =>
+            await ctx.reply(showOrderContent(orders.order, userId))
+        );
+      }
 
       var updatedActiveOrders = await (await findOrder(userId)).completed();
 

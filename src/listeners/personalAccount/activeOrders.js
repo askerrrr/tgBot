@@ -18,7 +18,7 @@ module.exports.getActiveOrders = async (bot) => {
       }
 
       var statusUpdatePromises = await activeOrders.map(
-        async (order) => await updateCurrentOrderStatus(order)
+        async (order) => await updateCurrentOrderStatus(order, ctx)
       );
 
       var result = await Promise.all(statusUpdatePromises).catch((err) =>
@@ -26,9 +26,14 @@ module.exports.getActiveOrders = async (bot) => {
       );
 
       if (!result || result.includes(null) || result.includes(undefined)) {
-        await ctx.reply("Что-то пошло не так, повторите позже...");
+        await ctx.reply(
+          `Не удалось запросить новые статусы для активных заказов.\nПоэтому покажу активные заказы с текущими статусами `
+        );
 
-        return;
+        return activeOrders.map(
+          async (orders) =>
+            await ctx.reply(showOrderContent(orders.order, userId))
+        );
       }
 
       var updatedActiveOrders = await findOrder(userId).then((order) =>

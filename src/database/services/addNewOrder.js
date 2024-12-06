@@ -18,7 +18,7 @@ module.exports.addNewOrder = async (order) => {
 
       var result = await collection.insertOne(newUser);
 
-      if (!result) console.log("Ошибка при добавлении нового пользователя");
+      if (!result) return;
 
       return await collection.updateOne(
         { userId: order.userId },

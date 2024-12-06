@@ -1,11 +1,11 @@
-const { mongodb, collection } = require("../db");
+var { mongodb, collection } = require("../db");
 
 module.exports.updateOrderStatus = async (userId, orderId, newStatus) => {
   try {
     await mongodb.connect();
 
     console.log("newStatus", newStatus);
-    const updatedStatus = await collection.updateOne(
+    var updatedStatus = await collection.updateOne(
       { userId, "orders.order.id": orderId },
       {
         $set: { "orders.$.order.orderStatus": newStatus },

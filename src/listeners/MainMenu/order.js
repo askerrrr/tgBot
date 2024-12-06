@@ -1,11 +1,11 @@
-const { keyboardForOrder } = require("../../keyboard/keyboard");
-const { findOrder } = require("../../database/services/findOrder");
+var { keyboardForOrder } = require("../../keyboard/keyboard");
+var { findOrder } = require("../../database/services/findOrder");
 
 module.exports.order = async (bot) => {
   bot.hears("Сделать заказ!", async (ctx) => {
     var userId = ctx.chat.id;
 
-    const activeOrders = await findOrder(userId).then((order) =>
+    var activeOrders = await findOrder(userId).then((order) =>
       order.active()
     );
 

@@ -1,6 +1,6 @@
-const JWT = require("jsonwebtoken");
-const { env } = require("../../../env");
-const {
+var JWT = require("jsonwebtoken");
+var { env } = require("../../../env");
+var {
   updateOrderStatus,
 } = require("../../database/services/updateOrderStatus");
 
@@ -13,7 +13,7 @@ module.exports.updateCurrentOrderStatus = async (activeOrders) => {
     orderStatus = activeOrders[key].orderStatus;
   }
 
-  const response = await fetch(`${env.bot_api_status}/${userId}/${orderId}`, {
+  var response = await fetch(`${env.bot_api_status}/${userId}/${orderId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -24,15 +24,15 @@ module.exports.updateCurrentOrderStatus = async (activeOrders) => {
   });
 
   if (!response.ok) {
-    const err = await response.text();
+    var err = await response.text();
     console.log("response.err", err);
 
     return;
   }
 
-  const json = await response.json();
+  var json = await response.json();
 
-  const currentStatusValue = orderStatus.split(":")[0];
+  var currentStatusValue = orderStatus.split(":")[0];
 
   if (json.status !== undefined && currentStatusValue !== json.status) {
     return await updateOrderStatus(userId, json.orderId, json.status);

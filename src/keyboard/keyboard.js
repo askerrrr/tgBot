@@ -1,6 +1,6 @@
-const { Keyboard } = require("grammy");
+var { Keyboard } = require("grammy");
 
-const keyboardForTheMainMenu = new Keyboard()
+var keyboardForTheMainMenu = new Keyboard()
   .text("Сделать заказ!")
   .text("Как сделать заказ?")
   .row()
@@ -10,7 +10,7 @@ const keyboardForTheMainMenu = new Keyboard()
   .text("Часто задаваемые вопросы FAQ")
   .resized();
 
-const keyboardForOtherQueries = new Keyboard()
+var keyboardForOtherQueries = new Keyboard()
 
   .text("Личный кабинет")
   .row()
@@ -21,7 +21,7 @@ const keyboardForOtherQueries = new Keyboard()
   .text("Основное меню")
   .resized();
 
-const keyboardForPersonalAccount = new Keyboard()
+var keyboardForPersonalAccount = new Keyboard()
   .text("Активные заказы")
   .row()
   .text("Завершенные заказы")
@@ -29,7 +29,7 @@ const keyboardForPersonalAccount = new Keyboard()
   .text("Назад")
   .resized();
 
-const keyboardForDownloadingApp = new Keyboard()
+var keyboardForDownloadingApp = new Keyboard()
   .text("1688")
   .text("Taobao")
   .row()
@@ -39,7 +39,7 @@ const keyboardForDownloadingApp = new Keyboard()
   .text("Назад")
   .resized();
 
-const keyboardForAppGuides = new Keyboard()
+var keyboardForAppGuides = new Keyboard()
   .text("Гайд по 1688")
   .text("Гайд по Taobao")
   .row()
@@ -49,19 +49,19 @@ const keyboardForAppGuides = new Keyboard()
   .text("Основное меню")
   .resized();
 
-const keyboardForСheckingnOrder = new Keyboard()
+var keyboardForСheckingnOrder = new Keyboard()
   .text("Да, все правильно!")
   .row()
   .text("Нет, тут ошибка, я хочу исправить данные")
   .resized();
 
-const keyboardForOrder = new Keyboard()
+var keyboardForOrder = new Keyboard()
   .text("Заказать один товар")
   .row()
   .text("Заказать несколько товаров")
   .resized();
 
-const keyboardForFAQ = new Keyboard()
+var keyboardForFAQ = new Keyboard()
   .text("Доставка")
   .row()
   .text("Маркеплейсы с которыми работаем")
@@ -69,7 +69,7 @@ const keyboardForFAQ = new Keyboard()
   .text("Основное меню")
   .resized();
 
-const keyboardForDelivery = new Keyboard()
+var keyboardForDelivery = new Keyboard()
   .text("Адрес доставки")
   .text("Стоимость доставки")
   .row()

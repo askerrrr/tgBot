@@ -1,13 +1,13 @@
-const { showOrderContent } = require("./showOrderContent");
-const { findOrder } = require("../../database/services/findOrder");
-const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
+var { showOrderContent } = require("./showOrderContent");
+var { findOrder } = require("../../database/services/findOrder");
+var { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 
 module.exports.getCompletedOrders = async (bot) => {
   try {
     bot.hears("Завершенные заказы", async (ctx) => {
-      const userId = ctx.chat.id;
+      var userId = ctx.chat.id;
 
-      const completedOrders = await (await findOrder(userId)).completed();
+      var completedOrders = await (await findOrder(userId)).completed();
 
       if (!completedOrders || completedOrders.length < 1) {
         await ctx.reply("Завершенных заказов не найдено");
@@ -15,7 +15,7 @@ module.exports.getCompletedOrders = async (bot) => {
         return;
       }
 
-      const statusUpdatePromises = completedOrders.map(
+      var statusUpdatePromises = completedOrders.map(
         async (order) =>
           await updateCurrentOrderStatus(order).catch((err) => {
             console.log(err);
@@ -24,11 +24,11 @@ module.exports.getCompletedOrders = async (bot) => {
           })
       );
 
-      const result = await Promise.all(statusUpdatePromises);
+      var result = await Promise.all(statusUpdatePromises);
 
       if (result.includes(null)) return;
 
-      const updatedActiveOrders = await (await findOrder(userId)).completed();
+      var updatedActiveOrders = await (await findOrder(userId)).completed();
 
       if (!updatedActiveOrders) {
         await ctx.reply("Что-то пошло не так, повторите позже...");

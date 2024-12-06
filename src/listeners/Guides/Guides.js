@@ -1,7 +1,7 @@
-const { guideFor1688 } = require("./1688");
-const { guideForTaobao } = require("./Taobao");
-const { guideForPoizon } = require("./Poizon");
-const { guideForPinduoduo } = require("./Pinduoduo");
+var { guideFor1688 } = require("./1688");
+var { guideForTaobao } = require("./Taobao");
+var { guideForPoizon } = require("./Poizon");
+var { guideForPinduoduo } = require("./Pinduoduo");
 
 module.exports.guides = async (bot) => {
   guideFor1688(bot);

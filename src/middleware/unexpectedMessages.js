@@ -1,4 +1,4 @@
-const { unexpectedMessages } = require("../utils/text");
+var { unexpectedMessages } = require("../utils/text");
 
 module.exports.catchUnexpectedMessages = async (ctx) => {
   await ctx.reply(unexpectedMessages, {

@@ -1,4 +1,4 @@
-const { keyboardForTheMainMenu } = require("../../keyboard/keyboard");
+var { keyboardForTheMainMenu } = require("../../keyboard/keyboard");
 
 module.exports.backToMainMenu = async (bot) => {
   bot.hears("Основное меню", async (ctx) => {

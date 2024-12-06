@@ -1,4 +1,4 @@
-const { keyboardForPersonalAccount } = require("../../keyboard/keyboard");
+var { keyboardForPersonalAccount } = require("../../keyboard/keyboard");
 
 module.exports.personalAccount = async (bot) => {
   bot.hears("Личный кабинет", async (ctx) => {

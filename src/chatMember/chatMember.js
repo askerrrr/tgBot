@@ -1,4 +1,4 @@
-const {
+var {
   sendUserDataToServer,
 } = require("../services/different/sendUserDataToServer");
 
@@ -9,12 +9,12 @@ module.exports.chatMember = async (bot) => {
         `${ctx.from.first_name}, добро пожаловать в наш бот  🤖\nВам присвоен id-${ctx.chat.id}\nДля дальнейшей работы воспользуйтесь 'Меню'\n\n*при работе с ботом рекомендуется отключать VPN`
       );
 
-      const chatMember = await ctx.chatMembers.getChatMember(
+      var chatMember = await ctx.chatMembers.getChatMember(
         ctx.chat.id,
         ctx.from.id
       );
 
-      const newUser = {
+      var newUser = {
         userId: `${chatMember.user.id}`,
         firstName: chatMember.user.first_name || "",
         userName: chatMember.user.user_name || "",

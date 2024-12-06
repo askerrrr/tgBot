@@ -1,8 +1,8 @@
-const { backToFAQ } = require("./backToFAQ");
-const { deliveryCost } = require("./deliveryCost");
-const { deliveryTime } = require("./deliveryTime");
-const { deliveryAddress } = require("./deliveryAdress");
-const { keyboardForDelivery } = require("../../../keyboard/keyboard");
+var { backToFAQ } = require("./backToFAQ");
+var { deliveryCost } = require("./deliveryCost");
+var { deliveryTime } = require("./deliveryTime");
+var { deliveryAddress } = require("./deliveryAdress");
+var { keyboardForDelivery } = require("../../../keyboard/keyboard");
 
 module.exports.delivery = async (bot) => {
   bot.hears("Доставка", async (ctx) => {

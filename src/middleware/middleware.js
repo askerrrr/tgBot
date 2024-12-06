@@ -1,23 +1,20 @@
-const { chatMembers } = require("@grammyjs/chat-members");
-const { chatMember } = require("../chatMember/chatMember");
-const { session, MemorySessionStorage } = require("grammy");
-const { single } = require("../services/order/single/single");
-const { orderCost } = require("../listeners/MainMenu/orderCost");
-const { multiple } = require("../services/order/multiple/multiple");
-const { catchUnexpectedMessages } = require("./unexpectedMessages");
-const { calcOrderCost } = require("../services/orderCost/calcOrderCost");
-const { orderSingleItems } = require("../listeners/Order/orderSilgleItem");
-const { orderMultipleItems } = require("../listeners/Order/orderMultipleItems");
-const {
-  conversations,
-  createConversation,
-} = require("@grammyjs/conversations");
+var { chatMembers } = require("@grammyjs/chat-members");
+var { chatMember } = require("../chatMember/chatMember");
+var { session, MemorySessionStorage } = require("grammy");
+var { single } = require("../services/order/single/single");
+var { orderCost } = require("../listeners/MainMenu/orderCost");
+var { multiple } = require("../services/order/multiple/multiple");
+var { catchUnexpectedMessages } = require("./unexpectedMessages");
+var { calcOrderCost } = require("../services/orderCost/calcOrderCost");
+var { orderSingleItems } = require("../listeners/Order/orderSilgleItem");
+var { orderMultipleItems } = require("../listeners/Order/orderMultipleItems");
+var { conversations, createConversation } = require("@grammyjs/conversations");
 
 //
 //
 //
 
-const adapter = new MemorySessionStorage();
+var adapter = new MemorySessionStorage();
 
 module.exports.middlewareForConversations = async (bot) => {
   bot.use(chatMembers(adapter));

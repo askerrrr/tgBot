@@ -1,8 +1,8 @@
-const { env } = require("../../env");
-const MongoClient = require("mongodb").MongoClient;
+var { env } = require("../../env");
+var MongoClient = require("mongodb").MongoClient;
 
-const mongodb = new MongoClient(env.mongo_url);
-const db = mongodb.db("database");
-const collection = db.collection("users");
+var mongodb = new MongoClient(env.mongo_url);
+var db = mongodb.db("database");
+var collection = db.collection("users");
 
 module.exports = { mongodb, collection };

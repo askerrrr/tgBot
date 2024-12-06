@@ -1,13 +1,13 @@
-const { showOrderContent } = require("./showOrderContent");
-const { findOrder } = require("../../database/services/findOrder");
-const { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
+var { showOrderContent } = require("./showOrderContent");
+var { findOrder } = require("../../database/services/findOrder");
+var { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
 
 module.exports.getActiveOrders = async (bot) => {
   try {
     bot.hears("Активные заказы", async (ctx) => {
-      const userId = ctx.chat.id;
+      var userId = ctx.chat.id;
 
-      const activeOrders = await findOrder(userId).then((order) =>
+      var activeOrders = await findOrder(userId).then((order) =>
         order.active()
       );
 
@@ -17,11 +17,11 @@ module.exports.getActiveOrders = async (bot) => {
         return;
       }
 
-      const statusUpdatePromises = await activeOrders.map(
+      var statusUpdatePromises = await activeOrders.map(
         async (order) => await updateCurrentOrderStatus(order)
       );
 
-      const result = await Promise.all(statusUpdatePromises).catch((err) =>
+      var result = await Promise.all(statusUpdatePromises).catch((err) =>
         console.log(err)
       );
 
@@ -31,7 +31,7 @@ module.exports.getActiveOrders = async (bot) => {
         return;
       }
 
-      const updatedActiveOrders = await findOrder(userId).then((order) =>
+      var updatedActiveOrders = await findOrder(userId).then((order) =>
         order.active()
       );
 

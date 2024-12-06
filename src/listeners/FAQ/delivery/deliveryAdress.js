@@ -1,4 +1,4 @@
-const { deliveryAddressText } = require("../../../utils/text");
+var { deliveryAddressText } = require("../../../utils/text");
 
 module.exports.deliveryAddress = async (bot) => {
   bot.hears("Адрес доставки", async (ctx) => {

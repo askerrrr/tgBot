@@ -1,5 +1,5 @@
-const { getActiveOrders } = require("./activeOrders");
-const { getCompletedOrders } = require("./completedOrders");
+var { getActiveOrders } = require("./activeOrders");
+var { getCompletedOrders } = require("./completedOrders");
 
 module.exports.personalAccount = async (bot) => {
   getActiveOrders(bot);

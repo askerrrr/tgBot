@@ -1,4 +1,4 @@
-const { keyboardForOtherQueries } = require("../../keyboard/keyboard");
+var { keyboardForOtherQueries } = require("../../keyboard/keyboard");
 
 module.exports.backToOtherMenu = async (bot) => {
   bot.hears("Назад", async (ctx) => {

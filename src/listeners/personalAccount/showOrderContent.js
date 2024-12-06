@@ -1,4 +1,4 @@
-const { statusTranslate } = require("../../services/different/statusTranslate");
+var { statusTranslate } = require("../../services/different/statusTranslate");
 
 module.exports.showOrderContent = (order, userId) => {
   return `ID пользователя : ${userId}\nID заказа : ${

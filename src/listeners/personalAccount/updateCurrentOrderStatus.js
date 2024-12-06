@@ -35,7 +35,7 @@ module.exports.updateCurrentOrderStatus = async (activeOrders) => {
   const currentStatusValue = orderStatus.split(":")[0];
 
   if (json.status !== undefined && currentStatusValue !== json.status) {
-    return await updateOrderStatus(userId, orderId, json.status);
+    return await updateOrderStatus(userId, json.orderId, json.status);
   }
 
   return;

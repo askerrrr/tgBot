@@ -7,7 +7,9 @@ module.exports.getCompletedOrders = async (bot) => {
     bot.hears("Завершенные заказы", async (ctx) => {
       var userId = ctx.chat.id;
 
-      var completedOrders = await (await findOrder(userId)).completed();
+      var completedOrders = await findOrder(userId).then((order) =>
+        order.completed()
+      );
 
       if (!completedOrders || completedOrders.length < 1) {
         await ctx.reply("Завершенных заказов не найдено");
@@ -37,7 +39,9 @@ module.exports.getCompletedOrders = async (bot) => {
         );
       }
 
-      var updatedActiveOrders = await (await findOrder(userId)).completed();
+      var updatedActiveOrders = await findOrder(userId).then((order) =>
+        order.completed()
+      );
 
       if (!updatedActiveOrders) {
         await ctx.reply("Что-то пошло не так, повторите позже...");

@@ -26,7 +26,7 @@ module.exports.getCompletedOrders = async (bot) => {
 
       var result = await Promise.all(statusUpdatePromises);
 
-      if (result.includes(null)) {
+      if (!result || result.includes(null) || result.includes(undefined)) {
         await ctx.reply(
           `Не удалось запросить новые статусы для активных заказов.\nПоэтому покажу активные заказы с текущими статусами `
         );

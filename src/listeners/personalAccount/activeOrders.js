@@ -21,9 +21,7 @@ module.exports.getActiveOrders = async (bot) => {
         async (order) => await updateCurrentOrderStatus(order, ctx)
       );
 
-      var result = await Promise.all(statusUpdatePromises).catch((err) =>
-        console.log(err)
-      );
+      var result = await Promise.all(statusUpdatePromises);
 
       if (!result || result.includes(null) || result.includes(undefined)) {
         await ctx.reply(

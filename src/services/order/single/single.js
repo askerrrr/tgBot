@@ -86,7 +86,6 @@ async function single(conversation, ctx) {
       phone,
       itemUrl,
       date: orderTime,
-      type: "single",
       description,
       orderStatus: "not-accepted-for-processing:0",
       type: "single",

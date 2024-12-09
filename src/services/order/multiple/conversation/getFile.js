@@ -15,23 +15,23 @@ module.exports.getFile = async (ctx, conversation) => {
       await ctx.reply("Это вообще не документ...");
 
       return;
-    } else {
-      var fileId = message.document.file_id;
-
-      var fileUrl = await getFileUrl(ctx, fileId);
-
-      var fileExtension = fileUrl.split(".")[3];
-
-      var validFile = fileExtension.toLowerCase() === "xlsx";
-
-      if (!validFile) {
-        await ctx.reply("Это не эксель таблица, попробуйте еще раз");
-
-        return;
-      }
-
-      return `${fileUrl}::${fileId}`;
     }
+
+    var fileId = message.document.file_id;
+
+    var fileUrl = await getFileUrl(ctx, fileId);
+
+    var fileExtension = fileUrl.split(".")[3];
+
+    var validFile = fileExtension.toLowerCase() === "xlsx";
+
+    if (!validFile) {
+      await ctx.reply("Это не эксель таблица, попробуйте еще раз");
+
+      return;
+    }
+
+    return `${fileUrl}::${fileId}`;
   } catch (err) {
     console.log(err);
   }

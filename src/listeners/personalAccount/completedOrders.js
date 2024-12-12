@@ -17,13 +17,7 @@ module.exports.getCompletedOrders = async (bot) => {
         return await currentCompletedOrders(ctx, userId);
 
       await Promise.all(
-        completedOrders.map(async (order) => {
-          await updateOrderStatus(
-            order.userId,
-            order.orderId,
-            order.orderStatus
-          );
-        })
+        completedOrders.map(async (order) => await updateOrderStatus(order))
       );
 
       return completedOrders.map(

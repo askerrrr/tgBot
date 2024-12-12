@@ -11,18 +11,16 @@ module.exports.getActiveOrders = async (bot) => {
       var userId = ctx.chat.id;
 
       var orders = await getOrders(userId, ctx);
-      var activeOrders = orders?.activeOrders;
+      var active = orders?.activeOrders;
 
-      if (!orders || activeOrders.length < 1)
+      if (!orders || active.length < 1)
         return await currentActiveOrders(ctx, userId);
 
       await Promise.all(
-        activeOrders.map(async (order) => await updateOrderStatus(order))
+        active.map(async (order) => await updateOrderStatus(ctx, order))
       );
 
-      return activeOrders.map(
-        async (order) => await ctx.reply(showOrder(order))
-      );
+      return active.map(async (order) => await ctx.reply(showOrder(order)));
     });
   } catch (err) {
     console.error(err);
@@ -30,12 +28,12 @@ module.exports.getActiveOrders = async (bot) => {
 };
 
 var currentActiveOrders = async (ctx, userId) => {
-  var activeOrders = await findOrder(userId).then((order) => order.active());
+  var active = await findOrder(userId).then((order) => order.active());
 
-  if (!activeOrders || activeOrders.length < 1)
+  if (!active || active.length < 1)
     return await ctx.reply("Активных заказов не найдено");
 
-  activeOrders.forEach(
+  active.forEach(
     async (orders) => await ctx.reply(showOrder(orders.order, userId))
   );
 };

@@ -12,17 +12,15 @@ module.exports.getCompletedOrders = async (bot) => {
 
       var orders = await getOrders(userId, ctx);
 
-      var completedOrders = orders?.completedOrders;
-      if (!orders || completedOrders.length < 1)
+      var completed = orders?.completedOrders;
+      if (!orders || completed.length < 1)
         return await currentCompletedOrders(ctx, userId);
 
       await Promise.all(
-        completedOrders.map(async (order) => await updateOrderStatus(order))
+        completed.map(async (order) => await updateOrderStatus(ctx, order))
       );
 
-      return completedOrders.map(
-        async (order) => await ctx.reply(showOrder(order))
-      );
+      return completed.map(async (order) => await ctx.reply(showOrder(order)));
     });
   } catch (err) {
     console.log(err);
@@ -30,14 +28,12 @@ module.exports.getCompletedOrders = async (bot) => {
 };
 
 var currentCompletedOrders = async (ctx, userId) => {
-  var completedOrders = await findOrder(userId).then((order) =>
-    order.completed()
-  );
+  var completed = await findOrder(userId).then((order) => order.completed());
 
-  if (!completedOrders || completedOrders.length == 0)
+  if (!completed || completed.length == 0)
     return await ctx.reply("Завершенных заказов не найдено");
 
-  completedOrders.forEach(
+  completed.forEach(
     async (orders) => await ctx.reply(showOrder(orders.order, userId))
   );
 };

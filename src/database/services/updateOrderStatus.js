@@ -1,6 +1,7 @@
+var { env } = require("../../../env");
 var { mongodb, collection } = require("../db");
 
-module.exports.updateOrderStatus = async (order) => {
+module.exports.updateOrderStatus = async (ctx, order) => {
   try {
     await mongodb.connect();
 
@@ -13,6 +14,7 @@ module.exports.updateOrderStatus = async (order) => {
 
     if (!updatedStatus) {
       console.log("Ошибка при обновлении статуса...");
+      await env.sendErrToAdmin(ctx, "Ошибка при обновлении статуса", null);
       return;
     }
 

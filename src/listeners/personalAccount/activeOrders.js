@@ -1,56 +1,47 @@
-var { showOrderContent } = require("./showOrderContent");
+var { getOrders } = require("./getOrders");
+var { showOrder } = require("./showOrderContent");
 var { findOrder } = require("../../database/services/findOrder");
-var { updateCurrentOrderStatus } = require("./updateCurrentOrderStatus");
+var {
+  updateOrderStatus,
+} = require("../../database/services/updateOrderStatus");
 
 module.exports.getActiveOrders = async (bot) => {
   try {
     bot.hears("Активные заказы", async (ctx) => {
       var userId = ctx.chat.id;
 
-      var activeOrders = await findOrder(userId).then((order) =>
-        order.active()
+      var orders = await getOrders(userId, ctx);
+      var activeOrders = orders?.activeOrders;
+
+      if (!orders || activeOrders.length < 1)
+        return await currentActiveOrders(ctx, userId);
+
+      await Promise.all(
+        activeOrders.map(async (order) => {
+          await updateOrderStatus(
+            order.userId,
+            order.orderId,
+            order.orderStatus
+          );
+        })
       );
 
-      if (!activeOrders || activeOrders.length < 1) {
-        await ctx.reply("Активных заказов не найдено");
-
-        return;
-      }
-
-      var statusUpdatePromises = await activeOrders.map(
-        async (order) => await updateCurrentOrderStatus(order, ctx)
+      return activeOrders.map(
+        async (order) => await ctx.reply(showOrder(order))
       );
-
-      var result = await Promise.all(statusUpdatePromises);
-
-      if (!result || result.includes(null) || result.includes(undefined)) {
-        await ctx.reply(
-          `Не удалось запросить новые статусы для активных заказов.\nПоэтому покажу активные заказы с текущими статусами `
-        );
-
-        return activeOrders.map(
-          async (orders) =>
-            await ctx.reply(showOrderContent(orders.order, userId))
-        );
-      }
-
-      var updatedActiveOrders = await findOrder(userId).then((order) =>
-        order.active()
-      );
-
-      if (!updatedActiveOrders) {
-        await ctx.reply("Что-то пошло не так, повторите позже...");
-
-        return;
-      }
-
-      await ctx.reply("Активные заказы");
-
-      return updatedActiveOrders.map(async (orders) => {
-        await ctx.reply(showOrderContent(orders.order, userId));
-      });
     });
   } catch (err) {
     console.error(err);
   }
+};
+
+var currentActiveOrders = async (ctx, userId) => {
+  var activeOrders = await findOrder(userId).then((order) => order.active());
+
+  if (!activeOrders || activeOrders.length < 1)
+    return await ctx.reply("Активный заказов не найдено");
+
+  activeOrders.forEach(
+    async (orders) => await ctx.reply(showOrder(orders.order, userId))
+  );
 };

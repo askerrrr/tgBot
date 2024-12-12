@@ -22,6 +22,6 @@ module.exports.updateOrderStatus = async (userId, orderId, newStatus) => {
 
     return;
   } finally {
-    await mongodb.close();
+    // await mongodb.close();
   }
 };

@@ -26,7 +26,7 @@ module.exports.getDateAndTime = () => {
       return `${day}.${month}.${year}`;
     },
     fullDateTime() {
-      return `${hours}:${minutes}:${second} - ${day}.${month}.${year}`;
+      return `${day}.${month}.${year} - ${hours}:${minutes}:${second} `;
     },
   };
 };

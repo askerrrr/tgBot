@@ -39,7 +39,7 @@ var currentActiveOrders = async (ctx, userId) => {
   var activeOrders = await findOrder(userId).then((order) => order.active());
 
   if (!activeOrders || activeOrders.length < 1)
-    return await ctx.reply("Активный заказов не найдено");
+    return await ctx.reply("Активных заказов не найдено");
 
   activeOrders.forEach(
     async (orders) => await ctx.reply(showOrder(orders.order, userId))

@@ -1,6 +1,6 @@
-var { getOrders } = require("./getOrders");
 var { showOrder } = require("./showOrderContent");
 var { findOrder } = require("../../database/services/findOrder");
+var { getOrders } = require("../../services/different/getOrders");
 var {
   updateOrderStatus,
 } = require("../../database/services/updateOrderStatus");

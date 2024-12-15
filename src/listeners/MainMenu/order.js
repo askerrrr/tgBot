@@ -3,14 +3,14 @@ var { findOrder } = require("../../database/services/findOrder");
 
 module.exports.order = async (bot) => {
   bot.hears("Сделать заказ!", async (ctx) => {
-    var userId = ctx.chat.id;
-
-    var activeOrders = await findOrder(userId).then((order) =>
+    var activeOrders = await findOrder(ctx.chat.id).then((order) =>
       order.active()
     );
 
-    if (activeOrders && activeOrders.length > 5) {
-      await ctx.reply("Вы превысили количество активных заказов");
+    if (activeOrders.length > 5) {
+      await ctx.reply(
+        "Вы превысили количество активных заказов.\nОдновременно вы можете иметь до 5 активных заказов.\nДля оформления заказа обратитесь к администратору."
+      );
 
       return;
     }

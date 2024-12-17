@@ -1,7 +1,2 @@
-module.exports.checkDescription = async (desctiption) => {
-  if (!Number(desctiption[0])) return;
-
-  if (+desctiption[0] <= 0) return;
-
-  return desctiption;
-};
+module.exports.checkDescription = async (description) =>
+  Number(description[0]) && +description[0] > 0 ? description : null;

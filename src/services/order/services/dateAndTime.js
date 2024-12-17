@@ -1,32 +1,26 @@
 module.exports.getDateAndTime = () => {
   var date = new Date();
 
-  var second = date.getSeconds();
-  second = second < 10 ? "0" + second : second;
+  var s = date.getSeconds();
+  s = s < 10 ? "0" + s : s;
 
-  var minutes = date.getMinutes();
-  minutes = minutes < 10 ? "0" + minutes : minutes;
+  var m = date.getMinutes();
+  m = m < 10 ? "0" + m : m;
 
-  var hours = date.getHours();
-  hours = hours < 10 ? "0" + hours : hours;
+  var h = date.getHours();
+  h = h < 10 ? "0" + h : h;
 
-  var day = date.getDate();
-  day = day < 10 ? "0" + day : day;
+  var d = date.getDate();
+  d = d < 10 ? "0" + d : d;
 
   var month = date.getMonth() + 1;
   month = month < 10 ? "0" + month : month;
 
-  var year = date.getFullYear();
+  var y = date.getFullYear();
 
   return {
-    time: () => {
-      return `${hours}:${minutes}:${second}`;
-    },
-    date: () => {
-      return `${day}.${month}.${year}`;
-    },
-    fullDateTime() {
-      return `${day}.${month}.${year} - ${hours}:${minutes}:${second} `;
-    },
+    time: () => `${h}:${m}:${s}`,
+    date: () => `${d}.${month}.${y}`,
+    fullDateTime: () => `${d}.${month}.${y} - ${h}:${m}:${s} `,
   };
 };

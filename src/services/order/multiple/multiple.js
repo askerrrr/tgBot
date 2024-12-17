@@ -8,14 +8,6 @@ var { returnOrderToUser } = require("./conversation/returnOrderToUser");
 
 async function multiple(conversation, ctx) {
   try {
-    var userId = `${ctx.chat.id}`;
-
-    var userName = ctx.chat.user_name || "";
-    var firstName = ctx.chat.first_name || "";
-
-    var orderTime = getDateAndTime().fullDateTime();
-    var randomKey = crypto.randomInt(10, 100000000000) + "0";
-
     let fileData, phone;
 
     let failedAttempt = 0;
@@ -47,6 +39,11 @@ async function multiple(conversation, ctx) {
       }
     }
 
+    var userId = `${ctx.chat.id}`;
+    var userName = ctx.chat.user_name || "";
+    var firstName = ctx.chat.first_name || "";
+    var orderTime = getDateAndTime().fullDateTime();
+    var randomKey = crypto.randomInt(10, 100000000000) + "0";
     var [telegramApiFileUrl, fileId] = fileData.split("::");
 
     var order = {

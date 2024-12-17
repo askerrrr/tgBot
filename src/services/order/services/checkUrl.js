@@ -1,13 +1,17 @@
-var { validOrigin, validProtocol } = require("./validUrlParams");
+var origin = [
+  "https://item.taobao.com",
+  "https://item.taobao.com",
+  "http://e.tb.cn",
+  "http://detail.m.1688.com",
+];
 
-module.exports.checkUrl = async function (url) {
+var protocol = ["http:", "https:"];
+
+module.exports.checkUrl = async (url) => {
   try {
     var result = new URL(url);
 
-    if (
-      validOrigin.includes(result.origin) &&
-      validProtocol.includes(result.protocol)
-    ) {
+    if (origin.includes(result.origin) && protocol.includes(result.protocol)) {
       return result.href;
     }
 
@@ -16,19 +20,15 @@ module.exports.checkUrl = async function (url) {
     if (err.message === "Invalid URL") {
       url = url
         .split(" ")
-        .find((item) => item.startsWith("http:") || item.startsWith("https:"));
+        .find((url) => url.startsWith("http:") || url.startsWith("https:"));
 
       if (!url) return;
 
       try {
         var result = new URL(url);
 
-        if (
-          validOrigin.includes(result.origin) &&
-          validProtocol.includes(result.protocol)
-        ) {
+        if (origin.includes(result.origin) && protocol.includes(result.protocol)) {
           return result.href;
-          f;
         }
       } catch {
         return;

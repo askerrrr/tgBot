@@ -17,7 +17,7 @@ module.exports.getDescriprion = async (ctx, conversation) => {
     }
 
     return {
-      quantity: desctiption[0],
+      qty: desctiption[0],
       size: desctiption[1] || "",
     };
   } catch (err) {

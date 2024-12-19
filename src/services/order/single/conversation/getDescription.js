@@ -1,5 +1,3 @@
-var { checkDescription } = require("../../services/checkDescription");
-
 module.exports.getDescriprion = async (ctx, conversation) => {
   try {
     await ctx.reply(
@@ -8,16 +6,12 @@ module.exports.getDescriprion = async (ctx, conversation) => {
 
     var description = await conversation.wait();
 
-    var [qty, size] = description.msg.text.split(" ");
+    var [qty, ...size] = description.msg.text.split(" ");
 
-    var validDesc = await checkDescription(+qty, +size || "");
+    if (size.length < 1) size = "";
+    else size = size.join(" ");
 
-    if (!validDesc) {
-      await ctx.reply("Попробуйте еще раз");
-      return;
-    }
-
-    return validDesc;
+    return +qty > 0 && +qty < 1e4 && size.length < 40 ? { qty, size } : null;
   } catch (err) {
     console.log(err);
   }

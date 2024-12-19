@@ -21,6 +21,3 @@ module.exports.returnOrderToUser = async (
     reply_markup: keyboardForСheckingnOrder,
   });
 };
-// `Описание :\n
-//   Количество : ${description.quantity}\n
-//   Размер : ${description.size}\n`

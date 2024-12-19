@@ -5,21 +5,19 @@ module.exports.getDescriprion = async (ctx, conversation) => {
     await ctx.reply(
       "Теперь пришлите нам через пробел \n\n1)Количество товара \n2)Размер (если такой параметр имеется)"
     );
-    var desctiptionCtx = await conversation.wait();
 
-    var desctiption = String(desctiptionCtx.msg.text).split(" ");
+    var description = await conversation.wait();
 
-    var result = await checkDescription(desctiption);
+    var [qty, size] = description.msg.text.split(" ");
 
-    if (!result) {
+    var validDesc = await checkDescription(+qty, +size || "");
+
+    if (!validDesc) {
       await ctx.reply("Попробуйте еще раз");
       return;
     }
 
-    return {
-      qty: desctiption[0],
-      size: desctiption[1] || "",
-    };
+    return validDesc;
   } catch (err) {
     console.log(err);
   }

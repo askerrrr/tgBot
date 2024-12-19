@@ -1,5 +1,5 @@
 var { wrapURL } = require("../../services/wrapURL");
-var { checkStrLength } = require("../../services/checkStrLength");
+var { checkDescriptionStructure } = require("../../services/checkStrLength");
 var { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
 
 module.exports.returnOrderToUser = async (
@@ -15,7 +15,7 @@ module.exports.returnOrderToUser = async (
   });
   await ctx.reply("Фото");
   await ctx.replyWithPhoto(imageId);
-  await ctx.reply(checkStrLength(description));
+  await ctx.reply(checkDescriptionStructure(description));
   await ctx.reply(`Телефон : ${phone}`);
   await ctx.reply(`Все правильно?`, {
     reply_markup: keyboardForСheckingnOrder,

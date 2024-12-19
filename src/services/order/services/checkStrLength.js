@@ -1,2 +1,4 @@
-module.exports.checkStrLength = (str) =>
-  str?.size ? `кол-во: ${str.qty}\nРазмер : ${str.size}` : `кол-во: ${str.qty}`;
+module.exports.checkDescriptionStructure = (desc) =>
+  desc?.size
+    ? `кол-во: ${desc.qty}\nРазмер: ${desc.size}`
+    : `кол-во: ${desc.qty}`;

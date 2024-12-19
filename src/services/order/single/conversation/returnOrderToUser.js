@@ -1,3 +1,4 @@
+var { wrapURL } = require("../../services/wrapURL");
 var { checkStrLength } = require("../../services/checkStrLength");
 var { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
 
@@ -8,7 +9,10 @@ module.exports.returnOrderToUser = async (
   imageId,
   description
 ) => {
-  await ctx.reply(`Ваша ссылка : ${url} `);
+  await ctx.reply(`Ваша ссылка : ${wrapURL(url)}`, {
+    parse_mode: "HTML",
+    disable_web_page_preview: true,
+  });
   await ctx.reply("Фото");
   await ctx.replyWithPhoto(imageId);
   await ctx.reply(checkStrLength(description));

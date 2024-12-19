@@ -4,7 +4,7 @@ var { getImage } = require("./conversation/getImage");
 var { getPhone } = require("./conversation/getPhone");
 var { getDateAndTime } = require("../services/dateAndTime");
 var { textForFailedAttempt } = require("../../../utils/text");
-var { getDescriprion } = require("./conversation/getDescriprion");
+var { getDescriprion } = require("./conversation/getDescription");
 var { checkOrderStatus } = require("../services/checkOrderStatus");
 var { returnOrderToUser } = require("./conversation/returnOrderToUser");
 
@@ -76,7 +76,6 @@ async function single(conversation, ctx) {
     var randomKey = crypto.randomInt(10, 100000000000) + "0";
     var [telegramApiFileUrl, imageId] = imageData.split("::");
 
-    console.log("in single", description);
     var order = {
       id: randomKey,
       userId,

@@ -1,5 +1,5 @@
 var { wrapURL } = require("../../services/wrapURL");
-var { checkDescriptionStructure } = require("../../services/checkStrLength");
+var { checkDescriptionStructure } = require("../../services/checkDescriptionStructure");
 var { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
 
 module.exports.returnOrderToUser = async (

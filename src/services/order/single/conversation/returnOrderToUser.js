@@ -1,3 +1,4 @@
+var { checkStrLength } = require("../../services/checkStrLength");
 var { keyboardForСheckingnOrder } = require("../../../../keyboard/keyboard");
 
 module.exports.returnOrderToUser = async (
@@ -8,15 +9,14 @@ module.exports.returnOrderToUser = async (
   description
 ) => {
   await ctx.reply(`Ваша ссылка : ${url} `);
-  await ctx.reply("Ваш файл");
+  await ctx.reply("Фото");
   await ctx.replyWithPhoto(imageId);
-  await ctx.reply(`Описание :\n
-  Количество : ${description.quantity}\n
-  Размер : ${description.size}\n`);
-
-  await ctx.reply(`Номер телефона : ${phone}`);
-
+  await ctx.reply(checkStrLength(description));
+  await ctx.reply(`Телефон : ${phone}`);
   await ctx.reply(`Все правильно?`, {
     reply_markup: keyboardForСheckingnOrder,
   });
 };
+// `Описание :\n
+//   Количество : ${description.quantity}\n
+//   Размер : ${description.size}\n`

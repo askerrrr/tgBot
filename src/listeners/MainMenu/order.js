@@ -7,7 +7,7 @@ module.exports.order = async (bot) => {
       order.active()
     );
 
-    if (activeOrders.length > 5) {
+    if (activeOrders?.length > 5) {
       await ctx.reply(
         "Вы превысили количество активных заказов.\nОдновременно вы можете иметь до 5 активных заказов.\nДля оформления заказа обратитесь к администратору."
       );

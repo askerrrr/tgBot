@@ -17,18 +17,18 @@ async function single(conversation, ctx) {
     let countForImageData = 0;
     let countForDescription = 0;
 
-    // while (!itemUrl) {
-    //   itemUrl = await getUrl(ctx, conversation);
+    while (!itemUrl) {
+      itemUrl = await getUrl(ctx, conversation);
 
-    //   if (!itemUrl) {
-    //     countForItemUrl++;
+      if (!itemUrl) {
+        countForItemUrl++;
 
-    //     if (countForItemUrl > 2) {
-    //       await ctx.reply(textForFailedAttempt);
-    //       return;
-    //     }
-    //   }
-    // }
+        if (countForItemUrl > 2) {
+          await ctx.reply(textForFailedAttempt);
+          return;
+        }
+      }
+    }
 
     while (!imageData) {
       imageData = await getImage(ctx, conversation);

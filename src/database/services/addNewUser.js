@@ -1,9 +1,8 @@
-var { mongodb, collection } = require("../db");
+var { db } = require("../db");
 
 module.exports.addNewUser = async (user) => {
   try {
-    await mongodb.connect();
-
+    var collection = (await db).collection("users");
     var existingDocument = await collection.findOne({ userId: user.userId });
 
     if (!existingDocument) return await collection.insertOne(user);
@@ -11,8 +10,5 @@ module.exports.addNewUser = async (user) => {
     return null;
   } catch (err) {
     console.log(err);
-    throw err;
-  } finally {
-    await mongodb.close();
   }
 };

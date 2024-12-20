@@ -1,9 +1,8 @@
-var { mongodb, collection } = require("../db");
+var { db } = require("../db");
 
 module.exports.findOrder = async (userId) => {
   try {
-    await mongodb.connect();
-
+    var collection = (await db).collection("users");
     var orders = await collection.findOne({ userId: `${userId}` });
 
     return {
@@ -18,8 +17,5 @@ module.exports.findOrder = async (userId) => {
     };
   } catch (err) {
     console.log(err);
-    throw err;
-  } finally {
-    await mongodb.close();
   }
 };

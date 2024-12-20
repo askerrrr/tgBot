@@ -5,7 +5,7 @@ module.exports.makeOrderNotification = (order) => {
     return `Новый заказ\n
     ID пользователя: ${order.userId}\nНомер телефона: ${order.phone}\n
     Ссылка на товар: ${env.main_server}/download/${order.userId}/${order.id}\n
-    Описание:\nКоличество: ${order.description.quantity}\nРазмер: ${order.description.size}\n
+    Описание:\nКоличество: ${order.description.qty}\nРазмер: ${order.description.size}\n
     ID заказа: ${order.id}\nВремя заказа: ${order.date}`;
   }
 

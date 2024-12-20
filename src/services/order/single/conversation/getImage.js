@@ -5,7 +5,7 @@ module.exports.getImage = async (ctx, conversation) => {
     await ctx.reply("Отправьте фото товара");
 
     var message = await conversation.wait();
-    console.log(message.msg);
+
     if (!message.msg.photo) {
       await ctx.reply("Что то не похоже на фото, попробуйте еще раз");
       return;

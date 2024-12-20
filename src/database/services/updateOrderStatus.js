@@ -1,10 +1,9 @@
 var { env } = require("../../../env");
-var { mongodb, collection } = require("../db");
+var { db } = require("../db");
 
 module.exports.updateOrderStatus = async (ctx, order) => {
   try {
-    await mongodb.connect();
-
+    var collection = (await db).collection("users");
     var updatedStatus = await collection.updateOne(
       { userId: order.userId, "orders.order.id": order.id },
       {
@@ -21,9 +20,5 @@ module.exports.updateOrderStatus = async (ctx, order) => {
     return updatedStatus;
   } catch (err) {
     console.log(err);
-
-    return;
-  } finally {
-    // await mongodb.close();
   }
 };

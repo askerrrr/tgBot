@@ -1,9 +1,8 @@
-var { mongodb, collection } = require("../db");
+var { db } = require("../db");
 
 module.exports.deleteOrder = async (userId, orderId) => {
   try {
-    await mongodb.connect();
-
+    var collection = (await db).collection("users");
     var result = await collection.updateOne(
       {
         userId,
@@ -21,8 +20,5 @@ module.exports.deleteOrder = async (userId, orderId) => {
     return result;
   } catch (err) {
     console.log(err);
-    throw err;
-  } finally {
-    mongodb.close();
   }
 };

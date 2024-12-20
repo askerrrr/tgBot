@@ -4,18 +4,17 @@ module.exports.getImage = async (ctx, conversation) => {
   try {
     await ctx.reply("Отправьте фото товара");
 
-    var imageCtx = await conversation.wait();
-
-    if (!imageCtx.msg.photo) {
+    var message = await conversation.wait();
+    console.log(message.msg);
+    if (!message.msg.photo) {
       await ctx.reply("Что то не похоже на фото, попробуйте еще раз");
       return;
     }
 
-    var imageId =
-      imageCtx.msg.photo[imageCtx.msg.photo.length - 1].file_id ||
-      imageCtx.msg.photo.file_id;
+    var fileId =
+      message.msg.photo.reverse()[0].file_id || message.msg.photo.file_id;
 
-    var validFile = await checkFileExtension(ctx, imageId);
+    var validFile = await checkFileExtension(ctx, fileId);
 
     if (!validFile) {
       await ctx.reply(

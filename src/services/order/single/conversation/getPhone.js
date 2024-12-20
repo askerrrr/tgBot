@@ -1,5 +1,3 @@
-var { checkPhoneNumber } = require("../../services/checkPhoneNumber");
-
 module.exports.getPhone = async (ctx, conversation) => {
   try {
     await ctx.reply(
@@ -7,17 +5,15 @@ module.exports.getPhone = async (ctx, conversation) => {
     );
 
     var message = await conversation.wait();
-    var phone = Number(message.msg.text);
+    var phone = message.msg.text;
 
-    var result = checkPhoneNumber(phone);
-
-    if (!result) {
+    if (phone.length == 11 && +phone) {
+      return phone;
+    } else {
       await ctx.reply("Некорректный номер телефона. Попробуйте снова.");
 
-      return null;
+      return;
     }
-
-    return phone;
   } catch (err) {
     console.log(err);
   }

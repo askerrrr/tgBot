@@ -17,44 +17,44 @@ async function single(conversation, ctx) {
     let countForImageData = 0;
     let countForDescription = 0;
 
-    // while (!itemUrl) {
-    //   itemUrl = await getUrl(ctx, conversation);
+    while (!itemUrl) {
+      itemUrl = await getUrl(ctx, conversation);
 
-    //   if (!itemUrl) {
-    //     countForItemUrl++;
+      if (!itemUrl) {
+        countForItemUrl++;
 
-    //     if (countForItemUrl > 2) {
-    //       await ctx.reply(textForFailedAttempt);
-    //       return;
-    //     }
-    //   }
-    // }
+        if (countForItemUrl > 2) {
+          await ctx.reply(textForFailedAttempt);
+          return;
+        }
+      }
+    }
 
-    // while (!imageData) {
-    //   imageData = await getImage(ctx, conversation);
+    while (!imageData) {
+      imageData = await getImage(ctx, conversation);
 
-    //   if (!imageData) {
-    //     countForImageData++;
+      if (!imageData) {
+        countForImageData++;
 
-    //     if (countForImageData > 2) {
-    //       await ctx.reply(textForFailedAttempt);
-    //       return;
-    //     }
-    //   }
-    // }
+        if (countForImageData > 2) {
+          await ctx.reply(textForFailedAttempt);
+          return;
+        }
+      }
+    }
 
-    // while (!description) {
-    //   description = await getDescriprion(ctx, conversation);
+    while (!description) {
+      description = await getDescriprion(ctx, conversation);
 
-    //   if (!description) {
-    //     countForDescription++;
+      if (!description) {
+        countForDescription++;
 
-    //     if (countForDescription > 2) {
-    //       await ctx.reply(textForFailedAttempt);
-    //       return;
-    //     }
-    //   }
-    // }
+        if (countForDescription > 2) {
+          await ctx.reply(textForFailedAttempt);
+          return;
+        }
+      }
+    }
 
     while (!phone) {
       phone = await getPhone(ctx, conversation);

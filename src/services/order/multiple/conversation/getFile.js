@@ -11,28 +11,29 @@ module.exports.getFile = async (ctx, conversation) => {
 
     var { message } = await conversation.wait();
 
-    if (!message.hasOwnProperty("document")) {
-      await ctx.reply("Это вообще не документ...");
+    if (message?.document) {
+      var fileName = message.document.file_name;
+      var mimeType = message.document.mime_type;
+      var validDocType = checkDocType(fileName, mimeType);
 
-      return;
+      if (validDocType) {
+        var fileId = message.document.file_id;
+        var fileURL = await getFileUrl(ctx, fileId);
+        return `${fileURL}::${fileId}`;
+      } else {
+        await ctx.reply("Это не эксель таблица, попробуйте еще раз");
+        return;
+      }
     }
 
-    var fileId = message.document.file_id;
-
-    var fileUrl = await getFileUrl(ctx, fileId);
-
-    var fileExtension = fileUrl.split(".")[3];
-
-    var validFile = fileExtension.toLowerCase() === "xlsx";
-
-    if (!validFile) {
-      await ctx.reply("Это не эксель таблица, попробуйте еще раз");
-
-      return;
-    }
-
-    return `${fileUrl}::${fileId}`;
+    await ctx.reply("Это вообще не документ...");
+    return;
   } catch (err) {
     console.log(err);
   }
 };
+
+var checkDocType = (fileName, mimeType) =>
+  fileName.split(".").reverse()[0] === "xlsx" &&
+  mimeType ===
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";

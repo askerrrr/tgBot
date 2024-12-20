@@ -11,11 +11,9 @@ module.exports.checkUrl = async (url) => {
   try {
     var result = new URL(url);
 
-    if (origin.includes(result.origin) && protocol.includes(result.protocol)) {
-      return result.href;
-    }
-
-    return;
+    return origin.includes(result.origin) && protocol.includes(result.protocol)
+      ? result.href
+      : null;
   } catch (err) {
     if (err.message === "Invalid URL") {
       url = url
@@ -27,14 +25,14 @@ module.exports.checkUrl = async (url) => {
       try {
         var result = new URL(url);
 
-        if (origin.includes(result.origin) && protocol.includes(result.protocol)) {
-          return result.href;
-        }
+        return origin.includes(result.origin) &&
+          protocol.includes(result.protocol)
+          ? result.href
+          : null;
       } catch {
         return;
       }
     }
-
     return;
   }
 };

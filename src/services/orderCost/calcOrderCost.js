@@ -5,7 +5,7 @@ async function calcOrderCost(conversation, ctx) {
 
   var result = await conversation.wait();
 
-  var num = result.msg.text;
+  var num = +result.msg.text;
 
   if (num > 0 && num < 1e6) {
     var result = await convertYuanToRubles(num);

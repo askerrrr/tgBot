@@ -1,11 +1,11 @@
 module.exports.shorteningTheString = async (val) => {
-  var arr = [];
-  var arr1 = [];
+  var arr = [],
+    arr1 = [];
 
-  var a = String(val).split("");
-  var b = String(val).split("").reverse();
+  var a = val.split("");
+  var b = val.split("").reverse();
 
-  for (let i = 0; i < a.length; i++) {
+  for (var i = 0; i < a.length; i++) {
     if (a[i].includes(".")) break;
     arr.push(a[i]);
 
@@ -14,5 +14,5 @@ module.exports.shorteningTheString = async (val) => {
   }
 
   val = arr.join("") + "." + arr1.reverse().slice(0, 2).join("");
-  return Number(val);
+  return val;
 };

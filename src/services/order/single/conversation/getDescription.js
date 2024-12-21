@@ -4,9 +4,9 @@ module.exports.getDescriprion = async (ctx, conversation) => {
       "Теперь пришлите нам через пробел \n\n1)Количество товара \n2)Размер (если такой параметр имеется)"
     );
 
-    var description = await conversation.wait();
+    var message = await conversation.wait();
 
-    var [qty, ...size] = description.msg.text.split(" ");
+    var [qty, ...size] = message.msg.text.split(" ");
 
     if (size.length < 1) size = "";
     else size = size.join(" ");

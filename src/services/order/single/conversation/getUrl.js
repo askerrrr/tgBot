@@ -6,9 +6,9 @@ module.exports.getUrl = async (ctx, conversation) => {
       reply_markup: { remove_keyboard: true },
     });
 
-    var urlCtx = await conversation.wait();
+    var message = await conversation.wait();
 
-    var url = urlCtx.msg.text;
+    var url = message.msg.text;
 
     var validUrl = await checkUrl(url);
 

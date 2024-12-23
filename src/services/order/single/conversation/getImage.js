@@ -11,7 +11,7 @@ module.exports.getImage = async (ctx, conversation) => {
       return;
     }
 
-    var fileId = message.msg.photo.at(-1).file_id || message.msg.photo.file_id;
+    var fileId = message.msg.photo.at(-1).file_id;
 
     var validFile = await checkFileExtension(ctx, fileId);
 

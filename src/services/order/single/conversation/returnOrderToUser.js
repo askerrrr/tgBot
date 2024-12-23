@@ -1,6 +1,4 @@
-var {
-  checkDescriptionStructure,
-} = require("../../services/checkDescriptionStructure");
+var { descCheck } = require("../../services/checkDescriptionStructure");
 var { keyboardForСheckingOrder } = require("../../../../keyboard/keyboard");
 
 module.exports.returnOrderToUser = async (
@@ -11,7 +9,7 @@ module.exports.returnOrderToUser = async (
   description
 ) => {
   url = wrapURL(url);
-  description = checkDescriptionStructure(description);
+  description = descCheck(description);
   var wrappedUrl = `<u><a href="${url}" target="_blank">ссылка</a></u>`;
 
   await ctx.reply(`${description}\nТелефон: ${phone}\nСсылка: ${wrappedUrl}`, {

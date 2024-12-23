@@ -49,7 +49,7 @@ var keyboardForAppGuides = new Keyboard()
   .text("Основное меню")
   .resized();
 
-var keyboardForСheckingnOrder = new Keyboard()
+var keyboardForСheckingOrder = new Keyboard()
   .text("Да, все правильно!")
   .row()
   .text("Нет, тут ошибка, я хочу исправить данные")
@@ -85,7 +85,7 @@ module.exports = {
   keyboardForAppGuides,
   keyboardForTheMainMenu,
   keyboardForOtherQueries,
-  keyboardForСheckingnOrder,
+  keyboardForСheckingOrder,
   keyboardForDownloadingApp,
   keyboardForPersonalAccount,
 };

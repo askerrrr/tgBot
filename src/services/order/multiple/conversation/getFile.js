@@ -34,6 +34,6 @@ module.exports.getFile = async (ctx, conversation) => {
 };
 
 var checkDocType = (fileName, mimeType) =>
-  fileName.split(".").reverse()[0] === "xlsx" &&
+  fileName.split(".").at(-1).toLowerCase() === "xlsx" &&
   mimeType ===
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";

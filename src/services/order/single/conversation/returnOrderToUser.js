@@ -8,7 +8,6 @@ module.exports.returnOrderToUser = async (
   imageId,
   description
 ) => {
-  url = wrapURL(url);
   description = descCheck(description);
   var wrappedUrl = `<u><a href="${url}" target="_blank">ссылка</a></u>`;
 
